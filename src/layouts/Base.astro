@@ -1,0 +1,179 @@
+---
+// Fælles layout for alle sider: head, navigation, footer og alt global CSS.
+// Designprincip: stor skrift, høj kontrast, tydelige links — bygget til folk,
+// der ikke er vokset op med computere.
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/guides/', label: 'Guides' },
+  { href: '/about/', label: 'About' },
+];
+const current = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header>
+    <nav aria-label="Main">
+      <a class="brand" href="/">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="var(--accent)"/><path d="M15 27v-9h2v9h-2Zm1-9c-.4-6-3.4-9.6-9.5-11 .9 6.5 4 9.9 9.5 11Zm0 0c.4-6 3.4-9.6 9.5-11-.9 6.5-4 9.9-9.5 11Z" fill="var(--paper)"/></svg>
+        <span>The Gentle AI Guide</span>
+      </a>
+      <ul>
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={current === item.href || (item.href !== '/' && current.startsWith(item.href)) ? 'page' : undefined}
+            >{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <slot />
+  </main>
+
+  <footer>
+    <p><strong>The Gentle AI Guide</strong> — plain-English help with AI, at your own pace.</p>
+    <p>Every guide is reviewed by a person before it is published. No account needed, nothing to install.</p>
+    <p class="fine"><a href="/about/">About this site</a> · <a href="mailto:hello@gentleaiguide.com">hello@gentleaiguide.com</a></p>
+  </footer>
+
+  <style is:global>
+    :root {
+      --paper: #faf8f3;
+      --card: #ffffff;
+      --ink: #26281f;
+      --ink-soft: #4f5347;
+      --line: #ddd9cc;
+      --accent: #2e5d43;
+      --accent-soft: #e6eee6;
+      --focus: #a54f00;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #1b1d19;
+        --card: #24271f;
+        --ink: #eae8de;
+        --ink-soft: #b4b3a4;
+        --line: #3c4034;
+        --accent: #8cbf9f;
+        --accent-soft: #2a3b2e;
+        --focus: #ffb25e;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Atkinson Hyperlegible', Verdana, sans-serif;
+      font-size: 1.1875rem; /* ~19 px — bevidst større end normalt */
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 600;
+      line-height: 1.2;
+      text-wrap: balance;
+      color: var(--ink);
+    }
+    h1 { font-size: 2.3rem; margin: 0 0 0.75rem; }
+    h2 { font-size: 1.55rem; margin: 2.2rem 0 0.6rem; }
+    h3 { font-size: 1.2rem; margin: 1.6rem 0 0.4rem; }
+    p { margin: 0.85rem 0; }
+    /* Links skal LIGNE links — altid understreget, tydelig farve */
+    a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 3px; }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+    .skip {
+      position: absolute; left: -999px; top: 0; background: var(--card);
+      padding: 0.6rem 1rem; z-index: 10;
+    }
+    .skip:focus { left: 0.5rem; top: 0.5rem; }
+
+    header { border-bottom: 1px solid var(--line); background: var(--card); }
+    nav {
+      max-width: 44rem; margin: 0 auto; padding: 0.9rem 1.25rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 1.25rem;
+      color: var(--ink); text-decoration: none;
+    }
+    .brand-mark { width: 2rem; height: 2rem; flex: none; }
+    nav ul { display: flex; gap: 0.4rem; list-style: none; margin: 0; padding: 0; }
+    nav ul a {
+      display: inline-block; padding: 0.45rem 0.85rem; border-radius: 8px;
+      text-decoration: none; color: var(--ink); font-weight: 700; font-size: 1.05rem;
+    }
+    nav ul a:hover { background: var(--accent-soft); }
+    nav ul a[aria-current='page'] { background: var(--accent-soft); color: var(--accent); }
+
+    main { max-width: 44rem; margin: 0 auto; padding: 2.2rem 1.25rem 4rem; }
+
+    footer { border-top: 1px solid var(--line); background: var(--card); }
+    footer p { max-width: 44rem; margin: 0 auto; padding: 0.35rem 1.25rem; color: var(--ink-soft); font-size: 1rem; }
+    footer p:first-child { padding-top: 1.6rem; }
+    footer .fine { padding-bottom: 1.6rem; }
+
+    /* Genbrugelige kort (bruges på forside og guide-oversigt) */
+    .card {
+      display: block; background: var(--card); border: 1px solid var(--line);
+      border-radius: 12px; padding: 1.3rem 1.4rem; margin: 1rem 0;
+      text-decoration: none; color: var(--ink);
+    }
+    .card:hover { border-color: var(--accent); }
+    .card h3 { margin: 0 0 0.3rem; color: var(--accent); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    .card p { margin: 0; color: var(--ink-soft); font-size: 1.05rem; }
+    .card .label {
+      display: inline-block; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--accent); background: var(--accent-soft);
+      padding: 0.15rem 0.6rem; border-radius: 99px; margin-bottom: 0.5rem;
+    }
+    .lede { font-size: 1.3rem; color: var(--ink-soft); }
+
+    /* Artikel-typografi */
+    article ul, article ol { padding-left: 1.4rem; }
+    article li { margin: 0.5rem 0; }
+    article blockquote {
+      margin: 1.2rem 0; padding: 0.8rem 1.2rem; border-left: 4px solid var(--accent);
+      background: var(--card); border-radius: 0 10px 10px 0; color: var(--ink-soft);
+    }
+    article code {
+      background: var(--accent-soft); padding: 0.1rem 0.4rem; border-radius: 6px;
+      font-size: 0.95em;
+    }
+    article hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
+    .updated { color: var(--ink-soft); font-size: 1rem; margin-top: 0; }
+  </style>
+</body>
+</html>

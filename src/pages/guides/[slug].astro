@@ -1,0 +1,30 @@
+---
+// Én side pr. guide, genereret fra markdown-filerne i src/content/guides/
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides.map((guide) => ({
+    params: { slug: guide.id },
+    props: { guide },
+  }));
+}
+
+const { guide } = Astro.props;
+const { Content } = await render(guide);
+const updated = guide.data.updated.toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+---
+<Base title={`${guide.data.title} — The Gentle AI Guide`} description={guide.data.description}>
+  <article>
+    <h1>{guide.data.title}</h1>
+    <p class="updated">Last reviewed by a person on {updated}.</p>
+    <Content />
+    <hr />
+    <p>
+      <a href="/guides/">← Back to all guides</a>
+    </p>
+  </article>
+</Base>
