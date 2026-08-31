@@ -1,4 +1,6 @@
+# Midlertidigt: sitet er lukket for søgemaskiner, indtil indholdet er godkendt.
+# Når det åbnes, byttes Disallow ud med "Allow: /" og INDEXABLE i src/site.ts sættes til true.
 User-agent: *
-Allow: /
+Disallow: /
 
 Sitemap: https://gentleaiguide.com/sitemap-index.xml

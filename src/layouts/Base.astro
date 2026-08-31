@@ -1,4 +1,5 @@
 ---
+import { INDEXABLE } from '../site';
 // Fælles layout for alle sider: head, navigation, footer og alt global CSS.
 // Designprincip: stor skrift, høj kontrast, tydelige links — bygget til folk,
 // der ikke er vokset op med computere.
@@ -22,6 +23,7 @@ const current = Astro.url.pathname;
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  {!INDEXABLE && <meta name="robots" content="noindex, nofollow" />}
   <link rel="canonical" href={canonical} />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="sitemap" href="/sitemap-index.xml" />
