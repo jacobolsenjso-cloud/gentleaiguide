@@ -190,6 +190,7 @@ const current = Astro.url.pathname;
     .btn--primary:hover { box-shadow: var(--shadow-lift); }
     .btn--ghost { border-color: currentColor; color: var(--accent); background: transparent; }
     .section--hero .btn--ghost { color: #fff; }
+    .section--hero .btn--primary { color: var(--sun-ink); }
     .btn-row { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 1.8rem 0 0; }
 
     /* ---------- Flueben-liste ---------- */
@@ -224,6 +225,12 @@ const current = Astro.url.pathname;
       text-transform: uppercase; color: var(--accent); background: var(--accent-soft);
       padding: 0.25rem 0.85rem; border-radius: 999px; margin-bottom: 0.7rem;
     }
+    .card-cta {
+      display: inline-block; margin-top: 0.9rem; color: var(--accent);
+      font-weight: 700; font-size: 1.02rem;
+      text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;
+    }
+    a.card:hover .card-cta { text-decoration-thickness: 3px; }
     .card .num {
       display: inline-flex; align-items: center; justify-content: center;
       width: 2.1rem; height: 2.1rem; border-radius: 999px;
