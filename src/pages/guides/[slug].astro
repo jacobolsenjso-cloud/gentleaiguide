@@ -18,13 +18,18 @@ const updated = guide.data.updated.toLocaleDateString('en-GB', {
 });
 ---
 <Base title={`${guide.data.title} — The Gentle AI Guide`} description={guide.data.description}>
-  <article>
-    <h1>{guide.data.title}</h1>
+  <section class="section section--hero">
+    <div class="inner">
+      {guide.data.label && <p class="eyebrow">{guide.data.label}</p>}
+      <h1>{guide.data.title}</h1>
+      <p class="lede">{guide.data.description}</p>
+    </div>
+  </section>
+
+  <article class="prose">
     <p class="updated">Last reviewed by a person on {updated}.</p>
     <Content />
     <hr />
-    <p>
-      <a href="/guides/">← Back to all guides</a>
-    </p>
+    <p><a href="/guides/">← Back to all guides</a></p>
   </article>
 </Base>

@@ -1,44 +1,70 @@
 ---
-// Forsiden: rolig velkomst + de fem guides i anbefalet rækkefølge
+// Forsiden: venlig velkomst, tydelige knapper, de fem guides som kort
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 
 const guides = (await getCollection('guides')).sort(
   (a, b) => a.data.order - b.data.order
 );
+const first = guides[0];
 ---
 <Base
   title="The Gentle AI Guide — plain-English help with AI"
   description="AI explained calmly and in plain English, one small step at a time. No jargon, no hype, no account needed. Written for people who didn't grow up with computers."
 >
-  <h1>AI, explained gently.</h1>
-  <p class="lede">
-    Everyone talks about AI. Very few people explain it calmly. This site does —
-    in plain English, one small step at a time, with no jargon and no hype.
-  </p>
-  <p>
-    You don't need to be "good with computers" to be here. If you can send an
-    email, you can learn to use AI — and decide for yourself what it's good for,
-    what it isn't, and what to be careful about.
-  </p>
+  <section class="section section--hero">
+    <div class="inner">
+      <p class="eyebrow">Plain-English help with AI</p>
+      <h1>AI, explained gently.</h1>
+      <p class="lede">
+        Everyone talks about AI. Very few people explain it calmly. This site does —
+        one small step at a time, with no jargon and no hype.
+      </p>
+      <ul class="checks">
+        <li>Written for people who didn't grow up with computers</li>
+        <li>Every word explained the first time it appears</li>
+        <li>Nothing to buy, no account, nothing to install</li>
+      </ul>
+      <div class="btn-row">
+        <a class="btn btn--primary" href={`/guides/${first.id}/`}>Start with guide 1</a>
+        <a class="btn btn--ghost" href="/guides/">See all five guides</a>
+      </div>
+    </div>
+  </section>
 
-  <h2>Start with these five guides</h2>
-  <p>Read them in order, or jump to the one that answers your question.</p>
+  <section class="section">
+    <div class="inner">
+      <h2>Start with these five guides</h2>
+      <p>Read them in order, or jump straight to the one that answers your question.</p>
+      <div class="cards">
+        {guides.map((guide, i) => (
+          <a class="card" href={`/guides/${guide.id}/`}>
+            <span class="num">{i + 1}</span>
+            {guide.data.label && <span class="label" style="margin-left:0.6rem">{guide.data.label}</span>}
+            <h3>{guide.data.title}</h3>
+            <p>{guide.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
 
-  {guides.map((guide, i) => (
-    <a class="card" href={`/guides/${guide.id}/`}>
-      {guide.data.label && <span class="label">{guide.data.label}</span>}
-      <h3>{i + 1}. {guide.data.title}</h3>
-      <p>{guide.data.description}</p>
-    </a>
-  ))}
-
-  <h2>What makes this site different</h2>
-  <p>
-    We assume nothing, we never make you feel behind, and we're honest about
-    AI's flaws — including on this site: every guide here is written with the
-    help of AI and then read, corrected and approved by a person before it is
-    published. That's the working relationship we recommend you have with AI,
-    too.
-  </p>
+  <section class="section section--tint">
+    <div class="inner">
+      <p class="eyebrow">Why this site is different</p>
+      <h2>We assume nothing, and we never make you feel behind.</h2>
+      <p>
+        We're honest about what AI gets wrong — including here. Every guide on this
+        site is written with the help of AI and then read, corrected and approved by
+        a person before it is published. Each page shows the date it was last checked.
+      </p>
+      <p>
+        That's the working relationship we recommend you have with AI, too: let it do
+        the heavy lifting, but never let it have the final word.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--ghost" href="/about/">More about how this works</a>
+      </div>
+    </div>
+  </section>
 </Base>

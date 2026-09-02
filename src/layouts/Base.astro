@@ -1,8 +1,9 @@
 ---
 import { INDEXABLE } from '../site';
 // Fælles layout for alle sider: head, navigation, footer og alt global CSS.
-// Designprincip: stor skrift, høj kontrast, tydelige links — bygget til folk,
-// der ikke er vokset op med computere.
+// Designprincip: venligt og rundt udtryk (inspireret af datafeedwatch.com),
+// men med stor, læsevenlig brødtekst — sitet er bygget til folk, der ikke
+// er vokset op med computere.
 interface Props {
   title: string;
   description: string;
@@ -33,14 +34,14 @@ const current = Astro.url.pathname;
   <meta property="og:url" content={canonical} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" />
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header>
     <nav aria-label="Main">
       <a class="brand" href="/">
-        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="var(--accent)"/><path d="M15 27v-9h2v9h-2Zm1-9c-.4-6-3.4-9.6-9.5-11 .9 6.5 4 9.9 9.5 11Zm0 0c.4-6 3.4-9.6 9.5-11-.9 6.5-4 9.9-9.5 11Z" fill="var(--paper)"/></svg>
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="10" fill="var(--accent)"/><path d="M15 27v-9h2v9h-2Zm1-9c-.4-6-3.4-9.6-9.5-11 .9 6.5 4 9.9 9.5 11Zm0 0c.4-6 3.4-9.6 9.5-11-.9 6.5-4 9.9-9.5 11Z" fill="#fff"/></svg>
         <span>The Gentle AI Guide</span>
       </a>
       <ul>
@@ -61,37 +62,55 @@ const current = Astro.url.pathname;
   </main>
 
   <footer>
-    <p><strong>The Gentle AI Guide</strong> — plain-English help with AI, at your own pace.</p>
-    <p>Every guide is reviewed by a person before it is published. No account needed, nothing to install.</p>
-    <p class="fine"><a href="/about/">About this site</a> · <a href="mailto:hello@gentleaiguide.com">hello@gentleaiguide.com</a></p>
+    <div class="inner">
+      <p class="footer-brand"><strong>The Gentle AI Guide</strong></p>
+      <p>Plain-English help with AI, at your own pace.</p>
+      <p>Every guide is reviewed by a person before it is published. No account needed, nothing to install.</p>
+      <p class="fine"><a href="/about/">About this site</a> · <a href="mailto:hello@gentleaiguide.com">hello@gentleaiguide.com</a></p>
+    </div>
   </footer>
 
   <style is:global>
     :root {
-      --paper: #faf8f3;
+      --paper: #f7f6f1;
       --card: #ffffff;
-      --ink: #26281f;
-      --ink-soft: #4f5347;
-      --line: #ddd9cc;
-      --accent: #2e5d43;
-      --accent-soft: #e6eee6;
+      --ink: #1e2b23;
+      --ink-soft: #4c5a52;
+      --line: #e3e1d7;
+      --accent: #1f6b48;
+      --accent-soft: #e4f0e8;
+      --sun: #ffc23c;
+      --sun-ink: #2e2200;
+      --deep: #143026;
+      --deep-ink: #eef3ef;
       --focus: #a54f00;
+      --shadow: 0 1px 2px rgba(20, 48, 38, 0.06), 0 8px 24px rgba(20, 48, 38, 0.06);
+      --shadow-lift: 0 2px 4px rgba(20, 48, 38, 0.08), 0 14px 34px rgba(20, 48, 38, 0.12);
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --paper: #1b1d19;
-        --card: #24271f;
-        --ink: #eae8de;
-        --ink-soft: #b4b3a4;
-        --line: #3c4034;
-        --accent: #8cbf9f;
-        --accent-soft: #2a3b2e;
+        --paper: #141815;
+        --card: #1d231e;
+        --ink: #e9eae3;
+        --ink-soft: #aeb5ab;
+        --line: #333c35;
+        --accent: #7fc79c;
+        --accent-soft: #23342a;
+        --sun: #ffc23c;
+        --sun-ink: #2e2200;
+        --deep: #0f1613;
+        --deep-ink: #e9eae3;
         --focus: #ffb25e;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+        --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.4), 0 14px 34px rgba(0, 0, 0, 0.45);
       }
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
     body {
       margin: 0;
       background: var(--paper);
@@ -100,82 +119,157 @@ const current = Astro.url.pathname;
       font-size: 1.1875rem; /* ~19 px — bevidst større end normalt */
       line-height: 1.75;
     }
+    h1, h2, h3, .brand, .btn, .label, nav ul a {
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+    }
     h1, h2, h3 {
-      font-family: 'Fraunces', Georgia, serif;
       font-weight: 600;
-      line-height: 1.2;
+      line-height: 1.18;
+      letter-spacing: -0.015em;
       text-wrap: balance;
       color: var(--ink);
     }
-    h1 { font-size: 2.3rem; margin: 0 0 0.75rem; }
-    h2 { font-size: 1.55rem; margin: 2.2rem 0 0.6rem; }
-    h3 { font-size: 1.2rem; margin: 1.6rem 0 0.4rem; }
-    p { margin: 0.85rem 0; }
-    /* Links skal LIGNE links — altid understreget, tydelig farve */
+    h1 { font-size: 2.6rem; margin: 0 0 0.9rem; }
+    h2 { font-size: 1.8rem; margin: 0 0 0.7rem; }
+    h3 { font-size: 1.25rem; margin: 0 0 0.4rem; }
+    p { margin: 0.9rem 0; }
     a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
     a:hover { text-decoration-thickness: 3px; }
-    :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
     .skip {
       position: absolute; left: -999px; top: 0; background: var(--card);
-      padding: 0.6rem 1rem; z-index: 10;
+      padding: 0.6rem 1rem; z-index: 20;
     }
     .skip:focus { left: 0.5rem; top: 0.5rem; }
 
-    header { border-bottom: 1px solid var(--line); background: var(--card); }
+    /* ---------- Header ---------- */
+    header { background: var(--card); border-bottom: 1px solid var(--line); }
     nav {
-      max-width: 44rem; margin: 0 auto; padding: 0.9rem 1.25rem;
+      max-width: 62rem; margin: 0 auto; padding: 0.9rem 1.25rem;
       display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
     }
     .brand {
-      display: flex; align-items: center; gap: 0.6rem;
-      font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 1.25rem;
+      display: flex; align-items: center; gap: 0.65rem;
+      font-weight: 600; font-size: 1.2rem; letter-spacing: -0.02em;
       color: var(--ink); text-decoration: none;
     }
-    .brand-mark { width: 2rem; height: 2rem; flex: none; }
-    nav ul { display: flex; gap: 0.4rem; list-style: none; margin: 0; padding: 0; }
+    .brand-mark { width: 2.1rem; height: 2.1rem; flex: none; }
+    nav ul { display: flex; gap: 0.3rem; list-style: none; margin: 0; padding: 0; }
     nav ul a {
-      display: inline-block; padding: 0.45rem 0.85rem; border-radius: 8px;
-      text-decoration: none; color: var(--ink); font-weight: 700; font-size: 1.05rem;
+      display: inline-block; padding: 0.55rem 1.1rem; border-radius: 999px;
+      text-decoration: none; color: var(--ink); font-weight: 600; font-size: 1.02rem;
     }
-    nav ul a:hover { background: var(--accent-soft); }
+    nav ul a:hover { background: var(--accent-soft); color: var(--accent); }
     nav ul a[aria-current='page'] { background: var(--accent-soft); color: var(--accent); }
 
-    main { max-width: 44rem; margin: 0 auto; padding: 2.2rem 1.25rem 4rem; }
+    main { display: block; }
 
-    footer { border-top: 1px solid var(--line); background: var(--card); }
-    footer p { max-width: 44rem; margin: 0 auto; padding: 0.35rem 1.25rem; color: var(--ink-soft); font-size: 1rem; }
-    footer p:first-child { padding-top: 1.6rem; }
-    footer .fine { padding-bottom: 1.6rem; }
+    /* ---------- Sektioner i fuld bredde ---------- */
+    .section { padding: 3.6rem 1.25rem; }
+    .section--hero {
+      background: var(--deep); color: var(--deep-ink);
+      background-image: radial-gradient(120% 90% at 15% 0%, rgba(127, 199, 156, 0.22), transparent 60%);
+    }
+    .section--hero h1, .section--hero h2 { color: #fff; }
+    .section--hero a { color: #fff; }
+    .section--tint { background: var(--accent-soft); }
+    .section--card { background: var(--card); }
+    .inner { max-width: 48rem; margin: 0 auto; }
+    .inner--wide { max-width: 62rem; }
 
-    /* Genbrugelige kort (bruges på forside og guide-oversigt) */
+    /* ---------- Knapper ---------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      font-weight: 600; font-size: 1.05rem; line-height: 1.2;
+      padding: 0.95rem 2rem; border-radius: 999px;
+      text-decoration: none; border: 2px solid transparent;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-2px); text-decoration: none; }
+    .btn--primary { background: var(--sun); color: var(--sun-ink); box-shadow: var(--shadow); }
+    .btn--primary:hover { box-shadow: var(--shadow-lift); }
+    .btn--ghost { border-color: currentColor; color: var(--accent); background: transparent; }
+    .section--hero .btn--ghost { color: #fff; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 1.8rem 0 0; }
+
+    /* ---------- Flueben-liste ---------- */
+    .checks { list-style: none; margin: 1.4rem 0 0; padding: 0; }
+    .checks li {
+      display: flex; align-items: flex-start; gap: 0.7rem;
+      margin: 0.7rem 0; font-size: 1.1rem;
+    }
+    .checks li::before {
+      content: ''; flex: none; width: 1.5rem; height: 1.5rem; margin-top: 0.25rem;
+      background: var(--accent); border-radius: 999px;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 6 9 17l-5-5' fill='none' stroke='%23000' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 6 9 17l-5-5' fill='none' stroke='%23000' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    .section--hero .checks li::before { background: #7fc79c; }
+
+    /* ---------- Kort ---------- */
+    .cards { display: grid; gap: 1.1rem; margin: 1.6rem 0 0; }
+    .cards--two { grid-template-columns: 1fr; }
+    @media (min-width: 46rem) { .cards--two { grid-template-columns: 1fr 1fr; } }
     .card {
       display: block; background: var(--card); border: 1px solid var(--line);
-      border-radius: 12px; padding: 1.3rem 1.4rem; margin: 1rem 0;
-      text-decoration: none; color: var(--ink);
+      border-radius: 20px; padding: 1.5rem 1.6rem;
+      text-decoration: none; color: var(--ink); box-shadow: var(--shadow);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
     }
-    .card:hover { border-color: var(--accent); }
-    .card h3 { margin: 0 0 0.3rem; color: var(--accent); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
-    .card p { margin: 0; color: var(--ink-soft); font-size: 1.05rem; }
+    a.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); border-color: var(--accent); text-decoration: none; }
+    .card h3 { margin: 0 0 0.35rem; color: var(--accent); }
+    .card p { margin: 0; color: var(--ink-soft); font-size: 1.05rem; line-height: 1.6; }
     .card .label {
-      display: inline-block; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em;
+      display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em;
       text-transform: uppercase; color: var(--accent); background: var(--accent-soft);
-      padding: 0.15rem 0.6rem; border-radius: 99px; margin-bottom: 0.5rem;
+      padding: 0.25rem 0.85rem; border-radius: 999px; margin-bottom: 0.7rem;
     }
-    .lede { font-size: 1.3rem; color: var(--ink-soft); }
+    .card .num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2.1rem; height: 2.1rem; border-radius: 999px;
+      background: var(--accent-soft); color: var(--accent);
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem;
+      margin-bottom: 0.7rem;
+    }
+    .lede { font-size: 1.35rem; line-height: 1.55; color: var(--ink-soft); }
+    .section--hero .lede { color: rgba(255, 255, 255, 0.86); }
+    .eyebrow {
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.85rem;
+      letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 0.8rem;
+      color: var(--accent);
+    }
+    .section--hero .eyebrow { color: #9fd6b6; }
 
-    /* Artikel-typografi */
-    article ul, article ol { padding-left: 1.4rem; }
-    article li { margin: 0.5rem 0; }
-    article blockquote {
-      margin: 1.2rem 0; padding: 0.8rem 1.2rem; border-left: 4px solid var(--accent);
-      background: var(--card); border-radius: 0 10px 10px 0; color: var(--ink-soft);
+    /* ---------- Almindelige tekstsider ---------- */
+    .prose { max-width: 44rem; margin: 0 auto; padding: 3rem 1.25rem 4.5rem; }
+    .prose h2 { margin-top: 2.6rem; }
+    .prose h3 { margin-top: 1.8rem; }
+    .prose ul, .prose ol { padding-left: 1.4rem; }
+    .prose li { margin: 0.55rem 0; }
+    .prose blockquote {
+      margin: 1.4rem 0; padding: 1rem 1.4rem; border-left: 5px solid var(--accent);
+      background: var(--card); border-radius: 0 16px 16px 0; color: var(--ink-soft);
+      box-shadow: var(--shadow);
     }
-    article code {
-      background: var(--accent-soft); padding: 0.1rem 0.4rem; border-radius: 6px;
-      font-size: 0.95em;
-    }
-    article hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
+    .prose code { background: var(--accent-soft); padding: 0.1rem 0.45rem; border-radius: 8px; font-size: 0.95em; }
+    .prose hr { border: none; border-top: 1px solid var(--line); margin: 2.4rem 0; }
     .updated { color: var(--ink-soft); font-size: 1rem; margin-top: 0; }
+
+    /* ---------- Footer ---------- */
+    footer { background: var(--deep); color: rgba(255, 255, 255, 0.82); padding: 2.8rem 1.25rem; }
+    footer .inner { max-width: 48rem; }
+    footer p { margin: 0.4rem 0; font-size: 1.02rem; }
+    footer a { color: #fff; }
+    .footer-brand { font-family: 'Poppins', sans-serif; font-size: 1.2rem; color: #fff; margin-bottom: 0.6rem; }
+    footer .fine { margin-top: 1.2rem; }
+
+    @media (max-width: 30rem) {
+      h1 { font-size: 2.1rem; }
+      h2 { font-size: 1.55rem; }
+      .lede { font-size: 1.2rem; }
+      .btn { width: 100%; }
+      .section { padding: 2.8rem 1.1rem; }
+    }
   </style>
 </body>
 </html>
