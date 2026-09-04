@@ -3,7 +3,8 @@
   "styles": {
     "flat": "Flat vector-style editorial illustration, warm and friendly, simple shapes with soft rounded edges and thick charcoal outlines. Limited palette: cream background (#FBF7EF), deep teal (#0F766E), burnt amber (#B45309), charcoal (#2B2B2B), light sand. Characters are adults aged 55-70, drawn with dignity and warmth, modern everyday clothing, varied appearances. No text, no letters, no logos, no readable words on any screen or paper. One clear subject, plenty of calm empty background, gentle daylight. Wide landscape composition.",
     "painterly": "Warm, softly painted editorial illustration with real depth: gentle natural daylight, soft shadows, subtle brush texture, realistic human proportions and calm expressions. Colour mood: cream and warm sand tones, deep teal accents, a touch of burnt amber; never garish. Characters are adults aged 55-70, drawn with dignity and warmth, modern everyday clothing, varied appearances. Absolutely no text, letters, numbers, lettering or writing anywhere in the image — not on screens, paper, cables, walls or clothing. No logos. One clear subject, uncluttered background, quiet domestic setting.",
-    "photo": "Natural, warm editorial photograph, soft window daylight, shallow depth of field, calm and dignified mood, candid not posed. Colour mood: cream and warm neutrals with a hint of teal and amber in the scene. Subjects are adults aged 55-70, varied appearances, modern everyday clothing. No text, no logos, no readable words on any screen or paper. One clear subject, uncluttered background, quiet domestic setting. 35mm lens look."
+    "photo": "Natural, warm editorial photograph, soft window daylight, shallow depth of field, calm and dignified mood, candid not posed. Colour mood: cream and warm neutrals with a hint of teal and amber in the scene. Subjects are adults aged 55-70, varied appearances, modern everyday clothing. No text, no logos, no readable words on any screen or paper. One clear subject, uncluttered background, quiet domestic setting. 35mm lens look.",
+    "spot": "Warm, softly painted spot illustration in the same painterly style: ONE isolated subject only, centred, on a completely plain pure white background. No room, no scene, no floor line, no furniture behind, no frame, no border, no vignette. A single soft cast shadow directly under the subject is fine. Gentle daylight, subtle brush texture, realistic proportions. Colour mood: warm sand and cream tones, deep teal accents, a touch of burnt amber. Adults are aged 55-70, drawn with dignity and warmth. Absolutely no text, letters, numbers or logos anywhere."
   },
   "articles": {
     "1": {
@@ -86,5 +87,14 @@
       "slug": "can-ai-remember-me",
       "motif": "A person pressing a large friendly cross symbol on a screen, a little cloud dissolving into sparkles"
     }
+  },
+  "spots": {
+    "basics": "An older woman and an older man standing side by side, she is pointing up at a large friendly rounded speech-bubble shape floating above them, both smiling gently",
+    "staying-safe": "An older woman standing calmly with one open palm raised in a gentle 'stop' gesture, a simple teal shield shape hovering beside her",
+    "everyday-use": "An older man seated at a small round café table with a laptop, a teapot and an envelope on the table, nothing else around him",
+    "tools": "Three friendly devices arranged together like a small still life: an open laptop, a smartphone and a small smart speaker, no people",
+    "questions": "An older man scratching his head thoughtfully, a large soft question-mark shape floating beside him",
+    "how-it-works": "An older woman reading a single sheet of paper with a pencil in hand, a large teal tick-mark shape floating beside her",
+    "about": "A friendly man in his fifties sitting at a small desk with an open laptop, raising one hand in a warm wave"
   }
 }

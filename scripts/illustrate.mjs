@@ -4,6 +4,8 @@
 //   npm run illustrate 7 13 3   -> flere ad gangen
 //   npm run illustrate 7 --force  overskriver, hvis filen findes
 //   npm run illustrate 7 --style=photo --suffix=photo   prøv en anden stil, gem som 07-ai-scams-photo.png
+//   npm run illustrate --spot basics tools    frie figurer (spot-stil) -> public/images/spots/<navn>.png
+//   (baggrunden fjernes bagefter i skyen, så de bliver gennemsigtige)
 //
 // To udbydere, valgt med IMAGE_PROVIDER i .env:
 //   cloudflare (standard) -> CF_ACCOUNT_ID + CF_API_TOKEN, model FLUX.1-schnell, gratis daglig kvote
@@ -37,7 +39,9 @@ const suffix = (args.find((a) => a.startsWith('--suffix=')) || '').slice(9);
 const style = cfg.styles[styleKey];
 if (!style) { console.error(`Ukendt stil "${styleKey}". Muligheder: ${Object.keys(cfg.styles).join(', ')}`); process.exit(1); }
 const numbers = args.filter((a) => /^\d+$/.test(a));
-if (numbers.length === 0) {
+const spotMode = args.includes('--spot');
+const spotKeys = spotMode ? args.filter((a) => !a.startsWith('--') && !/^\d+$/.test(a)) : [];
+if (numbers.length === 0 && spotKeys.length === 0) {
   console.error('Angiv mindst ét artikelnummer, fx: npm run illustrate 7');
   process.exit(1);
 }
@@ -111,6 +115,24 @@ async function generate(n) {
   console.log(`Gemt: ${file}`);
 }
 
+async function generateSpot(key) {
+  const motif = cfg.spots?.[key];
+  if (!motif) { console.error(`Spot "${key}" findes ikke. Muligheder: ${Object.keys(cfg.spots || {}).join(', ')}`); return; }
+  const dir = resolve(root, 'public/images/spots');
+  mkdirSync(dir, { recursive: true });
+  const file = resolve(dir, `${key}.png`);
+  if (existsSync(file) && !force) { console.log(`Springer over ${file} (findes allerede)`); return; }
+  const prompt = `${cfg.styles.spot}\n\nSubject: ${motif}`;
+  console.log(`Laver spot "${key}" via ${provider} …`);
+  const png = provider === 'gemini' ? await viaGemini(prompt, key) : await viaCloudflare(prompt, key);
+  if (!png) return;
+  writeFileSync(file, png);
+  console.log(`Gemt: ${file}`);
+}
+
 for (const n of numbers) {
   await generate(Number(n));
+}
+for (const k of spotKeys) {
+  await generateSpot(k);
 }

@@ -14,9 +14,13 @@ const items = (await getCollection('guides'))
   .sort((a, b) => a.data.order - b.data.order);
 ---
 <Base title={`${cat.name} — The Gentle AI Guide`} description={`${cat.blurb}. Articles in the ${cat.name} section of The Gentle AI Guide.`}>
-  <div class="wrap page-top">
-    <h1>{cat.name}</h1>
-    <p>{cat.blurb}.</p>
+  <div class="wrap page-top page-top--spot">
+    <img class="spot" src={`/images/spots/${cat.slug}.png`} alt="" width="480" height="480" loading="eager" />
+    <div>
+      <p class="kicker">Section</p>
+      <h1>{cat.name}</h1>
+      <p>{cat.blurb}. {items.length} {items.length === 1 ? 'article' : 'articles'} so far — more on the way.</p>
+    </div>
   </div>
   <div class="wrap" style="padding-bottom:3rem">
     <div class="grid grid--3">
