@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Forslag B — Varm og lys · The Gentle AI Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Forslag B — "Varm og lys": creme baggrund, mørkeblå tekst, rav og teal som
+   accentfarver. Todelt hero med illustration, hvide kort med skygge. */
+:root{
+  --w:1140px;
+  --paper:#fff8ee; --card:#ffffff;
+  --ink:#16273d; --soft:#4f5b6d; --line:#eadfcd;
+  --amber:#f2a33c; --amber-ink:#2b1a00; --teal:#2a9d8f; --teal-soft:#dff1ee;
+  --deep:#16273d;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Atkinson Hyperlegible',Verdana,sans-serif;font-size:1.125rem;line-height:1.7}
+h1,h2,h3{font-family:'Poppins',sans-serif;letter-spacing:-.02em;line-height:1.15;margin:0}
+a{color:inherit}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 24px}
+header{background:var(--paper);position:sticky;top:0;z-index:5}
+.nav{display:flex;align-items:center;justify-content:space-between;height:80px;gap:24px}
+.brand{display:flex;align-items:center;gap:12px;font-family:Poppins;font-weight:600;font-size:1.2rem;text-decoration:none}
+.mark{width:36px;height:36px;border-radius:12px;background:var(--teal);display:grid;place-items:center;color:#fff;font-family:Poppins;font-weight:700}
+.menu{display:flex;gap:6px;list-style:none;margin:0;padding:0}
+.menu a{font-family:Poppins;font-weight:600;font-size:1rem;text-decoration:none;padding:9px 16px;border-radius:999px;color:var(--ink)}
+.menu a:hover,.menu a.on{background:var(--teal-soft);color:var(--teal)}
+.btn{font-family:Poppins;font-weight:600;font-size:1rem;text-decoration:none;padding:13px 26px;border-radius:999px;display:inline-block}
+.btn-amber{background:var(--amber);color:var(--amber-ink);box-shadow:0 8px 20px rgba(242,163,60,.3)}
+.btn-line{border:2px solid var(--ink);color:var(--ink)}
+/* hero */
+.hero{padding:56px 0 64px}
+.hero .cols{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.eyebrow{font-family:Poppins;font-weight:600;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin:0 0 14px}
+.hero h1{font-size:3.6rem;font-weight:700}
+.hero p{font-size:1.3rem;color:var(--soft);margin:20px 0 28px;max-width:560px}
+.btns{display:flex;gap:14px;flex-wrap:wrap}
+.illus{aspect-ratio:1/.85;border-radius:32px;background:linear-gradient(135deg,#ffe7c2,#dff1ee);position:relative;overflow:hidden}
+.illus svg{width:100%;height:100%}
+/* grid */
+.sec{padding:24px 0 72px}
+.sec h2{font-size:2.1rem;font-weight:700;margin-bottom:6px}
+.sec .sub{color:var(--soft);margin:0 0 30px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.card{text-decoration:none;display:block;background:var(--card);border-radius:24px;overflow:hidden;box-shadow:0 2px 6px rgba(22,39,61,.06),0 14px 34px rgba(22,39,61,.08);transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-4px);box-shadow:0 4px 10px rgba(22,39,61,.08),0 22px 44px rgba(22,39,61,.14)}
+.cover{aspect-ratio:16/10;display:block}
+.cover svg{display:block;width:100%;height:100%}
+.body{padding:22px 24px 26px}
+.tag{display:inline-block;margin:0 0 10px;font-family:Poppins;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);background:var(--teal-soft);padding:5px 12px;border-radius:999px}
+.card h3{font-size:1.3rem;font-weight:600;margin-bottom:8px}
+.card p{margin:0;color:var(--soft);font-size:1.02rem;line-height:1.6}
+.more{display:inline-block;margin-top:16px;font-family:Poppins;font-weight:600;color:var(--teal)}
+/* band */
+.band{background:var(--card);padding:72px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.band .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.tile{background:var(--paper);border-radius:20px;padding:28px}
+.tile .ic{width:48px;height:48px;border-radius:14px;background:var(--amber);display:grid;place-items:center;font-size:1.3rem;margin-bottom:16px}
+.tile h3{font-size:1.2rem;margin-bottom:8px}
+.tile p{margin:0;color:var(--soft);font-size:1rem}
+footer{background:var(--deep);color:#c9d3e0;padding:56px 0}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+footer a{color:#fff}
+footer h4{font-family:Poppins;color:#fff;margin:0 0 12px;font-size:1rem}
+footer ul{list-style:none;margin:0;padding:0;line-height:2}
+.note{position:fixed;left:0;right:0;bottom:0;background:#111;color:#fff;font-family:Poppins;font-size:.85rem;text-align:center;padding:9px;z-index:20}
+.note a{color:#ffc23c}
+@media(max-width:900px){.grid,.band .cols{grid-template-columns:1fr 1fr}.hero .cols,footer .cols{grid-template-columns:1fr}.hero h1{font-size:2.5rem}.illus{display:none}}
+@media(max-width:620px){.grid,.band .cols{grid-template-columns:1fr}.menu{display:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="#"><span class="mark">✦</span> The Gentle AI Guide</a>
+  <ul class="menu"><li><a class="on" href="#">Home</a></li><li><a href="#">Guides</a></li><li><a href="#">About</a></li></ul>
+  <a class="btn btn-amber" href="#">Start with guide 1</a>
+</div></header>
+
+<section class="hero"><div class="wrap cols">
+  <div>
+    <p class="eyebrow">Plain-English help with AI</p>
+    <h1>AI, explained gently.</h1>
+    <p>Everyone talks about AI. Very few people explain it calmly. This site does — one small step at a time, with no jargon and no hype.</p>
+    <div class="btns"><a class="btn btn-amber" href="#">Start with guide 1</a><a class="btn btn-line" href="#">See all five guides</a></div>
+  </div>
+  <div class="illus">
+    <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="300" cy="90" r="70" fill="#f2a33c" opacity=".9"/>
+      <rect x="60" y="150" width="220" height="120" rx="28" fill="#fff"/>
+      <rect x="90" y="185" width="140" height="14" rx="7" fill="#2a9d8f"/>
+      <rect x="90" y="215" width="100" height="14" rx="7" fill="#c9d3e0"/>
+      <rect x="150" y="60" width="200" height="90" rx="26" fill="#16273d"/>
+      <rect x="180" y="90" width="120" height="12" rx="6" fill="#fff"/>
+      <rect x="180" y="114" width="80" height="12" rx="6" fill="#2a9d8f"/>
+      <circle cx="90" cy="290" r="30" fill="#2a9d8f"/>
+      <path d="M76 290l10 10 20-22" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <h2>Start with these five guides</h2>
+  <p class="sub">Read them in order, or jump straight to the one that answers your question.</p>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <h2 style="font-size:2rem;margin-bottom:28px">Why this site is different</h2>
+  <div class="cols">
+    <div class="tile"><div class="ic">👋</div><h3>We assume nothing</h3><p>Every technical word is explained the first time it appears. You'll never feel behind here.</p></div>
+    <div class="tile"><div class="ic">✅</div><h3>Reviewed by a person</h3><p>Guides are written with AI's help, then read, corrected and approved by a human before publishing.</p></div>
+    <div class="tile"><div class="ic">🔓</div><h3>Nothing to buy</h3><p>No account, no app, no newsletter you didn't ask for. Just guides you can read at your own pace.</p></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap cols">
+  <div><h4>The Gentle AI Guide</h4><p style="margin:0">Plain-English help with AI, at your own pace.</p></div>
+  <div><h4>Guides</h4><ul><li><a href="#">What is AI</a></li><li><a href="#">Your first conversation</a></li><li><a href="#">Is it safe?</a></li></ul></div>
+  <div><h4>Site</h4><ul><li><a href="#">About</a></li><li><a href="#">hello@gentleaiguide.com</a></li></ul></div>
+</div></footer>
+
+<div class="note">Forslag <b>B — Varm og lys</b> · <a href="/options/">tilbage til oversigten</a> · <a href="/options/a.html">A</a> · <a href="/options/c.html">C</a></div>
+<script src="/options/data.js"></script>
+<script>renderB()</script>
+</body></html>
