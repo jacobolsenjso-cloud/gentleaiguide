@@ -1,79 +1,64 @@
 ---
-// Forsiden (magasin-opsætning): centreret velkomst, de fem guides som kort i
-// tre spalter, og et afsnit om hvad der gør sitet anderledes.
+// Forsiden (avis-opsætning): to store historier + "Latest"-spalte,
+// derefter én række pr. kategori, og et bånd om hvordan sitet virker.
 import Base from '../layouts/Base.astro';
-import GuideCard from '../components/GuideCard.astro';
+import ArticleCard from '../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
+import { CATEGORIES } from '../site';
 
-const guides = (await getCollection('guides')).sort(
-  (a, b) => a.data.order - b.data.order
-);
-const first = guides[0];
+const all = (await getCollection('guides')).sort((a, b) => a.data.order - b.data.order);
+// Fremhævede: dem med featured: true (ellers de to første)
+let featured = all.filter((a) => a.data.featured).slice(0, 2);
+if (featured.length < 2) featured = [...featured, ...all.filter((a) => !featured.includes(a))].slice(0, 2);
+// "Latest": nyeste først (efter dato, så efter nummer), uden de fremhævede
+const latest = [...all]
+  .filter((a) => !featured.includes(a))
+  .sort((a, b) => b.data.updated.getTime() - a.data.updated.getTime() || b.data.order - a.data.order)
+  .slice(0, 7);
 ---
 <Base
-  title="The Gentle AI Guide — plain-English help with AI"
-  description="AI explained calmly and in plain English, one small step at a time. No jargon, no hype, no account needed. Written for people who didn't grow up with computers."
+  title="The Gentle AI Guide — plain-English help with AI for people over 50"
+  description="AI explained calmly, in plain English, one article at a time. Scams to recognise, tools explained, everyday uses that work — all reviewed by a person before publishing. No account, nothing to install."
 >
-  <section class="hero">
-    <div class="wrap">
-      <p class="eyebrow">Plain-English help with AI</p>
-      <h1>AI, explained <em>gently.</em></h1>
-      <p class="lede">
-        Everyone talks about AI. Very few people explain it calmly. This site does —
-        one small step at a time, with no jargon and no hype.
-      </p>
-      <div class="btn-row">
-        <a class="btn btn--primary" href={`/guides/${first.id}/`}>Start with guide 1</a>
-        <a class="btn btn--line" href="/guides/">See all five guides</a>
+  <div class="wrap front">
+    <section aria-label="Featured articles">
+      <div class="featured">
+        {featured.map((a) => <ArticleCard article={a} size="big" />)}
       </div>
-      <div class="strip">
-        <span><b>5</b> short guides</span>
-        <span><b>0</b> accounts to create</span>
-        <span><b>Every page</b> reviewed by a person</span>
-        <span><b>Plain English</b> throughout</span>
+    </section>
+    <aside aria-label="Latest articles">
+      <p class="side-head">Latest</p>
+      <div class="latest">
+        {latest.map((a) => <ArticleCard article={a} size="row" />)}
       </div>
-    </div>
-  </section>
+    </aside>
+  </div>
 
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <h2>Start with these five guides</h2>
-          <p>Read them in order, or jump straight to the one that answers your question.</p>
+  {CATEGORIES.map((cat) => {
+    const items = all.filter((a) => a.data.category === cat.name);
+    if (items.length === 0) return null;
+    return (
+      <section class="wrap section" aria-label={cat.name}>
+        <div class="section-head">
+          <h2>{cat.name}</h2>
+          <p>{cat.blurb}</p>
+          <a class="more" href={`/category/${cat.slug}/`}>All {cat.name.toLowerCase()} →</a>
         </div>
-        <a class="btn btn--line btn--small" href="/guides/">All guides →</a>
-      </div>
-      <div class="grid">
-        {guides.map((guide, i) => <GuideCard guide={guide} index={i} />)}
-      </div>
-    </div>
-  </section>
+        <div class="grid">
+          {items.slice(0, 4).map((a) => <ArticleCard article={a} />)}
+        </div>
+      </section>
+    );
+  })}
 
-  <section class="section section--card">
-    <div class="wrap why-cols">
-      <div>
-        <p class="eyebrow">Why this site is different</p>
-        <h2>We assume nothing, and we never make you feel behind.</h2>
-        <p>
-          Every guide is written with the help of AI and then read, corrected and
-          approved by a person before it is published. Each page shows the date it
-          was last checked.
-        </p>
-        <p>
-          That's the working relationship we recommend you have with AI, too: let it
-          do the heavy lifting, but never let it have the final word.
-        </p>
-        <div class="btn-row">
-          <a class="btn btn--line" href="/about/">More about how this works</a>
-        </div>
+  <section class="band" aria-label="How this site works">
+    <div class="wrap">
+      <h2>How this site works</h2>
+      <div class="band-cols">
+        <div><h3>Written for people over 50</h3><p>Plain English. Every technical word explained the first time it appears. No hype, no fear.</p></div>
+        <div><h3>Reviewed by a person</h3><p>Articles are drafted with AI's help, then read, corrected and approved by a human before they go online. Each one shows the date it was last checked.</p></div>
+        <div><h3>Nothing to buy</h3><p>No account, no app, no newsletter you didn't ask for. If you have a question, <a href="mailto:hello@gentleaiguide.com">write to us</a> — questions often become articles.</p></div>
       </div>
-      <ul class="checks">
-        <li>Written for people who didn't grow up with computers</li>
-        <li>Every technical word explained the first time it appears</li>
-        <li>Nothing to buy, no account, nothing to install</li>
-        <li>Each page shows when a person last checked it</li>
-      </ul>
     </div>
   </section>
 </Base>

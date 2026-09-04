@@ -1,0 +1,26 @@
+---
+// Én side pr. kategori: overskrift + alle artikler i kategorien som kort
+import Base from '../../layouts/Base.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '../../site';
+
+export async function getStaticPaths() {
+  return CATEGORIES.map((cat) => ({ params: { slug: cat.slug }, props: { cat } }));
+}
+const { cat } = Astro.props;
+const items = (await getCollection('guides'))
+  .filter((a) => a.data.category === cat.name)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+<Base title={`${cat.name} — The Gentle AI Guide`} description={`${cat.blurb}. Articles in the ${cat.name} section of The Gentle AI Guide.`}>
+  <div class="wrap page-top">
+    <h1>{cat.name}</h1>
+    <p>{cat.blurb}.</p>
+  </div>
+  <div class="wrap" style="padding-bottom:3rem">
+    <div class="grid grid--3">
+      {items.map((a) => <ArticleCard article={a} />)}
+    </div>
+  </div>
+</Base>

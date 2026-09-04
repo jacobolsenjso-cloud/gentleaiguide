@@ -6,6 +6,7 @@ order: 1
 category: "Basics"
 label: "Start here"
 image: "/images/articles/01-what-is-ai.png"
+featured: true
 ---
 
 If you've been putting off understanding AI because every explanation seems to

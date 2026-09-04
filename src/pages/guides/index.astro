@@ -1,30 +1,25 @@
 ---
-// Oversigt over alle guides som kort i tre spalter, sorteret efter 'order'
+// Alle artikler, samlet kategori for kategori
 import Base from '../../layouts/Base.astro';
-import GuideCard from '../../components/GuideCard.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
-
-const guides = (await getCollection('guides')).sort(
-  (a, b) => a.data.order - b.data.order
-);
+import { CATEGORIES } from '../../site';
+const all = (await getCollection('guides')).sort((a, b) => a.data.order - b.data.order);
 ---
-<Base
-  title="All guides — The Gentle AI Guide"
-  description="Every guide on The Gentle AI Guide: AI explained in plain English, at your own pace."
->
-  <section class="page-hero">
-    <div class="wrap">
-      <p class="eyebrow">The guides</p>
-      <h1>All five guides</h1>
-      <p class="lede">In the order we suggest reading them — but any of them stands on its own.</p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <div class="grid">
-        {guides.map((guide, i) => <GuideCard guide={guide} index={i} />)}
-      </div>
-    </div>
-  </section>
+<Base title="All articles — The Gentle AI Guide" description="Every article on The Gentle AI Guide, section by section.">
+  <div class="wrap page-top">
+    <h1>All articles</h1>
+    <p>{all.length} articles, section by section. New to AI? Start with <a href="/guides/what-is-ai/">What is AI, actually?</a></p>
+  </div>
+  {CATEGORIES.map((cat) => {
+    const items = all.filter((a) => a.data.category === cat.name);
+    if (items.length === 0) return null;
+    return (
+      <section class="wrap section" aria-label={cat.name}>
+        <div class="section-head"><h2>{cat.name}</h2><p>{cat.blurb}</p></div>
+        <div class="grid">{items.map((a) => <ArticleCard article={a} />)}</div>
+      </section>
+    );
+  })}
+  <div style="height:3rem"></div>
 </Base>

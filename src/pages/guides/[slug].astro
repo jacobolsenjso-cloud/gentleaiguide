@@ -1,60 +1,34 @@
 ---
-// Én side pr. guide: hero-bånd med titel, læsespalte til venstre og en
-// "In this series"-boks til højre på computer (falder under teksten på mobil).
+// Én side pr. artikel: kategori, titel, uddrag, meta, billede, tekst —
+// og "Read next" med tre andre artikler fra samme kategori nederst.
 import Base from '../../layouts/Base.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
 import { getCollection, render } from 'astro:content';
+import { categoryByName, readingMinutes, formatDate } from '../../site';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guides');
-  return guides.map((guide) => ({
-    params: { slug: guide.id },
-    props: { guide },
-  }));
+  return guides.map((guide) => ({ params: { slug: guide.id }, props: { guide } }));
 }
-
 const { guide } = Astro.props;
 const { Content } = await render(guide);
+const cat = categoryByName(guide.data.category);
 const all = (await getCollection('guides')).sort((a, b) => a.data.order - b.data.order);
-const idx = all.findIndex((g) => g.id === guide.id);
-const next = all[idx + 1];
-const updated = guide.data.updated.toLocaleDateString('en-GB', {
-  day: 'numeric', month: 'long', year: 'numeric',
-});
+const same = all.filter((a) => a.id !== guide.id && a.data.category === guide.data.category);
+const others = all.filter((a) => a.id !== guide.id && a.data.category !== guide.data.category);
+const next = [...same, ...others].slice(0, 3);
 ---
-<Base title={`${guide.data.title} — The Gentle AI Guide`} description={guide.data.description}>
-  <section class="page-hero">
-    <div class="wrap">
-      <p class="eyebrow">{guide.data.label ?? `Guide ${idx + 1} of ${all.length}`}</p>
-      <h1>{guide.data.title}</h1>
-      <p class="lede">{guide.data.description}</p>
-    </div>
+<Base title={`${guide.data.title} — The Gentle AI Guide`} description={guide.data.description} image={guide.data.image}>
+  <article class="article">
+    {cat && <a class="kicker" href={`/category/${cat.slug}/`}>{cat.name}</a>}
+    <h1>{guide.data.title}</h1>
+    <p class="lede">{guide.data.description}</p>
+    <p class="meta">{formatDate(guide.data.updated)} · {readingMinutes(guide.body)} min read · Written with AI's help, checked by a person</p>
+    {guide.data.image && <img class="article-image" src={guide.data.image} alt="" width="1024" height="640" loading="eager" />}
+    <div class="prose"><Content /></div>
+  </article>
+  <section class="wrap read-next" aria-label="Read next">
+    <h2>Read next</h2>
+    <div class="grid grid--3">{next.map((a) => <ArticleCard article={a} />)}</div>
   </section>
-
-  <div class="wrap article-cols">
-    <article class="prose">
-      {guide.data.image && (
-        <img class="article-image" src={guide.data.image} alt="" width="1024" height="640" loading="eager" />
-      )}
-      <p class="updated">Last reviewed by a person on {updated}.</p>
-      <Content />
-      <hr />
-      {next
-        ? <p>Next: <a href={`/guides/${next.id}/`}>{next.data.title} →</a></p>
-        : <p>You've read all five guides. <a href="/guides/">Back to the overview</a></p>}
-    </article>
-
-    <aside class="side" aria-label="In this series">
-      <div class="side-box">
-        <h2>In this series</h2>
-        <ol>
-          {all.map((g) => (
-            <li aria-current={g.id === guide.id ? 'page' : undefined}>
-              <a href={`/guides/${g.id}/`}>{g.data.title}</a>
-            </li>
-          ))}
-        </ol>
-        {next && <a class="btn btn--primary btn--small" href={`/guides/${next.id}/`}>Next guide →</a>}
-      </div>
-    </aside>
-  </div>
 </Base>

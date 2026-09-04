@@ -1,21 +1,19 @@
 ---
-import { INDEXABLE } from '../site';
-// Fælles layout: head, navigation, footer og al global CSS.
-// Opsætning A (magasin) + Farve 3 (varm): creme baggrund, hvide kort, kulsort
-// tekst, brændt rav KUN til den primære knap, teal til links og mærker.
-// Bred opsætning (1200 px) på computer, én spalte på mobil. Brødteksten er bevidst stor (19 px) og i Atkinson Hyperlegible,
-// fordi sitet er til folk, der ikke er vokset op med computere.
+import { INDEXABLE, CATEGORIES } from '../site';
+// Fælles layout: avis-opsætning som Smart Senior Daily.
+// Logo i midten, kategorilinje, bred beholder (1140 px). Lyst tema for alle —
+// ingen mørk tilstand. Brødtekst 19 px Atkinson Hyperlegible; overskrifter
+// Poppins. Tekststørrelse-knapper (A / A+ / A++), som huskes i browseren.
+// Farver: creme baggrund, hvide kort, kulsort tekst, teal til links, rav KUN
+// til den vigtigste knap.
 interface Props {
   title: string;
   description: string;
+  image?: string;
 }
-const { title, description } = Astro.props;
+const { title, description, image } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/guides/', label: 'Guides' },
-  { href: '/about/', label: 'About' },
-];
+const ogImage = new URL(image ?? '/images/articles/01-what-is-ai.png', Astro.site);
 const current = Astro.url.pathname;
 ---
 <!doctype html>
@@ -33,29 +31,44 @@ const current = Astro.url.pathname;
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" />
+  <script is:inline>
+    // Husk læserens tekststørrelse, før siden tegnes (undgår "hop")
+    try {
+      var s = localStorage.getItem('textsize');
+      if (s === 'large' || s === 'larger') document.documentElement.setAttribute('data-textsize', s);
+    } catch (e) {}
+  </script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
+
   <header>
-    <nav class="wrap" aria-label="Main">
+    <div class="wrap masthead">
+      <div class="masthead-side"></div>
       <a class="brand" href="/">
         <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="10" fill="var(--accent)"/><path d="M15 27v-9h2v9h-2Zm1-9c-.4-6-3.4-9.6-9.5-11 .9 6.5 4 9.9 9.5 11Zm0 0c.4-6 3.4-9.6 9.5-11-.9 6.5-4 9.9-9.5 11Z" fill="#fff"/></svg>
-        <span>The Gentle AI Guide</span>
+        <span class="brand-name">The Gentle <em>AI</em> Guide</span>
       </a>
-      <ul>
-        {navItems.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              aria-current={current === item.href || (item.href !== '/' && current.startsWith(item.href)) ? 'page' : undefined}
-            >{item.label}</a>
-          </li>
+      <div class="masthead-side textsize" role="group" aria-label="Text size">
+        <span class="textsize-label">Text size</span>
+        <button type="button" data-size="normal" aria-pressed="true">A</button>
+        <button type="button" data-size="large" aria-pressed="false">A<span aria-hidden="true">+</span><span class="sr">larger</span></button>
+        <button type="button" data-size="larger" aria-pressed="false">A<span aria-hidden="true">++</span><span class="sr">largest</span></button>
+      </div>
+    </div>
+    <nav class="catbar" aria-label="Categories">
+      <ul class="wrap">
+        {CATEGORIES.map((c) => (
+          <li><a href={`/category/${c.slug}/`} aria-current={current.startsWith(`/category/${c.slug}/`) ? 'page' : undefined}>{c.name}</a></li>
         ))}
+        <li class="catbar-sep" aria-hidden="true"></li>
+        <li><a href="/guides/" aria-current={current === '/guides/' ? 'page' : undefined}>All articles</a></li>
+        <li><a href="/about/" aria-current={current.startsWith('/about/') ? 'page' : undefined}>About</a></li>
       </ul>
-      <a class="btn btn--primary btn--small nav-cta" href="/guides/what-is-ai/">Start with guide 1</a>
     </nav>
   </header>
 
@@ -67,225 +80,206 @@ const current = Astro.url.pathname;
     <div class="wrap footer-cols">
       <div>
         <p class="footer-brand">The Gentle AI Guide</p>
-        <p>Plain-English help with AI, at your own pace.</p>
-        <p>Every guide is reviewed by a person before it is published. No account needed, nothing to install.</p>
+        <p>Plain-English help with AI for people over 50. Every article is written with AI's help, then read, corrected and approved by a person before it is published.</p>
+        <p>Nothing to buy. No account. Nothing to install.</p>
       </div>
       <div>
-        <p class="footer-head">Guides</p>
+        <p class="footer-head">Sections</p>
         <ul>
-          <li><a href="/guides/what-is-ai/">What is AI, actually?</a></li>
-          <li><a href="/guides/your-first-conversation/">Your first conversation</a></li>
-          <li><a href="/guides/is-it-safe/">Is it safe?</a></li>
-          <li><a href="/guides/">All guides</a></li>
+          {CATEGORIES.map((c) => <li><a href={`/category/${c.slug}/`}>{c.name}</a></li>)}
+          <li><a href="/guides/">All articles</a></li>
         </ul>
       </div>
       <div>
-        <p class="footer-head">Site</p>
+        <p class="footer-head">This site</p>
         <ul>
-          <li><a href="/about/">About this site</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
           <li><a href="mailto:hello@gentleaiguide.com">hello@gentleaiguide.com</a></li>
         </ul>
       </div>
     </div>
+    <p class="wrap footer-fine">© {new Date().getFullYear()} The Gentle AI Guide · Illustrations are AI-generated and reviewed by a person.</p>
   </footer>
+
+  <script is:inline>
+    // Tekststørrelse-knapperne: sæt attribut på <html>, gem valget
+    (function () {
+      var root = document.documentElement;
+      var buttons = document.querySelectorAll('.textsize button');
+      function apply(size) {
+        if (size === 'normal') root.removeAttribute('data-textsize');
+        else root.setAttribute('data-textsize', size);
+        buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.size === size)); });
+        try { localStorage.setItem('textsize', size); } catch (e) {}
+      }
+      var current = root.getAttribute('data-textsize') || 'normal';
+      buttons.forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.size === current));
+        b.addEventListener('click', function () { apply(b.dataset.size); });
+      });
+    })();
+  </script>
 
   <style is:global>
     :root {
-      --w: 75rem;               /* 1200 px */
-      --paper: #fbf7ef;         /* creme — ikke hvid, så skærmen ikke blænder */
-      --paper2: #f3ecdf;        /* et nøk mørkere, til bånd */
+      --w: 71.25rem;            /* 1140 px */
+      --read: 44rem;            /* læsespalte ≈ 65-75 tegn pr. linje */
+      --paper: #fbf7ef;
+      --paper2: #f3ecdf;
       --card: #ffffff;
-      --ink: #2b2b2b;           /* kul, ikke ren sort — blødere kant */
+      --ink: #2b2b2b;
       --soft: #5a5a57;
-      --line: #e6dfd2;
-      --accent: #0f766e;        /* teal: links, mærker, sekundær knap */
+      --line: #e3dccd;
+      --accent: #0f766e;
       --accent-soft: #dcefec;
-      --amber: #b45309;         /* brændt rav: KUN primærknappen */
+      --amber: #b45309;
       --amber-hover: #92400e;
       --focus: #b45309;
       --shadow: 0 1px 2px rgba(43, 43, 43, 0.05), 0 6px 18px rgba(43, 43, 43, 0.06);
     }
+    html { font-size: 100%; }
+    html[data-textsize='large'] { font-size: 112.5%; }
+    html[data-textsize='larger'] { font-size: 125%; }
+
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      * { transition: none !important; }
-    }
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: 'Atkinson Hyperlegible', Verdana, sans-serif;
-      font-size: 1.1875rem; /* ~19 px — bevidst større end normalt */
-      line-height: 1.7;
-    }
-    h1, h2, h3, h4 {
-      font-family: 'Poppins', 'Segoe UI', sans-serif;
-      font-weight: 600;
-      line-height: 1.12;
-      letter-spacing: -0.025em;
-      text-wrap: balance;
-      color: var(--ink);
-      margin: 0;
-    }
-    h1 { font-size: 3.6rem; }
-    h2 { font-size: 2.2rem; }
-    h3 { font-size: 1.3rem; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Atkinson Hyperlegible', Verdana, sans-serif; font-size: 1.1875rem; line-height: 1.7; }
+    h1, h2, h3, h4 { font-family: 'Poppins', 'Segoe UI', sans-serif; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; text-wrap: balance; color: var(--ink); margin: 0; }
+    h1 { font-size: 2.6rem; }
+    h2 { font-size: 1.7rem; }
+    h3 { font-size: 1.25rem; }
     p { margin: 0.9rem 0; }
     a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
     a:hover { text-decoration-thickness: 3px; }
+    img { max-width: 100%; height: auto; display: block; }
     :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
+    .sr { position: absolute; left: -9999px; }
     .skip { position: absolute; left: -999px; top: 0; background: var(--card); padding: 0.6rem 1rem; z-index: 20; }
     .skip:focus { left: 0.5rem; top: 0.5rem; }
+    .wrap { max-width: var(--w); margin: 0 auto; padding: 0 1.5rem; }
 
-    .wrap { max-width: var(--w); margin: 0 auto; padding: 0 2rem; }
+    /* ---------- Masthead: logo i midten, tekststørrelse til højre ---------- */
+    header { background: var(--card); border-bottom: 3px solid var(--ink); }
+    .masthead { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; padding-top: 1.1rem; padding-bottom: 0.9rem; }
+    .masthead-side:last-child { justify-self: end; }
+    .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--ink); }
+    .brand-mark { width: 2.6rem; height: 2.6rem; flex: none; }
+    .brand-name { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.9rem; letter-spacing: -0.03em; white-space: nowrap; }
+    .brand-name em { font-style: normal; color: var(--accent); }
+    .textsize { display: flex; align-items: center; gap: 0.3rem; }
+    .textsize-label { font-size: 0.95rem; color: var(--soft); margin-right: 0.3rem; }
+    .textsize button { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.98rem; line-height: 1; min-width: 2.6rem; height: 2.6rem; padding: 0 0.5rem; border-radius: 0.5rem; border: 2px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
+    .textsize button[aria-pressed='true'] { background: var(--ink); color: var(--card); border-color: var(--ink); }
 
-    /* ---------- Header ---------- */
-    header { background: var(--card); position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--line); }
-    nav { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.5rem; }
-    .brand {
-      display: flex; align-items: center; gap: 0.7rem;
-      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1.15rem; letter-spacing: -0.02em;
-      color: var(--ink); text-decoration: none;
-    }
-    .brand-mark { width: 2rem; height: 2rem; flex: none; }
-    nav ul { display: flex; gap: 1.8rem; list-style: none; margin: 0; padding: 0; }
-    nav ul a {
-      display: inline-block; padding: 1.4rem 0; border-bottom: 2px solid transparent;
-      font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 1rem;
-      text-decoration: none; color: var(--soft);
-    }
-    nav ul a:hover, nav ul a[aria-current='page'] { color: var(--ink); border-color: var(--accent); }
+    /* ---------- Kategorilinje ---------- */
+    .catbar { border-top: 1px solid var(--line); }
+    .catbar ul { display: flex; justify-content: center; gap: 0.2rem; list-style: none; margin: 0 auto; padding: 0 1.5rem; flex-wrap: wrap; }
+    .catbar a { display: inline-block; padding: 0.8rem 0.95rem; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1rem; text-decoration: none; color: var(--ink); border-bottom: 3px solid transparent; margin-bottom: -1px; }
+    .catbar a:hover { color: var(--accent); }
+    .catbar a[aria-current='page'] { border-bottom-color: var(--accent); color: var(--accent); }
+    .catbar-sep { width: 1px; background: var(--line); margin: 0.7rem 0.4rem; }
 
     /* ---------- Knapper ---------- */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1.02rem; line-height: 1.2;
-      padding: 0.9rem 1.5rem; border-radius: 0.8rem; text-decoration: none;
-      border: 2px solid transparent; transition: background 0.15s ease, color 0.15s ease;
-    }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1.02rem; line-height: 1.2; padding: 0.85rem 1.4rem; border-radius: 0.7rem; text-decoration: none; border: 2px solid transparent; }
     .btn:hover { text-decoration: none; }
     .btn--primary { background: var(--amber); color: #fff; }
     .btn--primary:hover { background: var(--amber-hover); }
-    .btn--line { background: var(--accent-soft); color: var(--accent); }
-    .btn--line:hover { background: var(--accent); color: #fff; }
-    .btn--small { padding: 0.65rem 1.2rem; font-size: 0.98rem; }
-    .btn-row { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.9rem; }
+    .btn--line { background: var(--card); color: var(--ink); border-color: var(--ink); }
+    .btn--line:hover { background: var(--paper2); }
 
-    /* ---------- Sektioner ---------- */
-    .section { padding: 3.8rem 0; }
-    .section--card { background: var(--paper2); border-top: 1px solid var(--line); }
-    .eyebrow {
-      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.85rem;
-      letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 0 0 0.9rem;
-    }
-    .lede { font-size: 1.35rem; line-height: 1.55; color: var(--soft); margin: 1.4rem 0 0; }
-    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 1.5rem; margin-bottom: 2rem; }
-    .section-head p { color: var(--soft); margin: 0.4rem 0 0; }
+    /* ---------- Forside ---------- */
+    .front { display: grid; grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr); gap: 2.5rem; padding: 2.2rem 0 1rem; }
+    .featured { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; }
+    .side-head { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.1rem; margin: 0 0 0.6rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--ink); }
+    .latest { display: flex; flex-direction: column; }
+    .row { display: grid; grid-template-columns: 5.5rem 1fr; gap: 0.9rem; padding: 0.85rem 0; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink); align-items: start; }
+    .row img { width: 5.5rem; height: 5.5rem; object-fit: cover; border-radius: 0.5rem; border: 1px solid var(--line); }
+    .row-text { display: flex; flex-direction: column; gap: 0.15rem; }
+    .row-title { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1rem; line-height: 1.3; }
+    .row:hover .row-title { color: var(--accent); }
+    .row-meta { font-size: 0.85rem; color: var(--soft); }
+    .kicker { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.85rem; color: var(--accent); text-decoration: none; }
+    .kicker:hover { text-decoration: underline; }
 
-    /* ---------- Hero ---------- */
-    .hero { padding: 4.5rem 0 3.5rem; background: var(--card); border-bottom: 1px solid var(--line); text-align: center; }
-    .hero h1 { max-width: 56rem; margin: 0 auto; }
-    .hero h1 em { font-style: normal; color: var(--accent); }
-    .hero .lede { max-width: 40rem; margin-left: auto; margin-right: auto; }
-    .hero .btn-row { justify-content: center; }
-    .strip { display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem; margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid var(--line); color: var(--soft); font-size: 1rem; }
-    .strip b { font-family: 'Poppins', sans-serif; font-weight: 600; color: var(--ink); }
+    /* ---------- Kort ---------- */
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 0.9rem; overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+    .card-img img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: center 40%; border-bottom: 1px solid var(--line); }
+    .card-body { padding: 1.1rem 1.25rem 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; flex: 1; }
+    .card h3 a { color: var(--ink); text-decoration: none; }
+    .card h3 a:hover { color: var(--accent); text-decoration: underline; }
+    .card--big h3 { font-size: 1.5rem; }
+    .card-desc { margin: 0.2rem 0 0; color: var(--soft); font-size: 1.02rem; line-height: 1.6; }
+    .card-meta { margin: auto 0 0; padding-top: 0.6rem; font-size: 0.88rem; color: var(--soft); }
 
-    /* ---------- Kortgitter ---------- */
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
-    .card {
-      display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line);
-      border-radius: 1rem; overflow: hidden; text-decoration: none; color: var(--ink);
-      box-shadow: var(--shadow); transition: border-color 0.15s ease, transform 0.15s ease;
-    }
-    .card:hover { border-color: var(--accent); transform: translateY(-2px); text-decoration: none; }
-    .card .cover { display: block; aspect-ratio: 16 / 10; border-bottom: 1px solid var(--line); }
-    .card .cover svg { display: block; width: 100%; height: 100%; }
-    .card .cover--img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: center 40%; }
-    .article-image { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: center 40%; border-radius: 1rem; border: 1px solid var(--line); margin: 0 0 1.6rem; }
-    .card .body { padding: 1.4rem 1.5rem 1.6rem; display: flex; flex-direction: column; flex: 1; }
-    .tag {
-      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.06em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem;
-    }
-    .card h3 { margin-bottom: 0.6rem; }
-    .card:hover h3 { color: var(--accent); }
-    .card p { margin: 0; color: var(--soft); font-size: 1.05rem; line-height: 1.6; }
-    .card .meta { margin-top: auto; padding-top: 1rem; color: var(--soft); font-size: 0.95rem; }
-    .card .more {
-      margin-top: 0.4rem; font-family: 'Poppins', sans-serif; font-weight: 600;
-      color: var(--accent); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;
-    }
-    .card:hover .more { text-decoration-thickness: 3px; }
+    /* ---------- Kategorirækker ---------- */
+    .section { padding: 2.2rem 0 0.5rem; }
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--ink); }
+    .section-head h2 { font-size: 1.45rem; }
+    .section-head p { margin: 0; color: var(--soft); font-size: 1rem; flex: 1; }
+    .section-head a.more { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.98rem; white-space: nowrap; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .grid--3 { grid-template-columns: repeat(3, 1fr); }
 
-    /* ---------- "Hvorfor os": tekst + flueben-liste ---------- */
-    .why-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-    .checks { list-style: none; margin: 0; padding: 0; }
-    .checks li { display: flex; gap: 0.9rem; padding: 1rem 0; border-bottom: 1px solid var(--line); font-size: 1.05rem; }
-    .checks li:first-child { border-top: 1px solid var(--line); }
-    .checks li::before {
-      content: '✓'; flex: none; width: 1.6rem; height: 1.6rem; border-radius: 0.45rem; margin-top: 0.2rem;
-      background: var(--accent); color: #fff; font-weight: 700; font-size: 0.9rem; display: grid; place-items: center;
-    }
+    /* ---------- Bånd ("how this site works") ---------- */
+    .band { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 2.6rem 0; margin-top: 2.5rem; }
+    .band-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+    .band h2 { font-size: 1.45rem; margin-bottom: 1rem; }
+    .band h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+    .band p { margin: 0; color: var(--soft); font-size: 1.02rem; }
 
-    /* ---------- Artikelsider: hero-bånd + læsespalte + sidebar ---------- */
-    .page-hero { background: var(--card); border-bottom: 1px solid var(--line); padding: 3.2rem 0 3.4rem; }
-    .page-hero h1 { font-size: 2.8rem; max-width: 50rem; }
-    .page-hero .lede { max-width: 44rem; }
-    .article-cols { display: grid; grid-template-columns: minmax(0, 46rem) 18rem; gap: 4rem; justify-content: space-between; padding: 3rem 0 4.5rem; }
-    .prose { max-width: 46rem; }
-    .prose h2 { font-size: 1.7rem; margin: 2.6rem 0 0.7rem; }
-    .prose h3 { margin: 1.8rem 0 0.4rem; }
-    .prose ul, .prose ol { padding-left: 1.4rem; }
+    /* ---------- Sidehoved for kategori/oversigt ---------- */
+    .page-top { padding: 2.2rem 0 1.2rem; }
+    .page-top h1 { font-size: 2.3rem; }
+    .page-top p { color: var(--soft); margin: 0.5rem 0 0; max-width: 40rem; }
+
+    /* ---------- Artikelside ---------- */
+    .article { max-width: var(--read); margin: 0 auto; padding: 2.4rem 1.5rem 3rem; }
+    .article h1 { font-size: 2.5rem; margin: 0.4rem 0 0.8rem; }
+    .article .lede { font-size: 1.28rem; line-height: 1.55; color: var(--soft); margin: 0 0 1rem; }
+    .article .meta { font-size: 0.95rem; color: var(--soft); margin: 0 0 1.4rem; padding-bottom: 1.2rem; border-bottom: 1px solid var(--line); }
+    .article-image { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: center 40%; border-radius: 0.9rem; border: 1px solid var(--line); margin: 0 0 1.8rem; }
+    .prose h2 { font-size: 1.6rem; margin: 2.4rem 0 0.6rem; }
+    .prose h3 { margin: 1.7rem 0 0.4rem; }
+    .prose ul, .prose ol { padding-left: 1.5rem; }
     .prose li { margin: 0.55rem 0; }
-    .prose blockquote {
-      margin: 1.5rem 0; padding: 1rem 1.4rem; border-left: 4px solid var(--accent);
-      background: var(--card); border: 1px solid var(--line); border-left-width: 4px; border-radius: 0 0.75rem 0.75rem 0; color: var(--soft);
-    }
+    .prose blockquote { margin: 1.5rem 0; padding: 1rem 1.4rem; border-left: 5px solid var(--accent); background: var(--card); border-radius: 0 0.8rem 0.8rem 0; color: var(--soft); }
     .prose code { background: var(--accent-soft); padding: 0.1rem 0.45rem; border-radius: 6px; font-size: 0.95em; }
+    .prose table { border-collapse: collapse; width: 100%; margin: 1.2rem 0; font-size: 1.02rem; }
+    .prose th, .prose td { text-align: left; padding: 0.6rem 0.8rem; border: 1px solid var(--line); vertical-align: top; }
+    .prose th { background: var(--paper2); font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.95rem; }
     .prose hr { border: none; border-top: 1px solid var(--line); margin: 2.4rem 0; }
-    .updated { color: var(--soft); font-size: 1rem; margin: 0 0 1.5rem; }
-    aside.side { position: sticky; top: 6rem; align-self: start; }
-    .side-box { background: var(--card); border: 1px solid var(--line); border-radius: 0.9rem; padding: 1.4rem 1.5rem; }
-    .side-box h2 { font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin: 0 0 0.8rem; }
-    .side-box ol { list-style: none; margin: 0; padding: 0; counter-reset: g; }
-    .side-box li { counter-increment: g; display: flex; gap: 0.7rem; padding: 0.55rem 0; border-top: 1px solid var(--line); font-size: 1rem; line-height: 1.45; }
-    .side-box li::before { content: counter(g); flex: none; width: 1.6rem; height: 1.6rem; border-radius: 0.45rem; background: var(--accent-soft); color: var(--accent); font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.85rem; display: grid; place-items: center; margin-top: 0.1rem; }
-    .side-box li[aria-current='page']::before { background: var(--amber); color: #fff; }
-    .side-box li a { color: var(--ink); text-decoration: none; }
-    .side-box li a:hover { text-decoration: underline; }
-    .side-box li[aria-current='page'] a { font-weight: 700; }
-    .side-box .btn { margin-top: 1rem; width: 100%; }
+    .read-next { padding: 2rem 0 3rem; border-top: 3px solid var(--ink); margin-top: 1rem; }
+    .read-next h2 { font-size: 1.45rem; margin-bottom: 1.1rem; }
 
     /* ---------- Footer ---------- */
-    footer { background: var(--card); border-top: 1px solid var(--line); color: var(--soft); padding: 3rem 0; }
-    .footer-cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2.5rem; }
+    footer { background: var(--card); border-top: 3px solid var(--ink); color: var(--soft); padding: 2.8rem 0 2rem; margin-top: 2rem; }
+    .footer-cols { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 2.5rem; }
     footer p { margin: 0.4rem 0; font-size: 1rem; }
     footer a { color: var(--ink); }
-    .footer-brand, .footer-head { font-family: 'Poppins', sans-serif; font-weight: 600; color: var(--ink); font-size: 1.05rem; margin: 0 0 0.6rem; }
+    .footer-brand, .footer-head { font-family: 'Poppins', sans-serif; font-weight: 700; color: var(--ink); font-size: 1.05rem; margin: 0 0 0.5rem; }
     footer ul { list-style: none; margin: 0; padding: 0; line-height: 2; }
+    .footer-fine { margin-top: 2rem; padding-top: 1.2rem; border-top: 1px solid var(--line); font-size: 0.9rem; }
 
     /* ---------- Mindre skærme ---------- */
     @media (max-width: 62rem) {
+      .front { grid-template-columns: 1fr; }
       .grid { grid-template-columns: 1fr 1fr; }
-      .why-cols, .article-cols { grid-template-columns: 1fr; gap: 2.5rem; }
-      aside.side { position: static; }
-      .footer-cols { grid-template-columns: 1fr; }
-      h1 { font-size: 2.7rem; }
+      .band-cols, .footer-cols { grid-template-columns: 1fr; }
+      .masthead { grid-template-columns: 1fr; justify-items: center; gap: 0.6rem; }
+      .masthead-side:first-child { display: none; }
+      .masthead-side:last-child { justify-self: center; }
     }
     @media (max-width: 40rem) {
-      .grid { grid-template-columns: 1fr; }
-      nav { flex-wrap: wrap; gap: 0 1.2rem; padding: 0.6rem 0; min-height: 0; }
-      nav ul a { padding: 0.7rem 0; }
-      .nav-cta { display: none; }
-      h1, .page-hero h1 { font-size: 2.2rem; }
-      h2 { font-size: 1.6rem; }
-      .lede { font-size: 1.2rem; }
-      .btn { width: 100%; }
-      .section, .hero { padding: 2.6rem 0; }
-      .section-head { flex-direction: column; align-items: start; }
-      .strip { gap: 1rem 2rem; }
+      .featured, .grid { grid-template-columns: 1fr; }
+      .brand-name { font-size: 1.5rem; white-space: normal; text-align: center; }
+      .catbar a { padding: 0.7rem 0.7rem; font-size: 0.95rem; }
+      .catbar-sep { display: none; }
+      .textsize-label { display: none; }
+      h1, .article h1 { font-size: 2rem; }
+      .card--big h3 { font-size: 1.3rem; }
+      .article { padding: 1.6rem 1.25rem 2.5rem; }
     }
   </style>
 </body>

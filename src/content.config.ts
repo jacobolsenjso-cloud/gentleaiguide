@@ -17,6 +17,8 @@ const guides = defineCollection({
     category: z.string().optional(),
     // Sti til illustration under public/, fx /images/articles/07-ai-scams.png
     image: z.string().optional(),
+    // true = vises som stor forsidehistorie
+    featured: z.boolean().optional(),
   }),
 });
 
