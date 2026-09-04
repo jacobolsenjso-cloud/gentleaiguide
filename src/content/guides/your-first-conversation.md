@@ -6,6 +6,7 @@ order: 2
 category: "Basics"
 label: "Basics"
 image: "/images/articles/02-your-first-conversation.png"
+figure: "scene"
 ---
 
 You can try an AI chatbot today, for free, without installing anything or

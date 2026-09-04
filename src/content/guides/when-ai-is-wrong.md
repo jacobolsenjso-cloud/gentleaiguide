@@ -6,6 +6,7 @@ order: 6
 category: "Staying safe"
 label: "Staying safe"
 image: "/images/articles/06-when-ai-is-wrong.png"
+figure: "spot"
 ---
 
 Here is the most important sentence on this entire website:

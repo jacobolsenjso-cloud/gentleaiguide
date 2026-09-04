@@ -6,6 +6,7 @@ order: 4
 updated: 2026-09-04
 label: "Basics"
 image: "/images/articles/04-how-does-ai-know.png"
+figure: "spot"
 ---
 
 Ask a chatbot about Roman history, sourdough bread or the rules of cricket, and it answers instantly, in full sentences, as if it had read everything ever written. So the natural question is: *how?* Is it looking things up? Is someone typing on the other end? Does it have the internet inside it?

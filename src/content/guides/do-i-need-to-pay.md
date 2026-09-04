@@ -6,6 +6,7 @@ order: 19
 updated: 2026-09-04
 label: "Questions"
 image: "/images/articles/19-do-i-need-to-pay.png"
+figure: "spot"
 ---
 
 Short answer: **no.** For everything this site describes — letters, explanations, planning, understanding documents — the free versions are enough. Genuinely enough, not "enough for now."

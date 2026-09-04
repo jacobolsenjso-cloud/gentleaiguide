@@ -6,6 +6,7 @@ order: 5
 category: "Staying safe"
 label: "Staying safe"
 image: "/images/articles/05-is-it-safe.png"
+figure: "spot"
 ---
 
 This is the question careful people ask first — and asking it is a sign of good

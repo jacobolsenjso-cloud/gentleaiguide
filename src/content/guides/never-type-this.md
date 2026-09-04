@@ -6,6 +6,7 @@ order: 8
 updated: 2026-09-04
 label: "Staying safe"
 image: "/images/articles/08-never-type-this.png"
+figure: "scene"
 ---
 
 Here is the reassuring part first: the vast majority of what you'd ever type into a chatbot is perfectly fine. Recipes, letters, questions about history, help with a crossword, "why does my knee click" — go ahead.

@@ -6,6 +6,7 @@ order: 15
 updated: 2026-09-04
 label: "Tools"
 image: "/images/articles/15-copilot-in-windows.png"
+figure: "scene"
 ---
 
 If your computer runs Windows, there's a fair chance an AI has moved in without asking. It's called Copilot. It shows up as an icon on the taskbar at the bottom of the screen, and on newer laptops there's an actual key for it, next to the space bar, with a little ribbon-like symbol.

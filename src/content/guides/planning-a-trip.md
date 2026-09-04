@@ -6,6 +6,7 @@ order: 11
 updated: 2026-09-04
 label: "Everyday use"
 image: "/images/articles/11-planning-a-trip.png"
+figure: "spot"
 ---
 
 Planning a trip used to mean a pile of guidebooks and a dozen browser tabs. Now you can describe what you'd like — "a gentle week in Portugal in May, not too much walking, good food, one or two day trips" — and get a full outline back in a minute.

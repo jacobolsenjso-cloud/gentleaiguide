@@ -6,6 +6,7 @@ order: 10
 updated: 2026-09-04
 label: "Everyday use"
 image: "/images/articles/10-difficult-email.png"
+figure: "scene"
 ---
 
 Everyone has one: the email that's been sitting half-written for three weeks. The complaint to the airline. The note to a friend after a bereavement. The polite "no" to a request you don't want to fulfil. You know what you mean, you just can't find the way in.

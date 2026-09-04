@@ -26,7 +26,9 @@ const spot = guide.data.image ? guide.data.image.replace(/\.png$/, '-spot.png') 
     <h1>{guide.data.title}</h1>
     <p class="lede">{guide.data.description}</p>
     <p class="meta">{formatDate(guide.data.updated)} · {readingMinutes(guide.body)} min read · Written with AI's help, checked by a person</p>
-    {spot && <div class="article-fig"><Blob index={guide.data.order} /><img src={spot} alt="" width="800" height="800" loading="eager" /></div>}
+    {guide.data.figure === 'scene'
+      ? guide.data.image && <img class="article-image" src={guide.data.image} alt="" width="1024" height="640" loading="eager" />
+      : spot && <div class="article-fig"><Blob index={guide.data.order} /><img src={spot} alt="" width="800" height="800" loading="eager" /></div>}
     <div class="prose"><Content /></div>
   </article>
   <section class="wrap read-next" aria-label="Read next">

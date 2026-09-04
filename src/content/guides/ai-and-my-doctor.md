@@ -6,6 +6,7 @@ order: 17
 updated: 2026-09-04
 label: "Questions"
 image: "/images/articles/17-ai-and-my-doctor.png"
+figure: "scene"
 ---
 
 It's the question people ask quietly, half-hoping the answer is yes. The doctor gives you eight minutes. The AI gives you all night, explains everything twice, and never sighs. So — can it take over?

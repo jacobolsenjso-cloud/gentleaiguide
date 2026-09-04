@@ -6,6 +6,7 @@ order: 16
 updated: 2026-09-04
 label: "Tools"
 image: "/images/articles/16-alexa-siri-chatbots.png"
+figure: "spot"
 ---
 
 If you've had an Alexa on the kitchen counter since 2018, or you've been asking Siri for the weather for a decade, you might reasonably wonder what all the fuss is about. You've *had* a talking computer. What's new?

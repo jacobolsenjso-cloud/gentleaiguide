@@ -6,6 +6,7 @@ order: 12
 updated: 2026-09-04
 label: "Everyday use"
 image: "/images/articles/12-explain-this-letter.png"
+figure: "spot"
 ---
 
 You know the letter. Two pages from the bank, the tax office, the hospital or the council. Long sentences, capital letters, phrases like "pursuant to" and "notwithstanding." You read it twice and you're still not sure what they actually want you to *do*.

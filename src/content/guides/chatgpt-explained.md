@@ -6,6 +6,7 @@ order: 13
 updated: 2026-09-04
 label: "Tools"
 image: "/images/articles/13-chatgpt-explained.png"
+figure: "scene"
 ---
 
 If you've heard one AI name, it's this one. ChatGPT is the chatbot that made all of this famous, and for most people it's still the sensible place to start. Here's a plain description — no hype, no warnings in capital letters.

@@ -6,6 +6,7 @@ order: 18
 updated: 2026-09-04
 label: "Questions"
 image: "/images/articles/18-grandchilds-homework.png"
+figure: "scene"
 ---
 
 You read the essay. It's good — better than the last one. The sentences are tidy, the argument is neat, and something in you goes: *did she write this?*

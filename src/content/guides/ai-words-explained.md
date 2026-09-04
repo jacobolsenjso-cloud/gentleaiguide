@@ -6,6 +6,7 @@ order: 3
 updated: 2026-09-04
 label: "Basics"
 image: "/images/articles/03-ai-words-explained.png"
+figure: "spot"
 ---
 
 Every new technology comes with a cloud of words, and AI has more than most. The good news: you only need about fifteen of them, and none of them is difficult once someone explains it without showing off.

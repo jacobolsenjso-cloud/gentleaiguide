@@ -19,6 +19,8 @@ const guides = defineCollection({
     image: z.string().optional(),
     // true = vises som stor forsidehistorie
     featured: z.boolean().optional(),
+    // 'scene' = hele billedet i ramme, 'spot' = fri figur på blød klat (standard)
+    figure: z.enum(['scene', 'spot']).optional(),
   }),
 });
 

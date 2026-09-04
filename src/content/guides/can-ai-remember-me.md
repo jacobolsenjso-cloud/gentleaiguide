@@ -6,6 +6,7 @@ order: 20
 updated: 2026-09-04
 label: "Questions"
 image: "/images/articles/20-can-ai-remember-me.png"
+figure: "spot"
 ---
 
 It's a reasonable thing to wonder. You've been chatting with this thing for weeks. Does it *know* you now? Is there a growing file somewhere with your name on it? And if so — where's the bin?

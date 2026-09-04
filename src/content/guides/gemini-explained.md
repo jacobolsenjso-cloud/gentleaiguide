@@ -6,6 +6,7 @@ order: 14
 updated: 2026-09-04
 label: "Tools"
 image: "/images/articles/14-gemini-explained.png"
+figure: "spot"
 ---
 
 Gemini is Google's AI. Unlike ChatGPT, which you have to go and find, Gemini has a habit of turning up on its own — at the top of a Google search, in Gmail, on your Android phone. If you've seen a little sparkle symbol ✦ somewhere in a Google product lately, that's it.

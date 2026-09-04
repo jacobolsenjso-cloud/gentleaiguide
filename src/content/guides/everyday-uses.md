@@ -6,6 +6,7 @@ order: 9
 category: "Everyday use"
 label: "Everyday use"
 image: "/images/articles/09-everyday-uses.png"
+figure: "spot"
 ---
 
 Enough theory. Here are ten uses that work today, for ordinary life. Each comes
