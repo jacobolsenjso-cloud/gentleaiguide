@@ -1,8 +1,10 @@
 ---
 import { INDEXABLE } from '../site';
-// Fælles layout for alle sider: head, navigation, footer og alt global CSS.
-// Designprincip: stor skrift, høj kontrast, tydelige links — bygget til folk,
-// der ikke er vokset op med computere.
+// Fælles layout: head, navigation, footer og al global CSS.
+// Design "Varm og lys" (forslag B): creme baggrund, mørkeblå tekst, rav-gul
+// primærknap, teal accent. Bred opsætning (1140 px) på computer, én spalte på
+// mobil. Brødteksten er bevidst stor (19 px) og i Atkinson Hyperlegible,
+// fordi sitet er til folk, der ikke er vokset op med computere.
 interface Props {
   title: string;
   description: string;
@@ -33,14 +35,14 @@ const current = Astro.url.pathname;
   <meta property="og:url" content={canonical} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" />
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header>
-    <nav aria-label="Main">
+    <nav class="wrap" aria-label="Main">
       <a class="brand" href="/">
-        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="var(--accent)"/><path d="M15 27v-9h2v9h-2Zm1-9c-.4-6-3.4-9.6-9.5-11 .9 6.5 4 9.9 9.5 11Zm0 0c.4-6 3.4-9.6 9.5-11-.9 6.5-4 9.9-9.5 11Z" fill="var(--paper)"/></svg>
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="10" fill="var(--teal)"/><path d="M15 27v-9h2v9h-2Zm1-9c-.4-6-3.4-9.6-9.5-11 .9 6.5 4 9.9 9.5 11Zm0 0c.4-6 3.4-9.6 9.5-11-.9 6.5-4 9.9-9.5 11Z" fill="#fff"/></svg>
         <span>The Gentle AI Guide</span>
       </a>
       <ul>
@@ -53,6 +55,7 @@ const current = Astro.url.pathname;
           </li>
         ))}
       </ul>
+      <a class="btn btn--primary btn--small nav-cta" href="/guides/what-is-ai/">Start with guide 1</a>
     </nav>
   </header>
 
@@ -61,121 +64,239 @@ const current = Astro.url.pathname;
   </main>
 
   <footer>
-    <p><strong>The Gentle AI Guide</strong> — plain-English help with AI, at your own pace.</p>
-    <p>Every guide is reviewed by a person before it is published. No account needed, nothing to install.</p>
-    <p class="fine"><a href="/about/">About this site</a> · <a href="mailto:hello@gentleaiguide.com">hello@gentleaiguide.com</a></p>
+    <div class="wrap footer-cols">
+      <div>
+        <p class="footer-brand">The Gentle AI Guide</p>
+        <p>Plain-English help with AI, at your own pace.</p>
+        <p>Every guide is reviewed by a person before it is published. No account needed, nothing to install.</p>
+      </div>
+      <div>
+        <p class="footer-head">Guides</p>
+        <ul>
+          <li><a href="/guides/what-is-ai/">What is AI, actually?</a></li>
+          <li><a href="/guides/your-first-conversation/">Your first conversation</a></li>
+          <li><a href="/guides/is-it-safe/">Is it safe?</a></li>
+          <li><a href="/guides/">All guides</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-head">Site</p>
+        <ul>
+          <li><a href="/about/">About this site</a></li>
+          <li><a href="mailto:hello@gentleaiguide.com">hello@gentleaiguide.com</a></li>
+        </ul>
+      </div>
+    </div>
   </footer>
 
   <style is:global>
     :root {
-      --paper: #faf8f3;
+      --w: 71.25rem;            /* 1140 px */
+      --paper: #fff8ee;
       --card: #ffffff;
-      --ink: #26281f;
-      --ink-soft: #4f5347;
-      --line: #ddd9cc;
-      --accent: #2e5d43;
-      --accent-soft: #e6eee6;
-      --focus: #a54f00;
+      --ink: #16273d;
+      --soft: #4f5b6d;
+      --line: #eadfcd;
+      --amber: #f2a33c;
+      --amber-ink: #2b1a00;
+      --teal: #2a9d8f;
+      --teal-ink: #1f7d72;      /* mørkere teal til tekst/links — bedre kontrast */
+      --teal-soft: #dff1ee;
+      --deep: #16273d;
+      --focus: #b45309;
+      --shadow: 0 2px 6px rgba(22, 39, 61, 0.06), 0 14px 34px rgba(22, 39, 61, 0.08);
+      --shadow-lift: 0 4px 10px rgba(22, 39, 61, 0.08), 0 22px 44px rgba(22, 39, 61, 0.14);
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --paper: #1b1d19;
-        --card: #24271f;
-        --ink: #eae8de;
-        --ink-soft: #b4b3a4;
-        --line: #3c4034;
-        --accent: #8cbf9f;
-        --accent-soft: #2a3b2e;
+        --paper: #131a25;
+        --card: #1b2432;
+        --ink: #eef1f5;
+        --soft: #b3bcc9;
+        --line: #2c3746;
+        --teal: #3fbfae;
+        --teal-ink: #6fd3c5;
+        --teal-soft: #1e3a3a;
+        --deep: #0d131b;
         --focus: #ffb25e;
+        --shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+        --shadow-lift: 0 4px 10px rgba(0, 0, 0, 0.4), 0 22px 44px rgba(0, 0, 0, 0.5);
       }
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
     body {
       margin: 0;
       background: var(--paper);
       color: var(--ink);
       font-family: 'Atkinson Hyperlegible', Verdana, sans-serif;
       font-size: 1.1875rem; /* ~19 px — bevidst større end normalt */
-      line-height: 1.75;
+      line-height: 1.7;
     }
-    h1, h2, h3 {
-      font-family: 'Fraunces', Georgia, serif;
+    h1, h2, h3, h4 {
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
       font-weight: 600;
-      line-height: 1.2;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
       text-wrap: balance;
       color: var(--ink);
+      margin: 0;
     }
-    h1 { font-size: 2.3rem; margin: 0 0 0.75rem; }
-    h2 { font-size: 1.55rem; margin: 2.2rem 0 0.6rem; }
-    h3 { font-size: 1.2rem; margin: 1.6rem 0 0.4rem; }
-    p { margin: 0.85rem 0; }
-    /* Links skal LIGNE links — altid understreget, tydelig farve */
-    a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    h1 { font-size: 3.2rem; font-weight: 700; }
+    h2 { font-size: 2.1rem; }
+    h3 { font-size: 1.3rem; }
+    p { margin: 0.9rem 0; }
+    a { color: var(--teal-ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
     a:hover { text-decoration-thickness: 3px; }
-    :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
-    .skip {
-      position: absolute; left: -999px; top: 0; background: var(--card);
-      padding: 0.6rem 1rem; z-index: 10;
-    }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
+    .skip { position: absolute; left: -999px; top: 0; background: var(--card); padding: 0.6rem 1rem; z-index: 20; }
     .skip:focus { left: 0.5rem; top: 0.5rem; }
 
-    header { border-bottom: 1px solid var(--line); background: var(--card); }
-    nav {
-      max-width: 44rem; margin: 0 auto; padding: 0.9rem 1.25rem;
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-    }
+    .wrap { max-width: var(--w); margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ---------- Header ---------- */
+    header { background: var(--paper); position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--line); }
+    nav { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 5rem; }
     .brand {
-      display: flex; align-items: center; gap: 0.6rem;
-      font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 1.25rem;
+      display: flex; align-items: center; gap: 0.7rem;
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1.2rem; letter-spacing: -0.02em;
       color: var(--ink); text-decoration: none;
     }
-    .brand-mark { width: 2rem; height: 2rem; flex: none; }
-    nav ul { display: flex; gap: 0.4rem; list-style: none; margin: 0; padding: 0; }
+    .brand-mark { width: 2.25rem; height: 2.25rem; flex: none; }
+    nav ul { display: flex; gap: 0.3rem; list-style: none; margin: 0; padding: 0; }
     nav ul a {
-      display: inline-block; padding: 0.45rem 0.85rem; border-radius: 8px;
-      text-decoration: none; color: var(--ink); font-weight: 700; font-size: 1.05rem;
-    }
-    nav ul a:hover { background: var(--accent-soft); }
-    nav ul a[aria-current='page'] { background: var(--accent-soft); color: var(--accent); }
-
-    main { max-width: 44rem; margin: 0 auto; padding: 2.2rem 1.25rem 4rem; }
-
-    footer { border-top: 1px solid var(--line); background: var(--card); }
-    footer p { max-width: 44rem; margin: 0 auto; padding: 0.35rem 1.25rem; color: var(--ink-soft); font-size: 1rem; }
-    footer p:first-child { padding-top: 1.6rem; }
-    footer .fine { padding-bottom: 1.6rem; }
-
-    /* Genbrugelige kort (bruges på forside og guide-oversigt) */
-    .card {
-      display: block; background: var(--card); border: 1px solid var(--line);
-      border-radius: 12px; padding: 1.3rem 1.4rem; margin: 1rem 0;
+      display: inline-block; padding: 0.55rem 1rem; border-radius: 999px;
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1rem;
       text-decoration: none; color: var(--ink);
     }
-    .card:hover { border-color: var(--accent); }
-    .card h3 { margin: 0 0 0.3rem; color: var(--accent); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
-    .card p { margin: 0; color: var(--ink-soft); font-size: 1.05rem; }
-    .card .label {
-      display: inline-block; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em;
-      text-transform: uppercase; color: var(--accent); background: var(--accent-soft);
-      padding: 0.15rem 0.6rem; border-radius: 99px; margin-bottom: 0.5rem;
-    }
-    .lede { font-size: 1.3rem; color: var(--ink-soft); }
+    nav ul a:hover, nav ul a[aria-current='page'] { background: var(--teal-soft); color: var(--teal-ink); }
 
-    /* Artikel-typografi */
-    article ul, article ol { padding-left: 1.4rem; }
-    article li { margin: 0.5rem 0; }
-    article blockquote {
-      margin: 1.2rem 0; padding: 0.8rem 1.2rem; border-left: 4px solid var(--accent);
-      background: var(--card); border-radius: 0 10px 10px 0; color: var(--ink-soft);
+    /* ---------- Knapper ---------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1.05rem; line-height: 1.2;
+      padding: 0.95rem 1.8rem; border-radius: 999px; text-decoration: none;
+      border: 2px solid transparent; transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    article code {
-      background: var(--accent-soft); padding: 0.1rem 0.4rem; border-radius: 6px;
-      font-size: 0.95em;
+    .btn:hover { transform: translateY(-2px); text-decoration: none; }
+    .btn--primary { background: var(--amber); color: var(--amber-ink); box-shadow: 0 8px 20px rgba(242, 163, 60, 0.3); }
+    .btn--primary:hover { box-shadow: 0 12px 26px rgba(242, 163, 60, 0.4); }
+    .btn--line { border-color: var(--ink); color: var(--ink); background: transparent; }
+    .btn--small { padding: 0.7rem 1.3rem; font-size: 0.98rem; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 1.8rem; }
+
+    /* ---------- Sektioner ---------- */
+    .section { padding: 3.5rem 0; }
+    .section--card { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .eyebrow {
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.85rem;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal-ink); margin: 0 0 0.9rem;
     }
-    article hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
-    .updated { color: var(--ink-soft); font-size: 1rem; margin-top: 0; }
+    .lede { font-size: 1.35rem; line-height: 1.55; color: var(--soft); margin: 1.2rem 0 0; }
+    .section-head { margin-bottom: 1.8rem; }
+    .section-head p { color: var(--soft); margin: 0.4rem 0 0; }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 3.5rem 0 4rem; }
+    .hero-cols { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3.5rem; align-items: center; }
+    .hero .lede { max-width: 36rem; }
+    .illus { aspect-ratio: 1 / 0.85; border-radius: 2rem; background: linear-gradient(135deg, #ffe7c2, #dff1ee); overflow: hidden; }
+    .illus svg { display: block; width: 100%; height: 100%; }
+
+    /* ---------- Kortgitter ---------- */
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .card {
+      display: flex; flex-direction: column; background: var(--card); border-radius: 1.5rem; overflow: hidden;
+      text-decoration: none; color: var(--ink); box-shadow: var(--shadow);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); text-decoration: none; }
+    .card .cover { display: block; aspect-ratio: 16 / 10; }
+    .card .cover svg { display: block; width: 100%; height: 100%; }
+    .card .body { padding: 1.4rem 1.5rem 1.6rem; display: flex; flex-direction: column; flex: 1; }
+    .tag {
+      display: inline-block; align-self: flex-start; margin-bottom: 0.7rem;
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.74rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--teal-ink); background: var(--teal-soft);
+      padding: 0.3rem 0.8rem; border-radius: 999px;
+    }
+    .card h3 { margin-bottom: 0.5rem; }
+    .card p { margin: 0; color: var(--soft); font-size: 1.05rem; line-height: 1.6; }
+    .card .more {
+      margin-top: auto; padding-top: 1rem; font-family: 'Poppins', sans-serif; font-weight: 600;
+      color: var(--teal-ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;
+    }
+    .card:hover .more { text-decoration-thickness: 3px; }
+    .card .meta { margin-top: 0.8rem; color: var(--soft); font-size: 0.95rem; }
+
+    /* ---------- Fliser ("hvorfor os") ---------- */
+    .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .tile { background: var(--paper); border-radius: 1.25rem; padding: 1.8rem; }
+    .tile .ic { width: 3rem; height: 3rem; border-radius: 0.9rem; background: var(--amber); display: grid; place-items: center; font-size: 1.4rem; margin-bottom: 1rem; }
+    .tile h3 { margin-bottom: 0.5rem; }
+    .tile p { margin: 0; color: var(--soft); font-size: 1.02rem; }
+
+    /* ---------- Artikelsider: hero-bånd + læsespalte + sidebar ---------- */
+    .page-hero { background: var(--card); border-bottom: 1px solid var(--line); padding: 3rem 0 3.2rem; }
+    .page-hero h1 { font-size: 2.7rem; max-width: 46rem; }
+    .page-hero .lede { max-width: 42rem; }
+    .article-cols { display: grid; grid-template-columns: minmax(0, 46rem) 18rem; gap: 4rem; justify-content: space-between; padding: 3rem 0 4.5rem; }
+    .prose { max-width: 46rem; }
+    .prose h2 { font-size: 1.7rem; margin: 2.6rem 0 0.7rem; }
+    .prose h3 { margin: 1.8rem 0 0.4rem; }
+    .prose ul, .prose ol { padding-left: 1.4rem; }
+    .prose li { margin: 0.55rem 0; }
+    .prose blockquote {
+      margin: 1.5rem 0; padding: 1rem 1.4rem; border-left: 5px solid var(--teal);
+      background: var(--card); border-radius: 0 1rem 1rem 0; color: var(--soft); box-shadow: var(--shadow);
+    }
+    .prose code { background: var(--teal-soft); padding: 0.1rem 0.45rem; border-radius: 8px; font-size: 0.95em; }
+    .prose hr { border: none; border-top: 1px solid var(--line); margin: 2.4rem 0; }
+    .updated { color: var(--soft); font-size: 1rem; margin: 0 0 1.5rem; }
+    aside.side { position: sticky; top: 6.5rem; align-self: start; }
+    .side-box { background: var(--card); border-radius: 1.25rem; padding: 1.4rem 1.5rem; box-shadow: var(--shadow); }
+    .side-box h2 { font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-ink); margin: 0 0 0.8rem; }
+    .side-box ol { list-style: none; margin: 0; padding: 0; counter-reset: g; }
+    .side-box li { counter-increment: g; display: flex; gap: 0.7rem; padding: 0.55rem 0; border-top: 1px solid var(--line); font-size: 1rem; line-height: 1.45; }
+    .side-box li::before { content: counter(g); flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--teal-soft); color: var(--teal-ink); font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.85rem; display: grid; place-items: center; margin-top: 0.1rem; }
+    .side-box li[aria-current='page']::before { background: var(--amber); color: var(--amber-ink); }
+    .side-box li a { color: var(--ink); text-decoration: none; }
+    .side-box li a:hover { text-decoration: underline; }
+    .side-box li[aria-current='page'] a { font-weight: 700; }
+    .side-box .btn { margin-top: 1rem; width: 100%; }
+
+    /* ---------- Footer ---------- */
+    footer { background: var(--deep); color: #c9d3e0; padding: 3.5rem 0; }
+    .footer-cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2.5rem; }
+    footer p { margin: 0.4rem 0; font-size: 1.02rem; }
+    footer a { color: #fff; }
+    .footer-brand, .footer-head { font-family: 'Poppins', sans-serif; font-weight: 600; color: #fff; font-size: 1.1rem; margin: 0 0 0.6rem; }
+    footer ul { list-style: none; margin: 0; padding: 0; line-height: 2; }
+
+    /* ---------- Mindre skærme ---------- */
+    @media (max-width: 62rem) {
+      .grid, .tiles { grid-template-columns: 1fr 1fr; }
+      .hero-cols { grid-template-columns: 1fr; }
+      .illus { display: none; }
+      .article-cols { grid-template-columns: 1fr; gap: 2.5rem; }
+      aside.side { position: static; }
+      .footer-cols { grid-template-columns: 1fr; }
+      h1 { font-size: 2.5rem; }
+    }
+    @media (max-width: 40rem) {
+      .grid, .tiles { grid-template-columns: 1fr; }
+      nav { flex-wrap: wrap; gap: 0.6rem 1rem; padding: 0.8rem 1.25rem; }
+      .nav-cta { display: none; }
+      h1, .page-hero h1 { font-size: 2.1rem; }
+      h2 { font-size: 1.6rem; }
+      .lede { font-size: 1.2rem; }
+      .btn { width: 100%; }
+      .section, .hero { padding: 2.6rem 0; }
+    }
   </style>
 </body>
 </html>

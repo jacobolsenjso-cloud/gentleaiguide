@@ -3,6 +3,7 @@ title: "Is it safe? What happens to the things you type"
 description: "Where your words go when you talk to an AI, what to keep to yourself, and simple habits that keep you in control."
 order: 3
 updated: 2026-08-31
+label: "Safety"
 ---
 
 This is the question careful people ask first — and asking it is a sign of good

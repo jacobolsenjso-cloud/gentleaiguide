@@ -1,6 +1,7 @@
 ---
-// Oversigt over alle guides, sorteret efter 'order'
+// Oversigt over alle guides som kort i tre spalter, sorteret efter 'order'
 import Base from '../../layouts/Base.astro';
+import GuideCard from '../../components/GuideCard.astro';
 import { getCollection } from 'astro:content';
 
 const guides = (await getCollection('guides')).sort(
@@ -11,13 +12,19 @@ const guides = (await getCollection('guides')).sort(
   title="All guides — The Gentle AI Guide"
   description="Every guide on The Gentle AI Guide: AI explained in plain English, at your own pace."
 >
-  <h1>All guides</h1>
-  <p class="lede">In the order we suggest reading them.</p>
-  {guides.map((guide, i) => (
-    <a class="card" href={`/guides/${guide.id}/`}>
-      {guide.data.label && <span class="label">{guide.data.label}</span>}
-      <h3>{i + 1}. {guide.data.title}</h3>
-      <p>{guide.data.description}</p>
-    </a>
-  ))}
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow">The guides</p>
+      <h1>All five guides</h1>
+      <p class="lede">In the order we suggest reading them — but any of them stands on its own.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid">
+        {guides.map((guide, i) => <GuideCard guide={guide} index={i} />)}
+      </div>
+    </div>
+  </section>
 </Base>

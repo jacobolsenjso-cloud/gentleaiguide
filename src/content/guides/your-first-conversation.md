@@ -3,6 +3,7 @@ title: "Your first conversation with an AI, step by step"
 description: "A calm, click-by-click walkthrough of trying an AI chatbot for the first time — free, safe, and with nothing to install."
 order: 2
 updated: 2026-08-31
+label: "Getting started"
 ---
 
 You can try an AI chatbot today, for free, without installing anything or
