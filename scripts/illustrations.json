@@ -1,0 +1,25 @@
+{
+  "style": "Flat vector-style editorial illustration, warm and friendly, simple shapes with soft rounded edges and thick charcoal outlines. Limited palette: cream background (#FBF7EF), deep teal (#0F766E), burnt amber (#B45309), charcoal (#2B2B2B), light sand. Characters are adults aged 55-70, drawn with dignity and warmth, modern everyday clothing, varied appearances. No text, no letters, no logos, no readable words on any screen or paper. One clear subject, plenty of calm empty background, gentle daylight. Wide landscape composition.",
+  "articles": {
+    "1":  { "slug": "what-is-ai",              "motif": "A woman at a kitchen table looking calmly at a laptop, a small friendly glowing speech bubble floating above it" },
+    "2":  { "slug": "your-first-conversation", "motif": "A man on a sofa typing his first message on a tablet, a cup of tea beside him" },
+    "3":  { "slug": "ai-words-explained",      "motif": "Fifteen small floating blank cards around a curious person, shapes only" },
+    "4":  { "slug": "how-does-ai-know",        "motif": "A large open book with soft light streaming out of it into a small speech bubble" },
+    "5":  { "slug": "is-it-safe",              "motif": "A person typing, with a gentle dotted line showing the words travelling up into a cloud" },
+    "6":  { "slug": "when-ai-is-wrong",        "motif": "Two identical speech bubbles, one with a tick and one with a question mark, a person weighing them in their hands" },
+    "7":  { "slug": "ai-scams",                "motif": "A landline phone ringing with a slightly shadowy figure inside its glow, an older person holding back with a raised hand, calm not frightened" },
+    "8":  { "slug": "never-type-this",         "motif": "A short blank paper checklist pinned to a fridge, a hand hovering over a keyboard" },
+    "9":  { "slug": "everyday-uses",           "motif": "Ten small everyday objects in a loose grid: an envelope, a suitcase, a recipe card, a calendar, a photo, a garden trowel, a teapot, a bus ticket, a book, a phone" },
+    "10": { "slug": "difficult-email",         "motif": "A person at a desk, a handwritten draft beside a laptop, crossing something out with visible relief" },
+    "11": { "slug": "planning-a-trip",         "motif": "A paper map on a table with a coffee, a tablet showing a simple route line, a magnifying glass beside it" },
+    "12": { "slug": "explain-this-letter",     "motif": "An official-looking envelope being transformed into a simple friendly note, an arrow between them" },
+    "13": { "slug": "chatgpt-explained",       "motif": "A plain chat window drawn as a friendly speech bubble on a laptop screen, a person leaning in with curiosity" },
+    "14": { "slug": "gemini-explained",        "motif": "A phone with a small glowing star at the corner of a blank search box, a person noticing it" },
+    "15": { "slug": "copilot-in-windows",      "motif": "A laptop keyboard with one extra key glowing softly, a person looking at it with mild suspicion" },
+    "16": { "slug": "alexa-siri-chatbots",     "motif": "A smart speaker and a laptop side by side, sound waves from one, a speech bubble from the other" },
+    "17": { "slug": "ai-and-my-doctor",        "motif": "A stethoscope and a laptop on the same table, a clear line drawn on the table between them" },
+    "18": { "slug": "grandchilds-homework",    "motif": "A grandparent and a teenager at a kitchen table, both smiling, a laptop between them" },
+    "19": { "slug": "do-i-need-to-pay",        "motif": "Two doors side by side: one open and welcoming, one with a small coin slot, a person choosing calmly" },
+    "20": { "slug": "can-ai-remember-me",      "motif": "A person pressing a large friendly cross symbol on a screen, a little cloud dissolving into sparkles" }
+  }
+}

@@ -58,7 +58,7 @@ Arbejdsgang pr. artikel: udkast → Jacob læser → rettelser → illustration 
 ## Illustrationsstil (én fast prompt til alle artikler)
 
 Brug denne som **stil-del** i ethvert AI-billedværktøj (ChatGPT, Midjourney, Canva, Ideogram …).
-Tilføj derefter motivet fra listen nedenfor. Format: **16:10 liggende**, mindst 1600 px bred.
+Tilføj derefter motivet fra listen nedenfor. Format: **16:9 liggende** (det er det, Gemini kan levere). Billederne laves automatisk med `npm run illustrate <nummer>` — se scripts/illustrate.mjs.
 
 > Flat vector-style editorial illustration, warm and friendly, simple shapes with soft rounded edges and thick charcoal outlines. Limited palette: cream background (#FBF7EF), deep teal (#0F766E), burnt amber (#B45309), charcoal (#2B2B2B), light sand. Characters are adults aged 55–70, drawn with dignity and warmth, modern everyday clothing, varied appearances. No text, no logos, no readable words on any screen. One clear subject, plenty of calm empty background, gentle daylight. 16:10 landscape.
 
