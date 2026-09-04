@@ -19,7 +19,7 @@ const navItems = [
 const current = Astro.url.pathname;
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en" style="color-scheme: light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -104,22 +104,6 @@ const current = Astro.url.pathname;
       --amber-hover: #92400e;
       --focus: #b45309;
       --shadow: 0 1px 2px rgba(43, 43, 43, 0.05), 0 6px 18px rgba(43, 43, 43, 0.06);
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --paper: #17150f;
-        --paper2: #1d1a13;
-        --card: #221f18;
-        --ink: #f1ede4;
-        --soft: #b8b2a6;
-        --line: #35312a;
-        --accent: #4cc2b2;
-        --accent-soft: #1f3a36;
-        --amber: #d97706;
-        --amber-hover: #f59e0b;
-        --focus: #ffb25e;
-        --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-      }
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
