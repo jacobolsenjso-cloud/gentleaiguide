@@ -1,9 +1,11 @@
 ---
 title: "How to tell when AI is wrong (because sometimes it is)"
 description: "AI answers with total confidence even when it's mistaken. Here's why that happens and the simple habits that protect you."
-order: 4
 updated: 2026-08-31
-label: "Judgement"
+order: 6
+category: "Staying safe"
+label: "Staying safe"
+image: "/images/articles/06-when-ai-is-wrong.png"
 ---
 
 Here is the most important sentence on this entire website:

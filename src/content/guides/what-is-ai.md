@@ -1,9 +1,11 @@
 ---
 title: "What is AI, actually? A plain-English answer"
 description: "Forget the movies and the headlines. Here's what today's AI really is, how it works in everyday terms, and why it sometimes feels like magic."
-order: 1
 updated: 2026-08-31
+order: 1
+category: "Basics"
 label: "Start here"
+image: "/images/articles/01-what-is-ai.png"
 ---
 
 If you've been putting off understanding AI because every explanation seems to

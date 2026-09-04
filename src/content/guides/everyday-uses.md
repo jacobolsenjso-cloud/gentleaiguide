@@ -1,9 +1,11 @@
 ---
 title: "Ten everyday things AI can genuinely help you with"
 description: "Not futuristic promises — practical, tested uses for AI in ordinary life, each with an example you can copy and try today."
-order: 5
 updated: 2026-08-31
+order: 9
+category: "Everyday use"
 label: "Everyday use"
+image: "/images/articles/09-everyday-uses.png"
 ---
 
 Enough theory. Here are ten uses that work today, for ordinary life. Each comes
