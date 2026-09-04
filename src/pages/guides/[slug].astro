@@ -1,57 +1,48 @@
 ---
-// Én side pr. guide: hero-bånd med titel, læsespalte til venstre og en
-// "In this series"-boks til højre på computer (falder under teksten på mobil).
+// Én side pr. guide: "Guide 2 of 5" med fremdrift øverst, teksten i en
+// læsespalte, og store Forrige/Næste-knapper nederst, der siger hvor de fører hen.
 import Base from '../../layouts/Base.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guides');
-  return guides.map((guide) => ({
-    params: { slug: guide.id },
-    props: { guide },
-  }));
+  return guides.map((guide) => ({ params: { slug: guide.id }, props: { guide } }));
 }
 
 const { guide } = Astro.props;
 const { Content } = await render(guide);
 const all = (await getCollection('guides')).sort((a, b) => a.data.order - b.data.order);
 const idx = all.findIndex((g) => g.id === guide.id);
+const prev = all[idx - 1];
 const next = all[idx + 1];
-const updated = guide.data.updated.toLocaleDateString('en-GB', {
-  day: 'numeric', month: 'long', year: 'numeric',
-});
+const pct = Math.round(((idx + 1) / all.length) * 100);
+const updated = guide.data.updated.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 <Base title={`${guide.data.title} — The Gentle AI Guide`} description={guide.data.description}>
-  <section class="page-hero">
+  <section class="page-top">
     <div class="wrap">
-      <p class="eyebrow">{guide.data.label ?? `Guide ${idx + 1} of ${all.length}`}</p>
+      <div class="progress">
+        <p>Guide {idx + 1} of {all.length}</p>
+        <div class="progress-bar" role="img" aria-label={`You are on guide ${idx + 1} of ${all.length}`}><span style={`width:${pct}%`}></span></div>
+      </div>
       <h1>{guide.data.title}</h1>
       <p class="lede">{guide.data.description}</p>
     </div>
   </section>
 
-  <div class="wrap article-cols">
+  <div class="wrap">
     <article class="prose">
-      <p class="updated">Last reviewed by a person on {updated}.</p>
+      <p class="updated">Last checked by a person on {updated}.</p>
       <Content />
-      <hr />
-      {next
-        ? <p>Next: <a href={`/guides/${next.id}/`}>{next.data.title} →</a></p>
-        : <p>You've read all five guides. <a href="/guides/">Back to the overview</a></p>}
     </article>
 
-    <aside class="side" aria-label="In this series">
-      <div class="side-box">
-        <h2>In this series</h2>
-        <ol>
-          {all.map((g) => (
-            <li aria-current={g.id === guide.id ? 'page' : undefined}>
-              <a href={`/guides/${g.id}/`}>{g.data.title}</a>
-            </li>
-          ))}
-        </ol>
-        {next && <a class="btn btn--primary btn--small" href={`/guides/${next.id}/`}>Next guide →</a>}
-      </div>
-    </aside>
+    <nav class="pager" aria-label="Previous and next guide">
+      {prev
+        ? <a class="prev" href={`/guides/${prev.id}/`}><small>← Previous: guide {idx}</small><strong>{prev.data.title}</strong></a>
+        : <a class="prev" href="/"><small>← Back</small><strong>Front page</strong></a>}
+      {next
+        ? <a class="next" href={`/guides/${next.id}/`}><small>Next: guide {idx + 2} →</small><strong>{next.data.title}</strong></a>
+        : <a class="next" href="/guides/"><small>You've finished all five →</small><strong>See the list of guides</strong></a>}
+    </nav>
   </div>
 </Base>

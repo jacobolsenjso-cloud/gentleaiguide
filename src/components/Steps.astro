@@ -1,0 +1,19 @@
+---
+// De fem guides som en lodret, nummereret trin-liste — én spalte, stor tekst,
+// én tydelig knap pr. trin. Første trin er fremhævet med rav-kant.
+interface Props { guides: any[]; }
+const { guides } = Astro.props;
+---
+<ol class="steps">
+  {guides.map((g, i) => (
+    <li class={`step${i === 0 ? ' step--first' : ''}`}>
+      <div>
+        <h3><a href={`/guides/${g.id}/`}>{g.data.title}</a></h3>
+        <p>{g.data.description}</p>
+        <a class={`btn ${i === 0 ? 'btn--primary' : 'btn--line'}`} href={`/guides/${g.id}/`}>
+          {i === 0 ? 'Start with this guide' : `Read guide ${i + 1}`}
+        </a>
+      </div>
+    </li>
+  ))}
+</ol>

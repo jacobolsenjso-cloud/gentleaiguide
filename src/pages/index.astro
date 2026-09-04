@@ -1,79 +1,49 @@
 ---
-// Forsiden (magasin-opsætning): centreret velkomst, de fem guides som kort i
-// tre spalter, og et afsnit om hvad der gør sitet anderledes.
+// Forsiden: ét spørgsmål, én stor knap, derefter de fem guides som trin.
 import Base from '../layouts/Base.astro';
-import GuideCard from '../components/GuideCard.astro';
+import Steps from '../components/Steps.astro';
 import { getCollection } from 'astro:content';
 
-const guides = (await getCollection('guides')).sort(
-  (a, b) => a.data.order - b.data.order
-);
+const guides = (await getCollection('guides')).sort((a, b) => a.data.order - b.data.order);
 const first = guides[0];
 ---
 <Base
   title="The Gentle AI Guide — plain-English help with AI"
   description="AI explained calmly and in plain English, one small step at a time. No jargon, no hype, no account needed. Written for people who didn't grow up with computers."
 >
-  <section class="hero">
+  <section class="welcome">
     <div class="wrap">
-      <p class="eyebrow">Plain-English help with AI</p>
-      <h1>AI, explained <em>gently.</em></h1>
+      <h1>AI, explained gently.</h1>
       <p class="lede">
         Everyone talks about AI. Very few people explain it calmly. This site does —
-        one small step at a time, with no jargon and no hype.
+        one small step at a time, in plain English, with no jargon and no hype.
       </p>
-      <div class="btn-row">
-        <a class="btn btn--primary" href={`/guides/${first.id}/`}>Start with guide 1</a>
-        <a class="btn btn--line" href="/guides/">See all five guides</a>
+      <p class="question">New to AI? Start here.</p>
+      <div class="btn-row" style="margin-top:0.4rem">
+        <a class="btn btn--primary btn--big" href={`/guides/${first.id}/`}>Start with guide 1: What is AI?</a>
       </div>
-      <div class="strip">
-        <span><b>5</b> short guides</span>
-        <span><b>0</b> accounts to create</span>
-        <span><b>Every page</b> reviewed by a person</span>
-        <span><b>Plain English</b> throughout</span>
-      </div>
+      <p style="margin-top:1.2rem;color:var(--soft)">It takes about 6 minutes to read. There is nothing to sign up for.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap">
-      <div class="section-head">
-        <div>
-          <h2>Start with these five guides</h2>
-          <p>Read them in order, or jump straight to the one that answers your question.</p>
-        </div>
-        <a class="btn btn--line btn--small" href="/guides/">All guides →</a>
-      </div>
-      <div class="grid">
-        {guides.map((guide, i) => <GuideCard guide={guide} index={i} />)}
-      </div>
+      <h2 style="margin-top:0">The five guides, in order</h2>
+      <p class="read">Read them one after another, or pick the one that answers your question. Each one stands on its own.</p>
+      <Steps guides={guides} />
     </div>
   </section>
 
   <section class="section section--card">
-    <div class="wrap why-cols">
-      <div>
-        <p class="eyebrow">Why this site is different</p>
-        <h2>We assume nothing, and we never make you feel behind.</h2>
-        <p>
-          Every guide is written with the help of AI and then read, corrected and
-          approved by a person before it is published. Each page shows the date it
-          was last checked.
-        </p>
-        <p>
-          That's the working relationship we recommend you have with AI, too: let it
-          do the heavy lifting, but never let it have the final word.
-        </p>
-        <div class="btn-row">
-          <a class="btn btn--line" href="/about/">More about how this works</a>
-        </div>
+    <div class="wrap read">
+      <h2 style="margin-top:0">How this site works</h2>
+      <p><strong>Nothing to buy, no account, nothing to install.</strong> You just read.</p>
+      <p><strong>Every word is explained</strong> the first time it appears. If you meet a word you don't know, that's our mistake, not yours — <a href="mailto:hello@gentleaiguide.com">tell us</a>.</p>
+      <p><strong>A person checks every guide</strong> before it goes online. The guides are written with the help of AI, then read, corrected and approved by a human. Each page shows the date it was last checked.</p>
+      <div class="btn-row">
+        <a class="btn btn--line" href="/how-to-use/">How to use this site</a>
+        <a class="btn btn--line" href="/about/">Who is behind it</a>
       </div>
-      <ul class="checks">
-        <li>Written for people who didn't grow up with computers</li>
-        <li>Every technical word explained the first time it appears</li>
-        <li>Nothing to buy, no account, nothing to install</li>
-        <li>Each page shows when a person last checked it</li>
-      </ul>
     </div>
   </section>
 </Base>
