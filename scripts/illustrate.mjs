@@ -40,7 +40,7 @@ const style = cfg.styles[styleKey];
 if (!style) { console.error(`Ukendt stil "${styleKey}". Muligheder: ${Object.keys(cfg.styles).join(', ')}`); process.exit(1); }
 const numbers = args.filter((a) => /^\d+$/.test(a));
 const spotMode = args.includes('--spot');
-const spotKeys = spotMode ? args.filter((a) => !a.startsWith('--') && !/^\d+$/.test(a)) : [];
+const spotKeys = spotMode ? args.filter((a) => !a.startsWith('--')) : [];
 if (numbers.length === 0 && spotKeys.length === 0) {
   console.error('Angiv mindst ét artikelnummer, fx: npm run illustrate 7');
   process.exit(1);
@@ -116,11 +116,15 @@ async function generate(n) {
 }
 
 async function generateSpot(key) {
-  const motif = cfg.spots?.[key];
-  if (!motif) { console.error(`Spot "${key}" findes ikke. Muligheder: ${Object.keys(cfg.spots || {}).join(', ')}`); return; }
-  const dir = resolve(root, 'public/images/spots');
+  // Et tal = artiklens motiv som fri figur; et navn = fra "spots"-listen
+  const isArticle = /^\d+$/.test(key);
+  const motif = isArticle ? cfg.articles[String(Number(key))]?.motif : cfg.spots?.[key];
+  if (!motif) { console.error(`Spot "${key}" findes ikke. Muligheder: ${Object.keys(cfg.spots || {}).join(', ')} eller et artikelnummer`); return; }
+  const dir = resolve(root, isArticle ? 'public/images/articles' : 'public/images/spots');
   mkdirSync(dir, { recursive: true });
-  const file = resolve(dir, `${key}.png`);
+  const file = isArticle
+    ? resolve(dir, `${String(Number(key)).padStart(2, '0')}-${cfg.articles[String(Number(key))].slug}-spot.png`)
+    : resolve(dir, `${key}.png`);
   if (existsSync(file) && !force) { console.log(`Springer over ${file} (findes allerede)`); return; }
   const prompt = `${cfg.styles.spot}\n\nSubject: ${motif}`;
   console.log(`Laver spot "${key}" via ${provider} …`);
@@ -130,7 +134,7 @@ async function generateSpot(key) {
   console.log(`Gemt: ${file}`);
 }
 
-for (const n of numbers) {
+if (!spotMode) for (const n of numbers) {
   await generate(Number(n));
 }
 for (const k of spotKeys) {

@@ -3,16 +3,20 @@
 //   'big'  = stor forsidehistorie (billede, kategori, titel, uddrag, meta)
 //   'card' = almindeligt kort i kategorirækkerne
 //   'row'  = lille række i "Latest"-spalten (miniature + titel)
+import Blob from './Blob.astro';
 import { categoryByName, readingMinutes, formatDate } from '../site';
 interface Props { article: any; size?: 'big' | 'card' | 'row'; }
 const { article, size = 'card' } = Astro.props;
 const cat = categoryByName(article.data.category);
 const href = `/guides/${article.id}/`;
 const mins = readingMinutes(article.body);
+// Fri figur = samme billede med '-spot' før .png (baggrund fjernet)
+const spot = article.data.image ? article.data.image.replace(/\.png$/, '-spot.png') : null;
+const idx = article.data.order ?? 0;
 ---
 {size === 'row' ? (
   <a class="row" href={href}>
-    {article.data.image && <img src={article.data.image} alt="" width="200" height="200" loading="lazy" />}
+    {spot && <span class="row-fig"><Blob index={idx} /><img src={spot} alt="" width="200" height="200" loading="lazy" /></span>}
     <span class="row-text">
       {cat && <span class="kicker">{cat.name}</span>}
       <span class="row-title">{article.data.title}</span>
@@ -22,7 +26,8 @@ const mins = readingMinutes(article.body);
 ) : (
   <article class={`card card--${size}`}>
     <a class="card-img" href={href} tabindex="-1" aria-hidden="true">
-      {article.data.image && <img src={article.data.image} alt="" width="1024" height="1024" loading={size === 'big' ? 'eager' : 'lazy'} />}
+      <Blob index={idx} />
+      {spot && <img src={spot} alt="" width="800" height="800" loading={size === 'big' ? 'eager' : 'lazy'} />}
     </a>
     <div class="card-body">
       {cat && <a class="kicker" href={`/category/${cat.slug}/`}>{cat.name}</a>}

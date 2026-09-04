@@ -3,6 +3,7 @@
 // og "Read next" med tre andre artikler fra samme kategori nederst.
 import Base from '../../layouts/Base.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
+import Blob from '../../components/Blob.astro';
 import { getCollection, render } from 'astro:content';
 import { categoryByName, readingMinutes, formatDate } from '../../site';
 
@@ -17,6 +18,7 @@ const all = (await getCollection('guides')).sort((a, b) => a.data.order - b.data
 const same = all.filter((a) => a.id !== guide.id && a.data.category === guide.data.category);
 const others = all.filter((a) => a.id !== guide.id && a.data.category !== guide.data.category);
 const next = [...same, ...others].slice(0, 3);
+const spot = guide.data.image ? guide.data.image.replace(/\.png$/, '-spot.png') : null;
 ---
 <Base title={`${guide.data.title} — The Gentle AI Guide`} description={guide.data.description} image={guide.data.image}>
   <article class="article">
@@ -24,7 +26,7 @@ const next = [...same, ...others].slice(0, 3);
     <h1>{guide.data.title}</h1>
     <p class="lede">{guide.data.description}</p>
     <p class="meta">{formatDate(guide.data.updated)} · {readingMinutes(guide.body)} min read · Written with AI's help, checked by a person</p>
-    {guide.data.image && <img class="article-image" src={guide.data.image} alt="" width="1024" height="640" loading="eager" />}
+    {spot && <div class="article-fig"><Blob index={guide.data.order} /><img src={spot} alt="" width="800" height="800" loading="eager" /></div>}
     <div class="prose"><Content /></div>
   </article>
   <section class="wrap read-next" aria-label="Read next">
