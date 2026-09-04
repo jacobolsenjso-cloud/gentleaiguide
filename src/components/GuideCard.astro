@@ -12,7 +12,9 @@ const minutes = Math.max(1, Math.round(words / 200));
 const tag = guide.data.label ?? `Guide ${index + 1}`;
 ---
 <a class="card" href={`/guides/${guide.id}/`}>
-  <Cover index={index} />
+  {guide.data.image
+    ? <img class="cover cover--img" src={guide.data.image} alt="" width="1024" height="640" loading="lazy" />
+    : <Cover index={index} />}
   <div class="body">
     <span class="tag">{tag}</span>
     <h3>{guide.data.title}</h3>

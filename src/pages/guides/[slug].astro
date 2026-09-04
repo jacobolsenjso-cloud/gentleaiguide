@@ -32,6 +32,9 @@ const updated = guide.data.updated.toLocaleDateString('en-GB', {
 
   <div class="wrap article-cols">
     <article class="prose">
+      {guide.data.image && (
+        <img class="article-image" src={guide.data.image} alt="" width="1024" height="640" loading="eager" />
+      )}
       <p class="updated">Last reviewed by a person on {updated}.</p>
       <Content />
       <hr />
