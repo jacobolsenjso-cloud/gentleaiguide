@@ -1,0 +1,33 @@
+---
+// "Start here": de fem grundguides i rækkefølge — for den helt nye læser
+import Base from '../layouts/Base.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+const all = (await getCollection('guides')).sort((a, b) => a.data.order - b.data.order);
+// De fem oprindelige guides er artikel 1, 2, 5, 6 og 9
+const series = [1, 2, 5, 6, 9].map((n) => all.find((a) => a.data.order === n)).filter(Boolean);
+---
+<Base title="Start here — The Gentle AI Guide" description="New to AI? Five short articles, in order, that take you from 'what is it?' to using it safely for everyday things.">
+  <div class="wrap page-top page-top--spot">
+    <img class="spot" src="/images/spots/basics.png" alt="" width="480" height="480" loading="eager" />
+    <div>
+      <p class="kicker">New to AI?</p>
+      <h1>Start here</h1>
+      <p>Five short articles, in this order. Together they take about half an hour, and you can stop after any of them. Nothing to sign up for.</p>
+    </div>
+  </div>
+  <div class="wrap" style="padding-bottom:3rem">
+    <ol class="start-list">
+      {series.map((a, i) => (
+        <li>
+          <span class="start-num">{i + 1}</span>
+          <div>
+            <h2><a href={`/guides/${a.id}/`}>{a.data.title}</a></h2>
+            <p>{a.data.description}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+    <p style="margin-top:2rem">Finished all five? <a href="/guides/">See every article</a>, or pick a section from the menu at the top.</p>
+  </div>
+</Base>

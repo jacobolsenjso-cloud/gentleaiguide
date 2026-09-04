@@ -1,0 +1,26 @@
+---
+// Læsbart sitemap (XML-udgaven til Google ligger på /sitemap-index.xml)
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '../site';
+const all = (await getCollection('guides')).sort((a, b) => a.data.order - b.data.order);
+const pages = [
+  ['/', 'Front page'], ['/start-here/', 'Start here'], ['/guides/', 'All articles'], ['/archive/', 'Archive'],
+  ['/about/', 'About'], ['/contact/', 'Contact'], ['/corrections/', 'Corrections'],
+  ['/terms/', 'Terms of use'], ['/privacy/', 'Privacy'], ['/rss.xml', 'RSS feed'],
+];
+---
+<Base title="Sitemap — The Gentle AI Guide" description="Every page on The Gentle AI Guide, in one list.">
+  <article class="article">
+    <h1>Sitemap</h1>
+    <p class="lede">Every page on the site, in one place.</p>
+    <div class="prose">
+      <h2>Pages</h2>
+      <ul>{pages.map(([href, label]) => <li><a href={href}>{label}</a></li>)}</ul>
+      <h2>Sections</h2>
+      <ul>{CATEGORIES.map((c) => <li><a href={`/category/${c.slug}/`}>{c.name}</a> — {c.blurb}</li>)}</ul>
+      <h2>Articles</h2>
+      <ol>{all.map((a) => <li><a href={`/guides/${a.id}/`}>{a.data.title}</a></li>)}</ol>
+    </div>
+  </article>
+</Base>

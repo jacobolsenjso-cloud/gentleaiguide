@@ -1,0 +1,29 @@
+---
+// Arkiv: alle artikler efter dato, samlet pr. måned
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { formatDate } from '../site';
+const all = (await getCollection('guides')).sort((a, b) => b.data.updated.getTime() - a.data.updated.getTime() || b.data.order - a.data.order);
+const months = new Map<string, typeof all>();
+for (const a of all) {
+  const key = a.data.updated.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+  if (!months.has(key)) months.set(key, []);
+  months.get(key)!.push(a);
+}
+---
+<Base title="Archive — The Gentle AI Guide" description="Every article on The Gentle AI Guide, by month.">
+  <article class="article">
+    <h1>Archive</h1>
+    <p class="lede">{all.length} articles, newest first.</p>
+    <div class="prose">
+      {[...months.entries()].map(([month, items]) => (
+        <>
+          <h2 id={month.toLowerCase().replace(/\s+/g, '-')}>{month}</h2>
+          <ul>
+            {items.map((a) => <li><a href={`/guides/${a.id}/`}>{a.data.title}</a> <span style="color:var(--soft);font-size:0.95rem">— {a.data.category} · {formatDate(a.data.updated)}</span></li>)}
+          </ul>
+        </>
+      ))}
+    </div>
+  </article>
+</Base>

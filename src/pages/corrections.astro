@@ -1,0 +1,22 @@
+---
+// Rettelser: politik + liste. Listen vedligeholdes manuelt her, nyeste øverst.
+import Base from '../layouts/Base.astro';
+const corrections: { date: string; article: string; href: string; what: string }[] = [
+  // { date: '2026-09-10', article: 'ChatGPT explained', href: '/guides/chatgpt-explained/', what: 'Corrected the location of the subscription setting.' },
+];
+---
+<Base title="Corrections — The Gentle AI Guide" description="How The Gentle AI Guide handles mistakes, and a public list of every correction made.">
+  <article class="article">
+    <h1>Corrections</h1>
+    <p class="lede">We make mistakes. When we do, we fix them and say so here.</p>
+    <div class="prose">
+      <h2>How it works</h2>
+      <p>Every article on this site is written with the help of AI and then checked by a person before it is published. That catches most errors. It doesn't catch all of them — and AI tools change quickly, so a menu item or a price that was right in the spring can be wrong by autumn.</p>
+      <p>If you spot something wrong, <a href="/contact/">tell us</a>. We'll check it, fix the article, update the "last checked" date at the top, and list the change below. We don't quietly edit things and pretend they were always right.</p>
+      <h2>Corrections made</h2>
+      {corrections.length === 0
+        ? <p><em>None yet. This page was created on 4 September 2026, when the site launched.</em></p>
+        : <ul>{corrections.map((c) => <li><strong>{c.date}</strong> — <a href={c.href}>{c.article}</a>: {c.what}</li>)}</ul>}
+    </div>
+  </article>
+</Base>
