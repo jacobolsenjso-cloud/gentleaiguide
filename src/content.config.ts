@@ -13,6 +13,10 @@ const guides = defineCollection({
     updated: z.coerce.date(),
     // Kort label der vises på kortet, fx "Start here"
     label: z.string().optional(),
+    // Kategori i kategorilinjen (Basics, Staying safe, Everyday use, Tools, Questions)
+    category: z.string().optional(),
+    // Sti til illustration under public/, fx /images/articles/07-ai-scams.png
+    image: z.string().optional(),
   }),
 });
 

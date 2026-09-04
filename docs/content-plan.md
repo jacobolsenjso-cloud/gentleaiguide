@@ -55,7 +55,7 @@ Arbejdsgang pr. artikel: udkast → Jacob læser → rettelser → illustration 
 
 ---
 
-## Illustrationsstil (én fast prompt til alle artikler)
+## Illustrationsstil (én fast prompt til alle artikler) — valgt 4/9: "malerisk"
 
 Brug denne som **stil-del** i ethvert AI-billedværktøj (ChatGPT, Midjourney, Canva, Ideogram …).
 Tilføj derefter motivet fra listen nedenfor. Format: **16:9 liggende** (det er det, Gemini kan levere). Billederne laves automatisk med `npm run illustrate <nummer>` — se scripts/illustrate.mjs.

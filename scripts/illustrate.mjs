@@ -3,6 +3,7 @@
 //   npm run illustrate 7        -> public/images/articles/07-ai-scams.png
 //   npm run illustrate 7 13 3   -> flere ad gangen
 //   npm run illustrate 7 --force  overskriver, hvis filen findes
+//   npm run illustrate 7 --style=photo --suffix=photo   prøv en anden stil, gem som 07-ai-scams-photo.png
 //
 // To udbydere, valgt med IMAGE_PROVIDER i .env:
 //   cloudflare (standard) -> CF_ACCOUNT_ID + CF_API_TOKEN, model FLUX.1-schnell, gratis daglig kvote
@@ -31,6 +32,10 @@ if (provider === 'cloudflare' && (!process.env.CF_ACCOUNT_ID || !process.env.CF_
 
 const args = process.argv.slice(2);
 const force = args.includes('--force');
+const styleKey = (args.find((a) => a.startsWith('--style=')) || '').slice(8) || cfg.defaultStyle;
+const suffix = (args.find((a) => a.startsWith('--suffix=')) || '').slice(9);
+const style = cfg.styles[styleKey];
+if (!style) { console.error(`Ukendt stil "${styleKey}". Muligheder: ${Object.keys(cfg.styles).join(', ')}`); process.exit(1); }
 const numbers = args.filter((a) => /^\d+$/.test(a));
 if (numbers.length === 0) {
   console.error('Angiv mindst ét artikelnummer, fx: npm run illustrate 7');
@@ -89,11 +94,11 @@ async function viaGemini(prompt, n) {
 async function generate(n) {
   const entry = cfg.articles[String(n)];
   if (!entry) { console.error(`Artikel ${n} findes ikke i illustrations.json`); return; }
-  const file = resolve(outDir, `${String(n).padStart(2, '0')}-${entry.slug}.png`);
+  const file = resolve(outDir, `${String(n).padStart(2, '0')}-${entry.slug}${suffix ? '-' + suffix : ''}.png`);
   if (existsSync(file) && !force) { console.log(`Springer over ${file} (findes allerede — brug --force for at lave ny)`); return; }
 
-  const prompt = `${cfg.style}\n\nSubject: ${entry.motif}`;
-  console.log(`Laver illustration ${n} (${entry.slug}) via ${provider} …`);
+  const prompt = `${style}\n\nSubject: ${entry.motif}`;
+  console.log(`Laver illustration ${n} (${entry.slug}) via ${provider}, stil "${styleKey}" …`);
 
   let png;
   if (provider === 'gemini') {

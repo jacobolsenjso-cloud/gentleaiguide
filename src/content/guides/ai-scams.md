@@ -4,7 +4,8 @@ description: "Scammers now use AI to copy voices, write perfect emails and fake 
 category: "Staying safe"
 order: 7
 updated: 2026-09-04
-draft: true
+image: "/images/articles/07-ai-scams.png"
+label: "Staying safe"
 ---
 
 Here is the honest situation: the scams themselves are old. What's new is that AI has made them **better made**. The phone call sounds like your grandson. The email has no spelling mistakes. The video of the famous investor looks real.
