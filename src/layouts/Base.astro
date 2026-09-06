@@ -196,7 +196,7 @@ const current = Astro.url.pathname;
     .btn--line:hover { background: var(--paper2); }
 
     /* ---------- Forside ---------- */
-    .front { display: grid; grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr); gap: 2.5rem; padding: 2.2rem 0 1rem; }
+    .front { display: grid; grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr); gap: 2.5rem; padding-top: 2.2rem; padding-bottom: 1rem; }
     .featured { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; }
     .side-head { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.1rem; margin: 0 0 0.6rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--ink); }
     .latest { display: flex; flex-direction: column; }
@@ -229,7 +229,7 @@ const current = Astro.url.pathname;
     .card-meta { margin: auto 0 0; padding-top: 0.6rem; font-size: 0.88rem; color: var(--soft); }
 
     /* ---------- Kategorirækker ---------- */
-    .section { padding: 2.2rem 0 0.5rem; }
+    .section { padding-top: 2.2rem; padding-bottom: 0.5rem; }
     .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--ink); }
     .section-head h2 { font-size: 1.45rem; }
     .section-head p { margin: 0; color: var(--soft); font-size: 1rem; flex: 1; }
@@ -245,7 +245,7 @@ const current = Astro.url.pathname;
     .band p { margin: 0; color: var(--soft); font-size: 1.02rem; }
 
     /* ---------- Sidehoved for kategori/oversigt ---------- */
-    .page-top { padding: 2.2rem 0 1.2rem; }
+    .page-top { padding-top: 2.2rem; padding-bottom: 1.2rem; }
     .page-top h1 { font-size: 2.3rem; }
     .page-top p { color: var(--soft); margin: 0.5rem 0 0; max-width: 40rem; }
 
@@ -290,7 +290,7 @@ const current = Astro.url.pathname;
     .prose th, .prose td { text-align: left; padding: 0.6rem 0.8rem; border: 1px solid var(--line); vertical-align: top; }
     .prose th { background: var(--paper2); font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.95rem; }
     .prose hr { border: none; border-top: 1px solid var(--line); margin: 2.4rem 0; }
-    .read-next { padding: 2rem 0 3rem; border-top: 3px solid var(--ink); margin-top: 1rem; }
+    .read-next { padding-top: 2rem; padding-bottom: 3rem; border-top: 3px solid var(--ink); margin-top: 1rem; }
     .read-next h2 { font-size: 1.45rem; margin-bottom: 1.1rem; }
 
     /* ---------- Footer ---------- */
@@ -322,7 +322,7 @@ const current = Astro.url.pathname;
       .textsize-label { display: none; }
       h1, .article h1 { font-size: 2rem; }
       .card--big h3 { font-size: 1.3rem; }
-      .article { padding: 1.6rem 1.25rem 2.5rem; }
+      .article { padding: 1.6rem 1.5rem 2.5rem; }
     }
   </style>
 </body>
