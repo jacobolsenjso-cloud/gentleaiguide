@@ -40,7 +40,7 @@ No. But it can do something almost as valuable: make your eight minutes with the
 
 **"Should I stop taking this?"** Never on AI's say-so. Medication decisions depend on things it can't see. Ask the pharmacist or doctor — both are easier to reach than people think.
 
-**"Is this serious?"** If you're asking because you're worried it might be — chest pain, sudden weakness, confusion, bleeding that won't stop, a lump that's new — that's not a chatbot question. Chest pain, sudden weakness or confusion, or bleeding that won't stop mean the emergency number (999 in the UK, 112 in Europe, 911 in the US) — right now. A new lump means your doctor, this week. AI will often tell you the same thing; don't wait for it to.
+**"Is this serious?"** If you're asking because you're worried it might be, that's not a chatbot question. Chest pain, sudden weakness or confusion, or bleeding that won't stop mean the emergency number (999 in the UK, 112 in Europe, 911 in the US) — right now. A new lump means your doctor, this week. AI will often tell you the same thing; don't wait for it to.
 
 ## The good pattern: AI before and after, doctor in the middle
 
