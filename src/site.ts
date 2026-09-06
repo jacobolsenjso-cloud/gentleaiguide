@@ -1,7 +1,7 @@
 // Én kontakt at slå på, når indholdet er godkendt.
 // INDEXABLE = false  -> sitet er live og læsbart, men søgemaskiner holdes ude
 // INDEXABLE = true   -> sitet må indekseres af Google m.fl.
-export const INDEXABLE = false;
+export const INDEXABLE = true;
 
 // Kategorierne i kategorilinjen, i den rækkefølge de vises.
 // 'name' skal matche 'category' i artiklernes frontmatter præcist.

@@ -1,6 +1,6 @@
-# Midlertidigt: sitet er lukket for søgemaskiner, indtil indholdet er godkendt.
-# Når det åbnes, byttes Disallow ud med "Allow: /" og INDEXABLE i src/site.ts sættes til true.
+# Sitet er åbent for søgemaskiner (godkendt af Jacob 6. september 2026).
+# Lukkes igen ved at sætte INDEXABLE = false i src/site.ts og skifte Allow til Disallow her.
 User-agent: *
-Disallow: /
+Allow: /
 
 Sitemap: https://gentleaiguide.com/sitemap-index.xml
