@@ -43,8 +43,8 @@ A dull dinner suggestion costs nothing. A wrong pill interaction does.
 
 ## Four habits that catch most mistakes
 
-1. **Ask "how sure are you?"** — chatbots are surprisingly honest when asked
-   directly, and will often list what they might have wrong.
+1. **Ask "how sure are you?"** — it won't always know, but asking often makes it
+   list the parts it is unsure about. Treat those as the bits to check.
 2. **Ask where it comes from.** "What is that based on? Can you give sources?"
    Modern chatbots can often search the internet and show links. Links you can
    check are worth far more than a fluent paragraph.

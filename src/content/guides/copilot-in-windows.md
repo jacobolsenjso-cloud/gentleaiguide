@@ -1,5 +1,6 @@
 ---
 title: "Copilot in Windows: the AI button you didn't ask for"
+summary: "A new icon appeared on your taskbar, maybe a new key too. That's Copilot, Microsoft's AI. What it does, and how to turn it off if you'd rather not."
 description: "One day a new icon appeared on your taskbar, and maybe a new key on your keyboard. That's Copilot, Microsoft's AI. What it does, what it can't do, and how to turn it off if you'd rather not."
 category: "Tools"
 order: 15
@@ -15,7 +16,7 @@ Nobody explained it. So here's the explanation.
 
 ## What it is
 
-Copilot is Microsoft's chatbot — the same kind of thing as [ChatGPT](/guides/chatgpt-explained/) and [Gemini](/guides/gemini-explained/). In fact, it runs on the same engine as ChatGPT underneath, because Microsoft and OpenAI work together. You type, it answers. It can explain things, write things, and search the web.
+Copilot is Microsoft's chatbot — the same kind of thing as [ChatGPT](/guides/chatgpt-explained/) and [Gemini](/guides/gemini-explained/). Underneath, it uses AI engines from Microsoft's partners (including OpenAI, the makers of ChatGPT) as well as Microsoft's own. You type, it answers. It can explain things, write things, and search the web.
 
 What makes it different is only *where it lives*: built into Windows, one click away, always there. Whether that's convenient or intrusive is a matter of taste.
 
@@ -30,8 +31,8 @@ What makes it different is only *where it lives*: built into Windows, one click 
 
 The name "Copilot" suggests it's flying the computer with you. It isn't, really.
 
-- It **can't see what's on your screen** unless you specifically share a screenshot.
-- It **can't open your files**, tidy your folders, or fix things on its own.
+- It **can't see what's on your screen** unless you deliberately switch on its "Vision" feature and share a window with it. It never looks on its own.
+- It **won't rummage through your files** on its own. Newer versions can find and open a file if you ask — but only when you ask.
 - It **can't read your email** or your documents unless you paste them in.
 
 Microsoft has been adding features that let it do more of this, and they change often. But as a rule: if you didn't paste it in, it doesn't know about it. This is a good thing for your privacy, and worth knowing so you don't expect magic.
@@ -44,9 +45,9 @@ No. It sits there. If you never click it, it does nothing. The key on the keyboa
 
 Reasonable choice, and it's easy:
 
-**Hide the taskbar icon:** right-click an empty part of the taskbar → *Taskbar settings* → turn off *Copilot*. (The exact wording varies slightly between Windows versions.)
+**Hide the taskbar icon:** right-click the Copilot icon on the taskbar → *Unpin from taskbar*. (On some older Windows versions it's under *Taskbar settings* instead.)
 
-**Stop the key opening it:** *Settings → Personalisation → Text input* (or search settings for "Copilot key") and you can change what the key does, including "nothing."
+**Stop the key opening it:** *Settings → Personalisation → Text input* (or search settings for "Copilot key") and you can change what the key does — for example, open Search instead.
 
 **Remove it entirely:** *Settings → Apps → Installed apps*, find Copilot, click the three dots → *Uninstall*. If it isn't listed, it's part of Windows on your version and can only be hidden, not removed — which is fine; hidden is as good as gone.
 

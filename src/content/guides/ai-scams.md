@@ -1,5 +1,6 @@
 ---
 title: "AI scams aimed at people over 50 — the five to recognise"
+summary: "Scammers now use AI to copy voices and write perfect emails. The five tricks you're most likely to meet, and the habits that stop them."
 description: "Scammers now use AI to copy voices, write perfect emails and fake videos. Here are the five tricks you're most likely to meet, and the simple habits that stop all of them."
 category: "Staying safe"
 order: 7
@@ -78,7 +79,7 @@ It happens to intelligent, careful people every day — the scams are designed b
 
 - **Call your bank straight away.** If money moved recently, they can sometimes stop it.
 - **Change the password** on any account you shared, starting with your email.
-- **Report it.** In the US: reportfraud.ftc.gov. In the UK: actionfraud.police.uk. Elsewhere: your local police non-emergency number. Reports are how these operations get shut down.
+- **Report it.** In the US: reportfraud.ftc.gov. In the UK: call 0300 123 2040 or search for "Report Fraud police" (the service was called Action Fraud until 2026). Elsewhere: your local police non-emergency number. Reports are how these operations get shut down.
 - **Tell someone you trust.** Not to be scolded — to have a second pair of eyes on the next call.
 
 ## One last thing

@@ -1,5 +1,6 @@
 ---
 title: "ChatGPT explained: what it is, what it costs, how to start"
+summary: "What ChatGPT actually is, what the free version can do, when paying makes sense, and how to have your first conversation in five minutes."
 description: "The one everyone has heard of. What ChatGPT actually is, what the free version can do, when paying makes sense, and how to have your first conversation in five minutes."
 category: "Tools"
 order: 13
@@ -21,9 +22,9 @@ It is not a person. It is not connected to your computer. It cannot see your scr
 
 ## What it costs
 
-**There is a free version, and it's good.** You go to chatgpt.com, you can use it. For most everyday purposes — letters, explanations, recipes, questions — the free version is all you need. You may hit a limit if you use it heavily in one sitting; it tells you, and it resets after a while.
+**There is a free version, and it's good.** You go to chatgpt.com and you can use it. For most everyday purposes — letters, explanations, recipes, questions — the free version is all you need. You may hit a limit if you use it heavily in one sitting; it tells you, and it resets after a while.
 
-**There is a paid version.** It costs roughly what a streaming service does per month. You get a more capable engine, fewer limits, and some extra features. The exact price and what's included change from time to time, so check the website rather than trusting a number here.
+**There are paid versions.** The main one, called Plus, costs roughly what a streaming service does per month; in some countries there is also a cheaper tier called Go. You get a more capable engine, fewer limits, and some extra features. The exact price and what's included change from time to time, so check the website rather than trusting a number here.
 
 **Should you pay?** Not to start with. Use the free version for a month. If you find yourself hitting limits or wishing it were cleverer, you'll know. Most people we'd write this site for will never need to.
 

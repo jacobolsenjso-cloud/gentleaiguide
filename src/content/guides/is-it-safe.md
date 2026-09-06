@@ -72,8 +72,8 @@ new habit: **verify through a second channel you already trust.**
 ## Settings worth two minutes
 
 Most chatbots have a settings menu (often behind your initials or a gear
-symbol). Two things are worth looking for once — many chatbots have both
-switched on by default:
+symbol). Two things are worth looking for once. On most chatbots, using your
+conversations for training is switched on unless you turn it off:
 
 - An option to **not use your conversations for training** the AI.
 - A button to **delete conversations** or your whole history.

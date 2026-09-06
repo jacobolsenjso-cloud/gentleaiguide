@@ -1,5 +1,6 @@
 ---
 title: "Writing a difficult email or letter with AI's help"
+summary: "A complaint, a condolence, a 'no' to a friend. How to use AI to get a good draft in five minutes, without it sounding like a robot."
 description: "A complaint, a condolence, a 'no' to a friend — the letters that sit unwritten for weeks. Here's how to use AI to get a good draft in five minutes, without it sounding like a robot."
 category: "Everyday use"
 order: 10
@@ -17,7 +18,7 @@ This is the single most useful thing AI does for ordinary people. Not because it
 
 Don't ask "write me an email." Tell it what happened and what you want. Like this:
 
-> "My flight was cancelled last Tuesday and the airline hasn't refunded me after two weeks. I've already emailed once and got an automatic reply. I want a firm but polite email asking for the refund within seven days, and mentioning that I know my rights under EU regulation 261. Keep it short."
+> "My flight was cancelled last Tuesday and the airline hasn't refunded me after two weeks. I've already emailed once and got an automatic reply. I want a firm but polite email asking for the refund within seven days, and mentioning that I know my rights under the flight compensation rules (EU/UK regulation 261). Keep it short."
 
 That takes thirty seconds to type, and what comes back will be 80% of the way there. The more you tell it about the *situation* — what happened, how you feel, what you want to happen — the less it sounds generic.
 

@@ -1,6 +1,7 @@
 ---
 title: "Planning a trip with AI — and checking it before you book"
-description: "AI can sketch a whole holiday in ten minutes: where to go, what to see, how to get around. It's genuinely useful — as long as you know which parts to double-check before paying for anything."
+summary: "AI can sketch a whole holiday in minutes. It's genuinely useful — as long as you know which parts to double-check before paying for anything."
+description: "AI can sketch a whole holiday in minutes: where to go, what to see, how to get around. It's genuinely useful — as long as you know which parts to double-check before paying for anything."
 category: "Everyday use"
 order: 11
 updated: 2026-09-04

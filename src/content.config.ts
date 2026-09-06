@@ -7,6 +7,8 @@ const guides = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    // Valgfri kort udgave til søgemaskiner (under 155 tegn). Uden den bruges description.
+    summary: z.string().optional(),
     // Rækkefølgen på guide-oversigten (1 = først)
     order: z.number(),
     // Sæt til dato når Jacob har godkendt teksten

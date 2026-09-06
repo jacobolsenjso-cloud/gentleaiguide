@@ -1,5 +1,6 @@
 ---
 title: "\"Can AI remember me?\" Memory, accounts and how to delete what it knows"
+summary: "Does the chatbot remember last week? Is it building a file on you? Where's the delete button? Plain answers and three settings to change."
 description: "Does the chatbot remember last week's conversation? Is it building a file on you? Where's the delete button? Plain answers, and the three settings worth changing today."
 category: "Questions"
 order: 20
@@ -33,14 +34,14 @@ Every chatbot has these, in slightly different places. The names below are the o
 
 **Setting 1: Stop your chats being used for training.**
 - *ChatGPT:* your name (bottom left) → *Settings* → *Data controls* → turn off *"Improve the model for everyone."*
-- *Gemini:* myactivity.google.com → *Gemini Apps Activity* → turn off.
+- *Gemini:* gemini.google.com → *Settings and help* → *Activity* → turn off *Keep activity* (older versions call it *Gemini Apps Activity*).
 - *Copilot:* *Settings* → *Privacy* → *Model training* → off.
 
 Your chats still work exactly the same. They're just not used to teach the next version.
 
 **Setting 2: See and prune the memory.**
 - *ChatGPT:* *Settings* → *Personalisation* → *Memory* → *Manage*. You'll see a list of things it has noted. Delete anything you like, or turn memory off entirely.
-- *Gemini:* it's tied to Gemini Apps Activity, above — turning that off stops it building a picture of you.
+- *Gemini:* *Settings* → *Personal context* → turn off. (This is separate from *Keep activity*, above, which controls whether your chats are stored.)
 - *Copilot:* *Settings* → *Privacy* → *Personalisation*.
 
 Read that list once. It's oddly revealing — and reassuringly mundane.

@@ -4,3 +4,5 @@ dist/
 .env
 .env.txt
 .env.local
+_audit/
+_audit.zip

@@ -1,5 +1,6 @@
 ---
 title: "\"Do I need to pay?\" Free vs paid AI, honestly"
+summary: "Every AI has a free version and a paid one. What you actually get for nothing, when paying makes sense, and how to avoid paying by accident."
 description: "Every AI has a free version and a paid one, and the paid one is always being advertised. Here's what you actually get for nothing, when paying makes sense, and how to avoid paying by accident."
 category: "Questions"
 order: 19
@@ -57,7 +58,7 @@ This is the practical part.
 
 ## How to check what you're paying now
 
-- **ChatGPT:** click your name (bottom left) → *Settings* → *Subscription*.
+- **ChatGPT:** click your name (bottom left) → *Settings* → *Account* → *Manage* next to your plan.
 - **Gemini:** it's part of your Google account → *Subscriptions* at one.google.com.
 - **Copilot:** account.microsoft.com → *Services & subscriptions*.
 - **Anything via your phone:** phone *Settings* → search "subscriptions."

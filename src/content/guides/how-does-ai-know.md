@@ -1,5 +1,6 @@
 ---
 title: "How does AI \"know\" things? Where the answers come from"
+summary: "It can write about almost anything — so where does it get it from? How AI learns, why it sounds so sure, and why it can't read your mind."
 description: "It can write about almost anything — so where does it get it from? A plain-English look at how AI learns, why it sounds so sure, and why it can't read your mind."
 category: "Basics"
 order: 4
@@ -37,7 +38,7 @@ This is the part that matters for using it well.
 
 **It doesn't know what happened last week.** Training has a cut-off date. Anything after that, the model has never seen. Ask about this morning's news and it will either tell you it doesn't know, or — worse — guess. Chatbots with search can get around this; ones without can't.
 
-**It doesn't know you.** It cannot see your screen, your other tabs, your files or your previous chats (unless the product has a memory feature, and it will say so). Every new conversation starts cold. If you want it to help with *your* letter, you have to paste the letter in.
+**It doesn't know you.** It cannot see your screen, your other tabs, your files or your previous chats (unless the product has a memory feature, and it will say so). Unless a memory feature is switched on, every new conversation starts cold ([more on that here](/guides/can-ai-remember-me/)). If you want it to help with *your* letter, you have to paste the letter in.
 
 **It doesn't have opinions or intentions.** When it says "I think…", that's a figure of speech learned from human writing. There's no one in there thinking. This is comforting when it's rude and important when it's flattering: neither means anything.
 

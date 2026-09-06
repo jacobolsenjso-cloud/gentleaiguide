@@ -1,5 +1,6 @@
 ---
 title: "Google Gemini explained: the AI that's already in your phone and your search"
+summary: "You may already be using Gemini without knowing it — it's in Google search, Gmail and most Android phones. What it is and how to use it on purpose."
 description: "You may already be using Gemini without knowing it — it's in Google search, in Gmail, and on most Android phones. What it is, where it hides, and how to use it on purpose."
 category: "Tools"
 order: 14
@@ -50,11 +51,11 @@ This is handy and also worth a moment's thought. It means the AI can read your e
 
 **Being everywhere isn't the same as being better.** Gemini is very good. So are the others. Google's advantage is convenience, not magic.
 
-**It stores what you type, like all of them.** [The usual rules apply](/guides/never-type-this/): no passwords, no ID numbers, no other people's private details. There's a setting to stop your chats being used for training — it's called "Gemini Apps Activity" and you can turn it off. ([How.](/guides/can-ai-remember-me/))
+**It stores what you type, like all of them.** [The usual rules apply](/guides/never-type-this/): no passwords, no ID numbers, no other people's private details. There's a setting to stop your chats being used for training — it's called "Keep activity" (older versions call it "Gemini Apps Activity") and you can turn it off. ([How.](/guides/can-ai-remember-me/))
 
 ## If you'd rather it went away
 
-You can. On an Android phone, you can switch back to the old Assistant in settings (the exact path varies by phone — search your phone's settings for "digital assistant"). In search, you can't fully remove AI Overviews, but you can ignore them, and adding the word "-ai" to the end of a search hides them on some versions. In Gmail, the suggestion buttons can be switched off under Settings → "Smart features."
+You can. On many Android phones Gemini has now replaced the old Assistant completely, and there is no way back. Where the option still exists, search your phone's settings for "digital assistant". In search, you can't fully remove AI Overviews, but you can ignore them, and adding the word "-ai" to the end of a search hides them on some versions. In Gmail, the suggestion buttons can be switched off under Settings → "Smart features."
 
 None of this is required. The point is only that it's *your* choice — and now you know where the switches are.
 

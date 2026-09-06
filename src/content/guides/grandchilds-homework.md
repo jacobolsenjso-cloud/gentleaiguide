@@ -1,5 +1,6 @@
 ---
 title: "\"Is my grandchild's homework written by AI?\" How to talk about it"
+summary: "The essay is suspiciously polished. What's really going on with AI in schools, and how to have the conversation without it becoming an interrogation."
 description: "The essay is suspiciously polished, and you have a feeling. Before you say anything: what's actually going on with AI in schools, what the grown-ups have decided, and how to have the conversation without it turning into an interrogation."
 category: "Questions"
 order: 18
