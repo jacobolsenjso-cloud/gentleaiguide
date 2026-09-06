@@ -1,5 +1,6 @@
 ---
 title: "How does AI \"know\" things? Where the answers come from"
+seoTitle: "How does AI \"know\" things?"
 summary: "It can write about almost anything — so where does it get it from? How AI learns, why it sounds so sure, and why it can't read your mind."
 description: "It can write about almost anything — so where does it get it from? A plain-English look at how AI learns, why it sounds so sure, and why it can't read your mind."
 category: "Basics"

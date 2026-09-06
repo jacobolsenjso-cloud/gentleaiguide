@@ -1,5 +1,6 @@
 ---
 title: "How to tell when AI is wrong (because sometimes it is)"
+seoTitle: "How to tell when AI is wrong"
 description: "AI answers with total confidence even when it's mistaken. Here's why that happens and the simple habits that protect you."
 updated: 2026-08-31
 order: 6

@@ -1,5 +1,6 @@
 ---
 title: "Copilot in Windows: the AI button you didn't ask for"
+seoTitle: "Copilot in Windows, and how to turn it off"
 summary: "A new icon appeared on your taskbar, maybe a new key too. That's Copilot, Microsoft's AI. What it does, and how to turn it off if you'd rather not."
 description: "One day a new icon appeared on your taskbar, and maybe a new key on your keyboard. That's Copilot, Microsoft's AI. What it does, what it can't do, and how to turn it off if you'd rather not."
 category: "Tools"

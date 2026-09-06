@@ -20,7 +20,7 @@ const others = all.filter((a) => a.id !== guide.id && a.data.category !== guide.
 const next = [...same, ...others].slice(0, 3);
 const spot = guide.data.image ? guide.data.image.replace(/\.png$/, '-spot.png') : null;
 ---
-<Base title={`${guide.data.title} — The Gentle AI Guide`} description={guide.data.summary ?? guide.data.description} image={guide.data.image}>
+<Base title={`${guide.data.seoTitle ?? guide.data.title} | Gentle AI Guide`} description={guide.data.summary ?? guide.data.description} image={guide.data.image}>
   <article class="article">
     {cat && <a class="kicker" href={`/category/${cat.slug}/`}>{cat.name}</a>}
     <h1>{guide.data.title}</h1>

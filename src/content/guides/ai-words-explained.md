@@ -1,5 +1,6 @@
 ---
 title: "AI words explained: the 15 you'll actually hear"
+seoTitle: "15 AI words explained in plain English"
 description: "Chatbot, prompt, model, hallucination — the words people throw around, explained once, in plain English, so you never have to nod along again."
 category: "Basics"
 order: 3

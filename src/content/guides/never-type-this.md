@@ -1,5 +1,6 @@
 ---
 title: "What never to type into an AI — a short list you can print"
+seoTitle: "What never to type into an AI"
 description: "Most things are fine to share with a chatbot. A few are not. Here is the short list, why each one matters, and what to type instead."
 category: "Staying safe"
 order: 8

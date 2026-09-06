@@ -1,5 +1,6 @@
 ---
 title: "Writing a difficult email or letter with AI's help"
+seoTitle: "Writing a difficult email with AI's help"
 summary: "A complaint, a condolence, a 'no' to a friend. How to use AI to get a good draft in five minutes, without it sounding like a robot."
 description: "A complaint, a condolence, a 'no' to a friend — the letters that sit unwritten for weeks. Here's how to use AI to get a good draft in five minutes, without it sounding like a robot."
 category: "Everyday use"

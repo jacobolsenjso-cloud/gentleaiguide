@@ -1,5 +1,6 @@
 ---
 title: "\"Can AI remember me?\" Memory, accounts and how to delete what it knows"
+seoTitle: "Can AI remember me? Memory and deleting"
 summary: "Does the chatbot remember last week? Is it building a file on you? Where's the delete button? Plain answers and three settings to change."
 description: "Does the chatbot remember last week's conversation? Is it building a file on you? Where's the delete button? Plain answers, and the three settings worth changing today."
 category: "Questions"

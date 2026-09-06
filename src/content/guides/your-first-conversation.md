@@ -1,5 +1,6 @@
 ---
 title: "Your first conversation with an AI, step by step"
+seoTitle: "Your first AI conversation, step by step"
 description: "A calm, click-by-click walkthrough of trying an AI chatbot for the first time — free, safe, and with nothing to install."
 updated: 2026-08-31
 order: 2

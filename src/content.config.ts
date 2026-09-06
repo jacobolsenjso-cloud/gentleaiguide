@@ -9,6 +9,8 @@ const guides = defineCollection({
     description: z.string(),
     // Valgfri kort udgave til søgemaskiner (under 155 tegn). Uden den bruges description.
     summary: z.string().optional(),
+    // Valgfri kort titel til browserfane/Google (maks. 42 tegn). Uden den bruges title.
+    seoTitle: z.string().optional(),
     // Rækkefølgen på guide-oversigten (1 = først)
     order: z.number(),
     // Sæt til dato når Jacob har godkendt teksten

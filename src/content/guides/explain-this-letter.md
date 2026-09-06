@@ -1,5 +1,6 @@
 ---
 title: "\"Explain this letter to me\": using AI to understand the bank, the doctor or the council"
+seoTitle: "Using AI to explain an official letter"
 summary: "Official letters are written to be correct, not understood. How to paste one into an AI and get plain English back — with your details left out."
 description: "Official letters are written to be correct, not to be understood. Here's how to paste one into an AI and get it back in plain English — safely, with your personal details left out."
 category: "Everyday use"

@@ -1,5 +1,6 @@
 ---
 title: "Alexa, Siri and the new AI chatbots — what's the difference?"
+seoTitle: "Alexa, Siri or AI chatbot: the difference"
 summary: "You've had a voice assistant for years. Now there are AI chatbots. Aren't they the same? Nearly — here's the difference in plain English."
 description: "You've had a voice assistant for years. Now there are 'AI chatbots'. Aren't they the same thing? Nearly — and the difference explains why one can set a timer and the other can write a speech."
 category: "Tools"

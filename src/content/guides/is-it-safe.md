@@ -1,5 +1,6 @@
 ---
 title: "Is it safe? What happens to the things you type"
+seoTitle: "Is AI safe? What happens to what you type"
 description: "Where your words go when you talk to an AI, what to keep to yourself, and simple habits that keep you in control."
 updated: 2026-08-31
 order: 5

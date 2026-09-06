@@ -1,5 +1,6 @@
 ---
 title: "\"Will AI replace my doctor?\" What it can and can't do with health questions"
+seoTitle: "Will AI replace my doctor?"
 summary: "AI is patient and available at 2 a.m. — but it's not a doctor. Where the line is, and how to use one to get more out of the other."
 description: "AI is patient, available at 2 a.m., and never makes you feel silly. It's also not a doctor. Here's the honest line between the two — and how to use one to get more out of the other."
 category: "Questions"

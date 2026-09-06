@@ -1,5 +1,6 @@
 ---
 title: "What is AI, actually? A plain-English answer"
+seoTitle: "What is AI? A plain-English answer"
 description: "Forget the movies and the headlines. Here's what today's AI really is, how it works in everyday terms, and why it sometimes feels like magic."
 updated: 2026-08-31
 order: 1

@@ -1,5 +1,6 @@
 ---
 title: "\"Do I need to pay?\" Free vs paid AI, honestly"
+seoTitle: "Do I need to pay for AI? Free vs paid"
 summary: "Every AI has a free version and a paid one. What you actually get for nothing, when paying makes sense, and how to avoid paying by accident."
 description: "Every AI has a free version and a paid one, and the paid one is always being advertised. Here's what you actually get for nothing, when paying makes sense, and how to avoid paying by accident."
 category: "Questions"

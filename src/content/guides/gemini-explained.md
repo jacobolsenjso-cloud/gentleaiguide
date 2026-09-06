@@ -1,5 +1,6 @@
 ---
 title: "Google Gemini explained: the AI that's already in your phone and your search"
+seoTitle: "Google Gemini explained"
 summary: "You may already be using Gemini without knowing it — it's in Google search, Gmail and most Android phones. What it is and how to use it on purpose."
 description: "You may already be using Gemini without knowing it — it's in Google search, in Gmail, and on most Android phones. What it is, where it hides, and how to use it on purpose."
 category: "Tools"

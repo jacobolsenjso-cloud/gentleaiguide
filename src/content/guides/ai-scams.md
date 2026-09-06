@@ -1,5 +1,6 @@
 ---
 title: "AI scams aimed at people over 50 — the five to recognise"
+seoTitle: "5 AI scams aimed at people over 50"
 summary: "Scammers now use AI to copy voices and write perfect emails. The five tricks you're most likely to meet, and the habits that stop them."
 description: "Scammers now use AI to copy voices, write perfect emails and fake videos. Here are the five tricks you're most likely to meet, and the simple habits that stop all of them."
 category: "Staying safe"

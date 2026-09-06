@@ -1,5 +1,6 @@
 ---
 title: "Ten everyday things AI can genuinely help you with"
+seoTitle: "10 everyday things AI can help you with"
 description: "Not futuristic promises — practical, tested uses for AI in ordinary life, each with an example you can copy and try today."
 updated: 2026-08-31
 order: 9

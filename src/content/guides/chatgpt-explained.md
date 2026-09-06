@@ -1,5 +1,6 @@
 ---
 title: "ChatGPT explained: what it is, what it costs, how to start"
+seoTitle: "ChatGPT explained: cost and how to start"
 summary: "What ChatGPT actually is, what the free version can do, when paying makes sense, and how to have your first conversation in five minutes."
 description: "The one everyone has heard of. What ChatGPT actually is, what the free version can do, when paying makes sense, and how to have your first conversation in five minutes."
 category: "Tools"
