@@ -12,8 +12,34 @@ interface Props {
   image?: string;
   // true = denne ene side holdes ude af Google (bruges til kladder)
   noindex?: boolean;
+  // Ekstra strukturerede data (JSON-LD) fra siden selv, fx Article på artikler.
+  // Kan være ét objekt eller en liste. Organization + WebSite sættes altid her.
+  schema?: object | object[];
 }
-const { title, description, image, noindex = false } = Astro.props;
+const { title, description, image, noindex = false, schema } = Astro.props;
+
+// Strukturerede data: fortæller Google hvem der udgiver sitet, og hvad siden er.
+// Uden dem viser Googles rich-results-test "intet fundet". Organization bruges
+// som publisher i artiklernes Article-skema (samme @id, så det hænger sammen).
+const ORG = {
+  '@type': 'Organization',
+  '@id': 'https://gentleaiguide.com/#organization',
+  name: 'The Gentle AI Guide',
+  url: 'https://gentleaiguide.com/',
+  logo: { '@type': 'ImageObject', url: 'https://gentleaiguide.com/logo-512.png', width: 512, height: 512 },
+  email: 'hello@gentleaiguide.com',
+};
+const WEBSITE = {
+  '@type': 'WebSite',
+  '@id': 'https://gentleaiguide.com/#website',
+  name: 'The Gentle AI Guide',
+  url: 'https://gentleaiguide.com/',
+  description: 'Plain-English help with AI for people over 50. Every article reviewed by a person.',
+  inLanguage: 'en',
+  publisher: { '@id': 'https://gentleaiguide.com/#organization' },
+};
+const graph = [ORG, WEBSITE, ...(Array.isArray(schema) ? schema : schema ? [schema] : [])];
+const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image ?? '/images/articles/01-what-is-ai.png', Astro.site);
 const current = Astro.url.pathname;
@@ -35,6 +61,7 @@ const current = Astro.url.pathname;
   <meta property="og:type" content="website" />
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={ogImage} />
+  <script type="application/ld+json" set:html={jsonLd} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" />

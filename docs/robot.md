@@ -143,9 +143,16 @@ npm run illustrate NN
 Fejler Cloudflare med 429 "Capacity temporarily exceeded": vent 1-2 minutter
 og kør igen (det er ikke dagskvoten). Fejler det stadig efter 3 forsøg: brug
 `figure: "spot"`-løsningen IKKE — lad `image` stå, skriv til Jacob at billedet
-mangler, og fortsæt. Kig på billedet (Read på PNG-filen): er der tekst,
-bogstaver eller et logo i det, kør `npm run illustrate NN -- --force` én gang
-til.
+mangler, og fortsæt.
+
+**OBLIGATORISK billedtjek — spring det ALDRIG over.** Åbn PNG-filen med
+Read-værktøjet og SE på den. Billed-AI'en sætter ofte vrøvle-tekst ind
+("SELAI VIDEO" stod på en skærm i den første kørsel 9/9, og Jacob så det før
+robotten gjorde). Er der bogstaver, tal, ord, et logo eller noget der ligner
+skrift — hvor som helst i billedet — kør `npm run illustrate NN -- --force` og
+se igen. Højst 3 forsøg. Er der stadig skrift, så skriv i beskeden til Jacob
+at billedet har tekst der skal males over, og fortsæt. Skriv i beskeden til
+Jacob, at billedet er tjekket, og hvad det forestiller.
 
 ## 6. Byg og læg kladden op
 
