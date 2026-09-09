@@ -156,6 +156,14 @@ med nøgle, uanset tilladelsesregler (målt 9/9). GitHub Actions har ikke det
 problem. Så: skriv motivet, push, og lad GitHub tegne. Kør IKKE
 `npm run illustrate` selv i skyen.
 
+Fejler jobbet (rødt under Actions): åbn kørslen og læs trinnet "Tjek
+nøglerne (fingeraftryk)". Det viser længde og hash af `CF_API_TOKEN` og
+`CF_ACCOUNT_ID` — aldrig værdierne. Et konto-id er 32 tegn; en nøgle er
+længere. Har begge samme hash/længde, er nøglen sat ind i begge felter
+(det var fejlen 9/9: Cloudflare svarede 404 "could not route"). Løsning: Jacob
+retter Secret'en under Settings → Secrets and variables → Actions. 401 fra
+Cloudflare = forkert nøgle; 429 = kvote brugt, prøv om lidt.
+
 Efter push: vent 3 minutter, `git pull` på grenen, og se om
 `public/images/articles/NN-<slug>.png` er kommet. Er den: hent den og SE på
 den (Read). Er der bogstaver/tal/logo i den, slet filen, commit, push — så
