@@ -20,6 +20,12 @@ export function categoryByName(name?: string) {
   return CATEGORIES.find((c) => c.name === name);
 }
 
+// Udgivne artikler = alt der ikke er kladde. Brug denne i ALLE lister,
+// så en kladde aldrig dukker op et sted, den ikke skal.
+export function isPublished(entry: { data: { draft?: boolean } }) {
+  return !entry.data.draft;
+}
+
 // Læsetid: ca. 200 ord i minuttet, mindst 1 minut
 export function readingMinutes(body?: string) {
   const words = (body ?? '').split(/\s+/).filter(Boolean).length;

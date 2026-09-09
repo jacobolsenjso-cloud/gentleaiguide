@@ -3,13 +3,13 @@
 import Base from '../../layouts/Base.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
-import { CATEGORIES } from '../../site';
+import { CATEGORIES, isPublished } from '../../site';
 
 export async function getStaticPaths() {
   return CATEGORIES.map((cat) => ({ params: { slug: cat.slug }, props: { cat } }));
 }
 const { cat } = Astro.props;
-const items = (await getCollection('guides'))
+const items = (await getCollection('guides', isPublished))
   .filter((a) => a.data.category === cat.name)
   .sort((a, b) => a.data.order - b.data.order);
 ---

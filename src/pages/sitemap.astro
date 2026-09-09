@@ -2,8 +2,8 @@
 // Læsbart sitemap (XML-udgaven til Google ligger på /sitemap-index.xml)
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
-import { CATEGORIES } from '../site';
-const all = (await getCollection('guides')).sort((a, b) => a.data.order - b.data.order);
+import { CATEGORIES, isPublished } from '../site';
+const all = (await getCollection('guides', isPublished)).sort((a, b) => a.data.order - b.data.order);
 const pages = [
   ['/', 'Front page'], ['/start-here/', 'Start here'], ['/guides/', 'All articles'], ['/archive/', 'Archive'],
   ['/about/', 'About'], ['/contact/', 'Contact'], ['/corrections/', 'Corrections'],

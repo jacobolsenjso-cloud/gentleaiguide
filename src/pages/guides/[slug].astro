@@ -5,7 +5,7 @@ import Base from '../../layouts/Base.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import Blob from '../../components/Blob.astro';
 import { getCollection, render } from 'astro:content';
-import { categoryByName, readingMinutes, formatDate } from '../../site';
+import { categoryByName, readingMinutes, formatDate, isPublished } from '../../site';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guides');
@@ -14,13 +14,14 @@ export async function getStaticPaths() {
 const { guide } = Astro.props;
 const { Content } = await render(guide);
 const cat = categoryByName(guide.data.category);
-const all = (await getCollection('guides')).sort((a, b) => a.data.order - b.data.order);
+const all = (await getCollection('guides', isPublished)).sort((a, b) => a.data.order - b.data.order);
 const same = all.filter((a) => a.id !== guide.id && a.data.category === guide.data.category);
 const others = all.filter((a) => a.id !== guide.id && a.data.category !== guide.data.category);
 const next = [...same, ...others].slice(0, 3);
 const spot = guide.data.image ? guide.data.image.replace(/\.png$/, '-spot.png') : null;
 ---
-<Base title={`${guide.data.seoTitle ?? guide.data.title} | Gentle AI Guide`} description={guide.data.summary ?? guide.data.description} image={guide.data.image}>
+<Base title={`${guide.data.seoTitle ?? guide.data.title} | Gentle AI Guide`} description={guide.data.summary ?? guide.data.description} image={guide.data.image} noindex={guide.data.draft === true}>
+  {guide.data.draft && <p class="draft-banner">Draft — not yet published. Only people with this link can see it.</p>}
   <article class="article">
     {cat && <a class="kicker" href={`/category/${cat.slug}/`}>{cat.name}</a>}
     <h1>{guide.data.title}</h1>

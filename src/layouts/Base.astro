@@ -10,8 +10,10 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  // true = denne ene side holdes ude af Google (bruges til kladder)
+  noindex?: boolean;
 }
-const { title, description, image } = Astro.props;
+const { title, description, image, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image ?? '/images/articles/01-what-is-ai.png', Astro.site);
 const current = Astro.url.pathname;
@@ -23,7 +25,7 @@ const current = Astro.url.pathname;
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{title}</title>
   <meta name="description" content={description} />
-  {!INDEXABLE && <meta name="robots" content="noindex, nofollow" />}
+  {(!INDEXABLE || noindex) && <meta name="robots" content="noindex, nofollow" />}
   <link rel="canonical" href={canonical} />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="sitemap" href="/sitemap-index.xml" />
@@ -207,6 +209,8 @@ const current = Astro.url.pathname;
     .row:hover .row-title { color: var(--accent); }
     .row-meta { font-size: 0.85rem; color: var(--soft); }
     .kicker { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.85rem; color: var(--accent); text-decoration: none; }
+    /* Kladde-banner: kun på artikler med draft: true, så Jacob kan se, at siden ikke er udgivet */
+    .draft-banner { max-width: 1140px; margin: 1rem auto 0; padding: 0.6rem 1rem; background: #fff3cd; border: 1px solid #e0b84a; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; }
     .kicker:hover { text-decoration: underline; }
 
     /* ---------- Kort ---------- */

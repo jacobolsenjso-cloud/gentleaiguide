@@ -25,6 +25,12 @@ const guides = defineCollection({
     featured: z.boolean().optional(),
     // 'scene' = hele billedet i ramme, 'spot' = fri figur på blød klat (standard)
     figure: z.enum(['scene', 'spot']).optional(),
+    // true = KLADDE: siden bygges og kan læses på sin egen adresse (til Jacobs
+    // gennemlæsning), men vises ikke på forsiden, i lister, sitemap eller RSS,
+    // og får noindex. Sæt til false (eller fjern) når Jacob har sagt ok.
+    draft: z.boolean().optional(),
+    // Det Google-søgespørgsmål artiklen er skrevet til (robotten sætter det)
+    targetQuestion: z.string().optional(),
   }),
 });
 

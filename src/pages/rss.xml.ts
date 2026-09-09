@@ -1,10 +1,11 @@
 // RSS-feed: nyeste artikler først. Læsere (og Google) kan abonnere.
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
+import { isPublished } from '../site';
 import type { APIContext } from 'astro';
 
 export async function GET(context: APIContext) {
-  const articles = (await getCollection('guides')).sort(
+  const articles = (await getCollection('guides', isPublished)).sort(
     (a, b) => b.data.updated.getTime() - a.data.updated.getTime() || b.data.order - a.data.order
   );
   return rss({

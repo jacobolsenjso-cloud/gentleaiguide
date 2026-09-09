@@ -4,9 +4,9 @@
 import Base from '../layouts/Base.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
-import { CATEGORIES } from '../site';
+import { CATEGORIES, isPublished } from '../site';
 
-const all = (await getCollection('guides')).sort((a, b) => a.data.order - b.data.order);
+const all = (await getCollection('guides', isPublished)).sort((a, b) => a.data.order - b.data.order);
 // Fremhævede: dem med featured: true (ellers de to første)
 let featured = all.filter((a) => a.data.featured).slice(0, 2);
 if (featured.length < 2) featured = [...featured, ...all.filter((a) => !featured.includes(a))].slice(0, 2);

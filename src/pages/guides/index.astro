@@ -3,8 +3,8 @@
 import Base from '../../layouts/Base.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
-import { CATEGORIES } from '../../site';
-const all = (await getCollection('guides')).sort((a, b) => a.data.order - b.data.order);
+import { CATEGORIES, isPublished } from '../../site';
+const all = (await getCollection('guides', isPublished)).sort((a, b) => a.data.order - b.data.order);
 ---
 <Base title="All articles — The Gentle AI Guide" description="Every article on The Gentle AI Guide, section by section.">
   <div class="wrap page-top">

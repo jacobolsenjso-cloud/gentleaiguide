@@ -6,3 +6,4 @@ dist/
 .env.local
 _audit/
 _audit.zip
+_topic-candidates.json

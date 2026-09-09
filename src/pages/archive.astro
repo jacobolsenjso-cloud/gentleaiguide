@@ -2,8 +2,8 @@
 // Arkiv: alle artikler efter dato, samlet pr. måned
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
-import { formatDate } from '../site';
-const all = (await getCollection('guides')).sort((a, b) => b.data.updated.getTime() - a.data.updated.getTime() || b.data.order - a.data.order);
+import { formatDate, isPublished } from '../site';
+const all = (await getCollection('guides', isPublished)).sort((a, b) => b.data.updated.getTime() - a.data.updated.getTime() || b.data.order - a.data.order);
 const months = new Map<string, typeof all>();
 for (const a of all) {
   const key = a.data.updated.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
