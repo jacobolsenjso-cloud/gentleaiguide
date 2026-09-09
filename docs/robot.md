@@ -4,18 +4,20 @@ Denne fil læses af en frisk Claude-session, der starter af sig selv mandag og
 torsdag morgen. Sessionen har ingen hukommelse om tidligere kørsler — alt den
 skal vide, står her. Læs hele filen, før du gør noget.
 
-**Målet med én kørsel:** skriv ÉN ny artikel som KLADDE, læg den på sitet,
-og giv Jacob besked. Du udgiver ALDRIG selv. Jacob læser kladden og svarer
-"ok" i samme samtale — først da går den live (trin 8).
+**Målet med én kørsel:** skriv ÉN ny artikel og læg den som **pull request**
+på GitHub (et forslag til ændring, som Jacob godkender med ét klik). Du
+udgiver ALDRIG selv på main. GitHub mailer Jacob om forslaget; Cloudflare
+bygger en preview-adresse, hvor han læser artiklen i det rigtige layout.
+Trykker han "Merge", går artiklen live. Trykker han "Close", forsvinder den.
 
 ---
 
 ## 0. Rammer
 
-- Repoet ligger på Jacobs pc: `C:\Users\jacob\gentleaiguide`. Alt arbejde sker
-  dér via Desktop Commander (PowerShell) — også git og build. Kør ALDRIG git
-  fra Linux-VM'en (`device_bash`): selv et `git status` derfra efterlader en
-  `.git/index.lock`, som blokerer git på Windows.
+- Du kører i skyen (Claude Code på nettet) med repoet
+  `jacobolsenjso-cloud/gentleaiguide` klonet i din arbejdsmappe. Alt sker med
+  almindelig bash: `git`, `node`, `npm`. Rør ALDRIG Jacobs pc.
+- Arbejd altid på en ny gren `draft/<slug>` — aldrig direkte på `main`.
 - Kommunikation med Jacob: dansk, kort, forklar hvorfor. Sitets tekst: engelsk
   (britisk stavning: recognise, organise, colour).
 - Jacob er ikke udvikler. Han skal aldrig selv rette i filer.
@@ -27,16 +29,18 @@ og giv Jacob besked. Du udgiver ALDRIG selv. Jacob læser kladden og svarer
 
 ## 1. Se, hvad der findes
 
-```powershell
-cd C:\Users\jacob\gentleaiguide
-git pull --rebase
+```bash
+git checkout main && git pull --rebase
 git log --oneline -5
-Get-ChildItem src\content\guides\*.md | Select-Object Name
-Select-String -Path src\content\guides\*.md -Pattern '^(title|category|order|draft|targetQuestion):' | ForEach-Object { $_.Line }
+ls src/content/guides/
+grep -H -E '^(title|category|order|targetQuestion):' src/content/guides/*.md
+npm ci   # kun første gang i en frisk session
 ```
 
-Er der allerede en artikel med `draft: true`? Så venter Jacob stadig på at
-læse den. **Skriv ikke en ny.** Mind ham i stedet om linket (trin 7) og stop.
+Er der allerede en åben pull request fra en tidligere kørsel (`gh pr list`
+eller `git ls-remote --heads origin 'draft/*'`)? Så venter Jacob stadig på at
+læse den. **Skriv ikke en ny.** Stop, og skriv til Jacob at forslaget stadig
+venter (med link).
 
 Læs to eksisterende artikler i den kategori, du ender med at vælge, så tonen
 sidder — fx `src\content\guides\ai-scams.md` og `never-type-this.md`.
@@ -50,9 +54,12 @@ sikkerhed og praktisk hjælp er dét, læseren over 50 har mest brug for.
 
 ## 3. Find spørgsmålet (Google-søgeforslag)
 
-```powershell
+```bash
 node scripts/find-topic.mjs --category=<slug>     # fx staying-safe
 ```
+
+Virker Googles autocomplete ikke fra skyen (tomt svar / netværksfejl): stop,
+og skriv det til Jacob. Gæt ALDRIG et spørgsmål selv.
 
 Scriptet spørger Googles autocomplete med sætninger, som en begynder over 50
 bruger, og viser rigtige søgninger. ★ = set fra flere frø = stærkere. Allerede
@@ -73,7 +80,7 @@ vælges igen — også hvis Jacob afviser artiklen.
 
 ## 4. Skriv artiklen
 
-Fil: `src\content\guides\<slug>.md`. Slug: 2-4 engelske ord med bindestreg,
+Fil: `src/content/guides/<slug>.md`. Slug: 2-4 engelske ord med bindestreg,
 uden "ai" hvis det kan undgås (fx `stop-ai-phone-calls`, `spot-fake-videos`).
 Filnavnet ER adressen: `/guides/<slug>/`. Det ændres aldrig bagefter.
 
@@ -91,7 +98,9 @@ updated: ÅÅÅÅ-MM-DD             # dagens dato
 image: "/images/articles/NN-<slug>.png"
 label: "Staying safe"           # samme som category
 figure: "scene"                 # robot-artikler er altid 'scene' (ingen frilægning nødvendig)
-draft: true                     # ALTID true ved oprettelse. Kun trin 8 fjerner den.
+# INGEN draft-linje: artiklen skal vises fuldt ud på preview-sitet (forside,
+# lister), så Jacob ser den i sammenhæng. Preview-adresser er automatisk
+# skjult for Google (Cloudflare sætter noindex på dem).
 targetQuestion: "det valgte spørgsmål, små bogstaver, ordret fra scriptet"
 ---
 ```
@@ -124,7 +133,7 @@ ai, phone, calls — alle med, i rækkefølge). Ikke "Silence the Machines".
 
 ## 5. Illustration
 
-Tilføj artiklen i `scripts\illustrations.json` under `"articles"` med nøglen
+Tilføj artiklen i `scripts/illustrations.json` under `"articles"` med nøglen
 `"NN"` (samme tal som `order`):
 
 ```json
@@ -136,9 +145,13 @@ mini-scene, roligt, ingen tekst/logoer/bogstaver, helst ting frem for personer
 (en telefon med et rødt kryds, et brev med en lup, en kop te ved en tablet).
 Skriv POSITIVT hvad der skal være — "no people" ignoreres af billed-AI'en.
 
-```powershell
-npm run illustrate NN
+```bash
+npm run illustrate NN     # kræver CF_ACCOUNT_ID + CF_API_TOKEN som miljøvariabler
 ```
+
+Mangler nøglerne i skyen (scriptet siger det selv): spring billedet over, lad
+`image`-linjen stå, og skriv i pull request-teksten at illustrationen mangler
+og skal laves fra Jacobs pc med `npm run illustrate NN`. Det er i orden.
 
 Fejler Cloudflare med 429 "Capacity temporarily exceeded": vent 1-2 minutter
 og kør igen (det er ikke dagskvoten). Fejler det stadig efter 3 forsøg: brug
@@ -154,59 +167,53 @@ se igen. Højst 3 forsøg. Er der stadig skrift, så skriv i beskeden til Jacob
 at billedet har tekst der skal males over, og fortsæt. Skriv i beskeden til
 Jacob, at billedet er tjekket, og hvad det forestiller.
 
-## 6. Byg og læg kladden op
+## 6. Byg, gren, pull request
 
-```powershell
+```bash
 npm run build            # skal ende med 0 fejl
+grep -c "<loc>" dist/sitemap-0.xml          # ét mere end før
+ls dist/guides/<slug>/index.html            # findes
+
+git checkout -b draft/<slug>
+git add src/content/guides/<slug>.md scripts/illustrations.json docs/used-questions.json
+git add public/images/articles/NN-<slug>.png   # kun hvis billedet blev lavet
+git commit -F /tmp/msg.txt   # engelsk: hvilket spørgsmål, hvilken kategori, hvorfor
+git push -u origin draft/<slug>
 ```
 
-Tjek i `dist\`: findes `dist\guides\<slug>\index.html`? Står `noindex` i
-den? Står slug'en IKKE i `dist\sitemap-0.xml` og ikke i `dist\index.html`?
-Alle tre skal være ja — ellers er kladde-tilstanden i stykker: stop og skriv
-til Jacob.
+Opret pull request'en mod `main` — med `gh` hvis det findes, ellers via
+GitHubs API med GITHUB_TOKEN (`POST /repos/jacobolsenjso-cloud/gentleaiguide/pulls`).
+Titel: `New article: <titel>`. Tekst (engelsk er fint på GitHub, men skriv
+den til Jacob på dansk):
 
-Commit KUN de filer, du har rørt (aldrig `git add .`):
+> **Ny artikel til godkendelse**
+> Kategori: <kategori> · Søgning: "<spørgsmål>" · <ord> ord · Illustration: ja/nej (tjekket for tekst)
+>
+> Læs den her (Cloudflare bygger preview på 1-3 min):
+> https://draft-<slug>.gentleaiguide.pages.dev/guides/<slug>/
+>
+> Tryk **Merge pull request** for at udgive. Tryk **Close** for at droppe den.
+> Rettelser: skriv dem som kommentar her, så retter robotten næste gang.
 
-```powershell
-git add src/content/guides/<slug>.md public/images/articles/NN-<slug>.png scripts/illustrations.json docs/used-questions.json
-git commit -F _commitmsg.txt      # engelsk besked: hvilket spørgsmål, hvilken kategori, hvorfor det spørgsmål
-git pull --rebase
-git push
-```
-
-Skriv commit-beskeden til `_commitmsg.txt` BOM-frit:
-`[System.IO.File]::WriteAllText("$PWD\_commitmsg.txt", $msg, (New-Object System.Text.UTF8Encoding($false)))`.
-
-Cloudflare Pages bygger selv ved push (1-3 minutter). Kladden er derefter på
-`https://gentleaiguide.com/guides/<slug>/` — synlig for den der har linket,
-usynlig for forsiden, Google og sitemap.
+Preview-adressen dannes af grennavnet: `draft/<slug>` bliver til
+`draft-<slug>.gentleaiguide.pages.dev`. Tjek den med curl efter et par minutter,
+hvis du kan; ellers stol på mønstret.
 
 ## 7. Giv Jacob besked
 
-Send med `SendUserMessage` (dansk, kort):
+GitHub mailer ham automatisk om pull request'en. Afslut alligevel med en kort
+dansk besked (SendUserMessage) med titel, link til pull request'en og
+preview-linket. Så stop. Vent ikke.
 
-> Ny kladde klar til gennemlæsning: **<titel>**
-> https://gentleaiguide.com/guides/<slug>/
-> Kategori: <kategori> · Søgning: "<spørgsmål>" · <ord> ord
-> Svar **ok** for at udgive, eller skriv hvad der skal rettes.
+## 8. Kommentarer på en åben pull request
 
-Og stop dér. Vent på svar.
-
-## 8. Når Jacob svarer
-
-- **"ok"** (eller tilsvarende): fjern linjen `draft: true` fra frontmatter,
-  sæt `updated:` til dagens dato, `npm run build`, tjek at slug'en NU står i
-  `dist\sitemap-0.xml`, commit ("Publish: <titel>"), `git pull --rebase`,
-  `git push`. Skriv til Jacob: "Udgivet: <link>".
-- **Rettelser:** ret præcis det han beder om, byg, commit, push, send linket
-  igen, vent.
-- **"nej"/"drop den":** slet artikel-filen og billedet, fjern posten i
-  `illustrations.json`, commit ("Drop draft: <titel>"), push. Spørgsmålet
-  bliver stående i `used-questions.json`, så det ikke foreslås igen.
+Er der ved næste kørsel en åben pull request MED en kommentar fra Jacob:
+ret præcis det, han beder om, på samme gren, commit, push (pull request'en
+opdateres selv), svar kort i en kommentar, og skriv ingen ny artikel den dag.
 
 ## 9. Det du ikke gør
 
 - Ikke ændre design, layout, andre artikler eller `src\site.ts`.
 - Ikke slå AdSense, analytics eller andre scripts til.
-- Ikke udgive uden "ok". Ikke skrive mere end én artikel.
+- Ikke pushe til `main`. Ikke merge selv. Ikke skrive mere end én artikel.
 - Ikke skrive om noget, du ikke kan svare ærligt på.
