@@ -34,6 +34,9 @@ if (provider === 'gemini' && !process.env.GEMINI_API_KEY) {
 //    Authorization-headeren på kald til api.cloudflare.com. Derfor må scriptet
 //    IKKE kræve CF_API_TOKEN, og det må ikke sende en tom header selv.
 //    Sæt CF_VIA_PROXY=1 for at sige "nøglen kommer udefra".
+// Trim: en Secret/env-værdi med et usynligt linjeskift i enden gav 9/9 en 404
+// "could not route" fra Cloudflare — id'et var rigtigt, kun linjeskiftet var galt.
+for (const k of ['CF_API_TOKEN', 'CF_ACCOUNT_ID', 'GEMINI_API_KEY']) if (process.env[k]) process.env[k] = process.env[k].trim();
 const viaProxy = process.env.CF_VIA_PROXY === '1';
 if (provider === 'cloudflare' && !process.env.CF_API_TOKEN && !viaProxy) {
   console.error('Mangler CF_API_TOKEN i .env (eller CF_VIA_PROXY=1 i skyen).\nToken laves på https://dash.cloudflare.com/profile/api-tokens (skabelon "Workers AI").');
@@ -133,7 +136,7 @@ async function generate(n) {
   } else {
     png = await viaCloudflare(prompt, n);
   }
-  if (!png) return;
+  if (!png) { process.exitCode = 1; return; } // GitHub-jobbet skal blive rødt, ikke grønt uden billede
   writeFileSync(file, png);
   console.log(`Gemt: ${file}`);
 }
@@ -152,7 +155,7 @@ async function generateSpot(key) {
   const prompt = `${cfg.styles.spot}\n\nSubject: ${motif}`;
   console.log(`Laver spot "${key}" via ${provider} …`);
   const png = provider === 'gemini' ? await viaGemini(prompt, key) : await viaCloudflare(prompt, key);
-  if (!png) return;
+  if (!png) { process.exitCode = 1; return; } // GitHub-jobbet skal blive rødt, ikke grønt uden billede
   writeFileSync(file, png);
   console.log(`Gemt: ${file}`);
 }
