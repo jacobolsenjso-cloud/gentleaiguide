@@ -34,7 +34,7 @@ git checkout main && git pull --rebase
 git log --oneline -5
 ls src/content/guides/
 grep -H -E '^(title|category|order|targetQuestion):' src/content/guides/*.md
-npm ci   # kun første gang i en frisk session
+npm ci   # installerer pakkerne (package-lock.json ligger i repoet)
 ```
 
 Er der allerede en åben pull request fra en tidligere kørsel (`gh pr list`
@@ -145,27 +145,32 @@ mini-scene, roligt, ingen tekst/logoer/bogstaver, helst ting frem for personer
 (en telefon med et rødt kryds, et brev med en lup, en kop te ved en tablet).
 Skriv POSITIVT hvad der skal være — "no people" ignoreres af billed-AI'en.
 
-```bash
-npm run illustrate NN     # kræver CF_ACCOUNT_ID + CF_API_TOKEN som miljøvariabler
-```
+**Selve billedet tegnes af GitHub, ikke af dig.** Når grenen pushes (trin 6),
+kører GitHub Actions-jobbet "Illustrate" (`.github/workflows/illustrate.yml`):
+det finder artikler i `illustrations.json` uden PNG, kalder Cloudflare med
+nøglen fra repoets Secrets, og committer billedet til samme gren. Pull
+request'en opdateres af sig selv 1-3 minutter efter push.
 
-Mangler nøglerne i skyen (scriptet siger det selv): spring billedet over, lad
-`image`-linjen stå, og skriv i pull request-teksten at illustrationen mangler
-og skal laves fra Jacobs pc med `npm run illustrate NN`. Det er i orden.
+Hvorfor sådan: sky-sessionens sikkerhedsfilter blokerer kald til Cloudflare
+med nøgle, uanset tilladelsesregler (målt 9/9). GitHub Actions har ikke det
+problem. Så: skriv motivet, push, og lad GitHub tegne. Kør IKKE
+`npm run illustrate` selv i skyen.
 
-Fejler Cloudflare med 429 "Capacity temporarily exceeded": vent 1-2 minutter
-og kør igen (det er ikke dagskvoten). Fejler det stadig efter 3 forsøg: brug
-`figure: "spot"`-løsningen IKKE — lad `image` stå, skriv til Jacob at billedet
-mangler, og fortsæt.
+Efter push: vent 3 minutter, `git pull` på grenen, og se om
+`public/images/articles/NN-<slug>.png` er kommet. Er den: hent den og SE på
+den (Read). Er der bogstaver/tal/logo i den, slet filen, commit, push — så
+tegner jobbet igen (højst 3 gange). Kommer der intet billede efter 5 minutter:
+skriv det i pull request-teksten (Jacob kan starte jobbet manuelt under
+Actions → Illustrate → Run workflow) og fortsæt.
 
-**OBLIGATORISK billedtjek — spring det ALDRIG over.** Åbn PNG-filen med
-Read-værktøjet og SE på den. Billed-AI'en sætter ofte vrøvle-tekst ind
-("SELAI VIDEO" stod på en skærm i den første kørsel 9/9, og Jacob så det før
-robotten gjorde). Er der bogstaver, tal, ord, et logo eller noget der ligner
-skrift — hvor som helst i billedet — kør `npm run illustrate NN -- --force` og
-se igen. Højst 3 forsøg. Er der stadig skrift, så skriv i beskeden til Jacob
-at billedet har tekst der skal males over, og fortsæt. Skriv i beskeden til
-Jacob, at billedet er tjekket, og hvad det forestiller.
+**OBLIGATORISK billedtjek — spring det ALDRIG over.** Når billedet er
+kommet fra GitHub-jobbet, åbn PNG-filen med Read-værktøjet og SE på den.
+Billed-AI'en sætter ofte vrøvle-tekst ind ("SELAI VIDEO" stod på en skærm i
+den første kørsel 9/9, og Jacob så det før robotten gjorde). Er der bogstaver,
+tal, ord, et logo eller noget der ligner skrift — hvor som helst i billedet —
+slet filen, commit, push, og lad jobbet tegne igen. Højst 3 forsøg. Er der
+stadig skrift, så skriv i pull request-teksten at billedet har tekst, der skal
+males over. Skriv altid, at billedet er tjekket, og hvad det forestiller.
 
 ## 6. Byg, gren, pull request
 

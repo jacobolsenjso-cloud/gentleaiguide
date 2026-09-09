@@ -27,9 +27,32 @@ if (provider === 'gemini' && !process.env.GEMINI_API_KEY) {
   console.error('Mangler GEMINI_API_KEY i .env');
   process.exit(1);
 }
-if (provider === 'cloudflare' && (!process.env.CF_ACCOUNT_ID || !process.env.CF_API_TOKEN)) {
-  console.error('Mangler CF_ACCOUNT_ID og/eller CF_API_TOKEN i .env.\nToken laves på https://dash.cloudflare.com/profile/api-tokens (skabelon "Workers AI").');
+// To måder at være logget ind hos Cloudflare på:
+//  - På Jacobs pc: CF_API_TOKEN (+ evt. CF_ACCOUNT_ID) i .env.
+//  - I skyen (Claude Code på nettet): nøglen ligger som "API credential" på
+//    miljøet. Sessionen ser den aldrig — skyens proxy sætter selv
+//    Authorization-headeren på kald til api.cloudflare.com. Derfor må scriptet
+//    IKKE kræve CF_API_TOKEN, og det må ikke sende en tom header selv.
+//    Sæt CF_VIA_PROXY=1 for at sige "nøglen kommer udefra".
+const viaProxy = process.env.CF_VIA_PROXY === '1';
+if (provider === 'cloudflare' && !process.env.CF_API_TOKEN && !viaProxy) {
+  console.error('Mangler CF_API_TOKEN i .env (eller CF_VIA_PROXY=1 i skyen).\nToken laves på https://dash.cloudflare.com/profile/api-tokens (skabelon "Workers AI").');
   process.exit(1);
+}
+function cfHeaders(extra = {}) {
+  return process.env.CF_API_TOKEN ? { ...extra, Authorization: `Bearer ${process.env.CF_API_TOKEN}` } : extra;
+}
+// Konto-id: fra .env hvis det findes, ellers slås det op hos Cloudflare — så
+// ingen skal indtaste det i skyen.
+let cfAccountId = process.env.CF_ACCOUNT_ID || '';
+async function hentAccountId() {
+  if (cfAccountId) return cfAccountId;
+  const r = await fetch('https://api.cloudflare.com/client/v4/accounts', { headers: cfHeaders() });
+  if (!r.ok) { console.error(`Kunne ikke slå Cloudflare-konto op (${r.status}): ${(await r.text()).slice(0, 300)}`); process.exit(1); }
+  const j = await r.json();
+  cfAccountId = j.result?.[0]?.id || '';
+  if (!cfAccountId) { console.error('Cloudflare svarede uden konto-id'); process.exit(1); }
+  return cfAccountId;
 }
 
 const args = process.argv.slice(2);
@@ -51,10 +74,10 @@ mkdirSync(outDir, { recursive: true });
 // --- Cloudflare Workers AI: FLUX.1-schnell (gratis daglig kvote, kvadratisk 1024x1024)
 async function viaCloudflare(prompt, n) {
   const model = process.env.CF_IMAGE_MODEL || '@cf/black-forest-labs/flux-1-schnell';
-  const url = `https://api.cloudflare.com/client/v4/accounts/${process.env.CF_ACCOUNT_ID}/ai/run/${model}`;
+  const url = `https://api.cloudflare.com/client/v4/accounts/${await hentAccountId()}/ai/run/${model}`;
   const res = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${process.env.CF_API_TOKEN}` },
+    headers: cfHeaders({ 'Content-Type': 'application/json' }),
     body: JSON.stringify({ prompt, steps: 8 }),
   });
   if (!res.ok) {
