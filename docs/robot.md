@@ -34,7 +34,7 @@ git checkout main && git pull --rebase
 git log --oneline -5
 ls src/content/guides/
 grep -H -E '^(title|category|order|targetQuestion):' src/content/guides/*.md
-npm ci   # kun første gang i en frisk session
+npm ci   # installerer pakkerne (package-lock.json ligger i repoet)
 ```
 
 Er der allerede en åben pull request fra en tidligere kørsel (`gh pr list`
@@ -146,12 +146,17 @@ mini-scene, roligt, ingen tekst/logoer/bogstaver, helst ting frem for personer
 Skriv POSITIVT hvad der skal være — "no people" ignoreres af billed-AI'en.
 
 ```bash
-npm run illustrate NN     # kræver CF_ACCOUNT_ID + CF_API_TOKEN som miljøvariabler
+CF_VIA_PROXY=1 npm run illustrate NN
 ```
 
-Mangler nøglerne i skyen (scriptet siger det selv): spring billedet over, lad
-`image`-linjen stå, og skriv i pull request-teksten at illustrationen mangler
-og skal laves fra Jacobs pc med `npm run illustrate NN`. Det er i orden.
+`CF_VIA_PROXY=1` betyder: nøglen kommer udefra. I skyen ligger Cloudflare-
+nøglen som "API credential" på miljøet — sessionen ser den aldrig, skyens
+proxy sætter den selv på kald til api.cloudflare.com. Scriptet slår selv
+konto-id'et op. (På Jacobs pc bruges `.env` i stedet, uden CF_VIA_PROXY.)
+
+Fejler kaldet med 401/403: nøglen mangler på miljøet — spring billedet over,
+lad `image`-linjen stå, og skriv i pull request-teksten at illustrationen
+mangler og kan laves fra Jacobs pc med `npm run illustrate NN`. Det er i orden.
 
 Fejler Cloudflare med 429 "Capacity temporarily exceeded": vent 1-2 minutter
 og kør igen (det er ikke dagskvoten). Fejler det stadig efter 3 forsøg: brug
