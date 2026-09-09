@@ -87,6 +87,10 @@
     "20": {
       "slug": "can-ai-remember-me",
       "motif": "A tablet screen with a soft cloud of small memory dots dissolving into sparkles as a finger presses a large friendly cross, no faces"
+    },
+    "21": {
+      "slug": "detect-fake-videos",
+      "motif": "A tablet propped on a wooden table showing a blank paused video frame with a simple play triangle, a large magnifying glass held over one corner of the screen, a cup of tea beside it, no people, no faces, no words"
     }
   },
   "spots": {
