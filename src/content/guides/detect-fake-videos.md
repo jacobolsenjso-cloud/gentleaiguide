@@ -5,11 +5,10 @@ summary: "Look less at the picture and more at where it came from: who posted it
 description: "Fake AI videos are now good enough to fool a quick glance. Here are six calm checks, in order of how well they work, so you can decide what to trust."
 category: "Staying safe"
 order: 21
-updated: 2026-09-09
+updated: 2026-09-15
 image: "/images/articles/21-detect-fake-videos.png"
 label: "Staying safe"
 figure: "scene"
-draft: true
 targetQuestion: "how to detect fake ai videos"
 ---
 
