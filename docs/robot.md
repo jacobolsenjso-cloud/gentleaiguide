@@ -17,6 +17,14 @@ Trykker han "Merge", går artiklen live. Trykker han "Close", forsvinder den.
 - Du kører i skyen (Claude Code på nettet) med repoet
   `jacobolsenjso-cloud/gentleaiguide` klonet i din arbejdsmappe. Alt sker med
   almindelig bash: `git`, `node`, `npm`. Rør ALDRIG Jacobs pc.
+- Repoet er koblet på den planlagte kørsel (sat i Routine-indstillingerne
+  15/9). Mangler det alligevel — ingen mappe, og `add_repo` findes ikke — så
+  stop straks og skriv til Jacob, at repoet skal vælges igen under
+  claude.ai/code → Routines → Edit → "Select a repository". Prøv ikke at
+  klone med tokens; det var derfor kørslerne 10/9 og 14/9 gav intet.
+- Repoet er OFFENTLIGT på GitHub (siden 15/9, for gratis Actions-minutter).
+  Derfor: aldrig nøgler, tokens eller `.env` i en commit — heller ikke i
+  pull request-tekster eller commit-beskeder.
 - Arbejd altid på en ny gren `draft/<slug>` — aldrig direkte på `main`.
 - Kommunikation med Jacob: dansk, kort, forklar hvorfor. Sitets tekst: engelsk
   (britisk stavning: recognise, organise, colour).
@@ -164,6 +172,14 @@ længere. Har begge samme hash/længde, er nøglen sat ind i begge felter
 retter Secret'en under Settings → Secrets and variables → Actions. 401 fra
 Cloudflare = forkert nøgle; 429 = kvote brugt, prøv om lidt.
 
+**Dør jobbet på under 10 sekunder uden logs** (rødt kryds, "Total duration
+5s"), er det ikke koden. Læs annotationen på kørslen: står der "recent
+account payments have failed or your spending limit needs to be increased",
+har GitHub lukket for Actions på hele kontoen (gratis minutter brugt op —
+skete 15/9). Så: prøv IKKE igen, skriv det med ordene "GitHub Actions er
+spærret af betalingsgrænsen" i pull request-teksten, og gå videre uden
+billede. Jacob kan starte jobbet igen med "Re-run jobs", når det er løst.
+
 Efter push: vent 3 minutter, `git pull` på grenen, og se om
 `public/images/articles/NN-<slug>.png` er kommet. Er den: hent den og SE på
 den (Read). Er der bogstaver/tal/logo i den, slet filen, commit, push — så
@@ -203,14 +219,26 @@ den til Jacob på dansk):
 > Kategori: <kategori> · Søgning: "<spørgsmål>" · <ord> ord · Illustration: ja/nej (tjekket for tekst)
 >
 > Læs den her (Cloudflare bygger preview på 1-3 min):
-> https://draft-<slug>.gentleaiguide.pages.dev/guides/<slug>/
+> https://<alias>.gentleaiguide.pages.dev/guides/<slug>/
 >
 > Tryk **Merge pull request** for at udgive. Tryk **Close** for at droppe den.
 > Rettelser: skriv dem som kommentar her, så retter robotten næste gang.
 
-Preview-adressen dannes af grennavnet: `draft/<slug>` bliver til
-`draft-<slug>.gentleaiguide.pages.dev`. Tjek den med curl efter et par minutter,
-hvis du kan; ellers stol på mønstret.
+**Preview-adressen — regn den rigtigt ud.** Cloudflare laver grennavnet om
+til et alias: `/` bliver `-`, og aliasset **klippes til de første 28 tegn**
+(en bindestreg til sidst fjernes). `draft/responsible-for-ai-mistakes` blev
+derfor `draft-responsible-for-ai-mis` — ikke det fulde navn (linket i PR #2
+var dødt af den grund, 15/9). Regn det ud sådan:
+
+```bash
+alias=$(echo "draft-<slug>" | cut -c1-28 | sed 's/-$//')
+echo "https://$alias.gentleaiguide.pages.dev/guides/<slug>/"
+```
+
+Er slug'en kort (alias under 28 tegn), er det bare `draft-<slug>`. Cloudflares
+bot skriver desuden "Branch Preview URL" som kommentar på pull request'en
+1-3 minutter efter push — stemmer den ikke med din udregning, er bot'ens
+adresse facit. Tjek adressen med curl, hvis du kan.
 
 ## 7. Giv Jacob besked
 
