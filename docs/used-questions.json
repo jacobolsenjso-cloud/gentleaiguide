@@ -33,5 +33,10 @@
     "q": "use ai to write a story",
     "date": "2026-10-01",
     "slug": "ai-write-a-story"
+  },
+  {
+    "q": "when ai becomes self aware",
+    "date": "2026-10-08",
+    "slug": "ai-self-aware"
   }
 ]
