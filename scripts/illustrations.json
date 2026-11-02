@@ -2,7 +2,7 @@
   "defaultStyle": "flat2",
   "styles": {
     "flat": "Flat vector-style editorial illustration, warm and friendly, simple shapes with soft rounded edges and thick charcoal outlines. Limited palette: cream background (#FBF7EF), deep teal (#0F766E), burnt amber (#B45309), charcoal (#2B2B2B), light sand. Characters are adults aged 55-70, drawn with dignity and warmth, modern everyday clothing, varied appearances. No text, no letters, no logos, no readable words on any screen or paper. One clear subject, plenty of calm empty background, gentle daylight. Wide landscape composition.",
-    "painterly": "Warm, softly painted editorial illustration with real depth: gentle natural daylight, soft shadows, subtle brush texture, realistic human proportions and calm expressions. Colour mood: cream and warm sand tones, deep teal accents, a touch of burnt amber; never garish. Characters are adults aged 55-70, drawn with dignity and warmth, modern everyday clothing, varied appearances. Absolutely no text, letters, numbers, lettering or writing anywhere in the image \u2014 not on screens, paper, cables, walls or clothing. No logos. One clear subject, uncluttered background, quiet domestic setting.",
+    "painterly": "Warm, softly painted editorial illustration with real depth: gentle natural daylight, soft shadows, subtle brush texture, realistic human proportions and calm expressions. Colour mood: cream and warm sand tones, deep teal accents, a touch of burnt amber; never garish. Characters are adults aged 55-70, drawn with dignity and warmth, modern everyday clothing, varied appearances. Absolutely no text, letters, numbers, lettering or writing anywhere in the image — not on screens, paper, cables, walls or clothing. No logos. One clear subject, uncluttered background, quiet domestic setting.",
     "photo": "Natural, warm editorial photograph, soft window daylight, shallow depth of field, calm and dignified mood, candid not posed. Colour mood: cream and warm neutrals with a hint of teal and amber in the scene. Subjects are adults aged 55-70, varied appearances, modern everyday clothing. No text, no logos, no readable words on any screen or paper. One clear subject, uncluttered background, quiet domestic setting. 35mm lens look.",
     "spot": "Flat vector illustration, clean and modern editorial style, like a contemporary magazine infographic. Simple geometric shapes with smooth flat colour fills, minimal thin outlines or none, no gradients, no brush texture, no painterly shading. Bright but harmonious palette: deep teal (#0F766E), soft teal (#7FC4BB), warm amber (#D97706), soft coral (#F08A7E), navy (#1F2A44) for details, cream and sand neutrals. Composition sits on a completely plain pure white background with generous empty space around it; no frame, no border. If people appear they are adults aged 55-70, drawn with dignity and warmth, simple friendly faces, modern everyday clothing, varied appearances. Absolutely no text, letters, numbers or logos anywhere, not on screens, papers or signs. ONE isolated subject only, centred, nothing else around it, no floor line, no scene. One clear idea per image.",
     "flat2": "Flat vector illustration, clean and modern editorial style, like a contemporary magazine infographic. Simple geometric shapes with smooth flat colour fills, minimal thin outlines or none, no gradients, no brush texture, no painterly shading. Bright but harmonious palette: deep teal (#0F766E), soft teal (#7FC4BB), warm amber (#D97706), soft coral (#F08A7E), navy (#1F2A44) for details, cream and sand neutrals. Composition sits on a completely plain pure white background with generous empty space around it; no frame, no border. If people appear they are adults aged 55-70, drawn with dignity and warmth, simple friendly faces, modern everyday clothing, varied appearances. Absolutely no text, letters, numbers or logos anywhere, not on screens, papers or signs. One clear idea per image."
@@ -22,7 +22,7 @@
     },
     "4": {
       "slug": "how-does-ai-know",
-      "motif": "A large open book with shapes and dots streaming out of it into a small glowing speech bubble \u2014 ideas flowing from many pages into one answer, no people"
+      "motif": "A large open book with shapes and dots streaming out of it into a small glowing speech bubble — ideas flowing from many pages into one answer, no people"
     },
     "5": {
       "slug": "is-it-safe",
@@ -42,7 +42,7 @@
     },
     "9": {
       "slug": "everyday-uses",
-      "motif": "Ten small everyday objects arranged in a neat grid: envelope, suitcase, recipe card, calendar, framed photo, garden trowel, teapot, bus ticket, book, phone \u2014 no people"
+      "motif": "Ten small everyday objects arranged in a neat grid: envelope, suitcase, recipe card, calendar, framed photo, garden trowel, teapot, bus ticket, book, phone — no people"
     },
     "10": {
       "slug": "difficult-email",
